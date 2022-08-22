@@ -6,35 +6,30 @@ import CustomButton from "./component/atom/CustomButton";
 import {colors} from "./variable/color";
 import MyTabs from "./component/template/MyTabs"
 import {NavigationContainer} from "@react-navigation/native";
+import {createStackNavigator} from '@react-navigation/stack';
+import MainPage from "./component/page/MainPage";
+import LoginPage from "./component/page/LoginPage";
+
+const Stack = createStackNavigator();
+
 
 export default function App() {
-    const handleLoginButtonClick = () => {
-        Alert.alert("hi");
-    }
     return (
-        <View style={styles.container}>
-
-            {/*<Text>Open up App.js to start working on your app!</Text>*/}
-            {/*<StatusBar style="auto" />*/}
-            {/*<CustomInput placeholder={"아이디"} width={"260px"} height={"40px"}/>*/}
-            {/*<CustomInput placeholder={"비밀번호"} width={"260px"} height={"40px"}/>*/}
-            {/*<CustomButton content={"로그인"} handlePressButton={handleLoginButtonClick} width={"260px"} height={"40px"}*/}
-            {/*              background={colors.pointBlue}/>*/}
-            {/*<MyTabs/>*/}
             <NavigationContainer>
-                <MyTabs/>
+                <Stack.Navigator
+                    initialRouteName={"LoginPage"}>
+                    <Stack.Screen name="MainPage" component={MainPage} options={{headerShown: false}}/>
+                    <Stack.Screen name="LoginPage" component={LoginPage} options={{headerShown: false}}/>
+
+                    {/*<Text>Open up App.js to start working on your app!</Text>*/}
+                    {/*<StatusBar style="auto" />*/}
+                    {/*<CustomInput placeholder={"아이디"} width={"260px"} height={"40px"}/>*/}
+                    {/*<CustomInput placeholder={"비밀번호"} width={"260px"} height={"40px"}/>*/}
+                    {/*<CustomButton content={"로그인"} handlePressButton={handleLoginButtonClick} width={"260px"} height={"40px"}*/}
+                    {/*              background={colors.pointBlue}/>*/}
+                    {/*<MyTabs/>*/}
+                </Stack.Navigator>
             </NavigationContainer>
-        </View>
+
     );
 }
-
-const styles = StyleSheet.create({
-    container: {
-        // width: "100%",
-        flex: 1,
-        backgroundColor: 'pink',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-
-});
