@@ -2,9 +2,9 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {NavigationContainer} from '@react-navigation/native';
 
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import MyPage from "./MyPage";
-import MyScrapPage from "./MyScrapPage";
-import SearchPage from "./SearchPage";
+import MyPage from "./MyPageTemplate/MyPage";
+import MyScrapPage from "./MyScrapPageTemplate/MyScrapPage";
+import SearchPage from "./SearchPageTemplate/SearchPage";
 import {colors} from "../../variable/color";
 
 const Tab = createBottomTabNavigator();
