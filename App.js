@@ -8,10 +8,10 @@ import LoginPage from "./component/page/LoginPage";
 export default function App() {
     const [isReady, setIsReady] = useState(false);
 
-    useEffect(async () => {
-        await Font.loadAsync({
-            JuaRegular: require("./assets/fonts/Jua-Regular.ttf"),
-        });
+    useEffect( () => {
+        // await Font.loadAsync({
+        //     JuaRegular: require("./assets/fonts/Jua-Regular.ttf"),
+        // });
         setIsReady(true);
     }, []);
 
@@ -20,7 +20,9 @@ export default function App() {
     return (
         isReady &&
         <NavigationContainer>
-            <Stack.Navigator initialRouteName={"LoginPage"}>
+            <Stack.Navigator initialRouteName={"LoginPage"}
+
+            >
                 <Stack.Screen name="MainPage" component={MainPage} options={{headerShown: false}}/>
                 <Stack.Screen name="LoginPage" component={LoginPage} options={{headerShown: false}}/>
                 {/*<MyTabs/>*/}

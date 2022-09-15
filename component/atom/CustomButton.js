@@ -1,7 +1,7 @@
 import React from 'react';
-import {Platform, Text, TouchableOpacity, View} from 'react-native';
+import {Text, TouchableOpacity, View} from 'react-native';
 import styled from 'styled-components/native';
-import {colors} from "../../variable/color"
+
 function CustomButton({content, handlePressButton, width, height, background}) {
     return (
         <TouchableOpacity onPress={handlePressButton} activeOpacity={0.9}>

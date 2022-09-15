@@ -17,7 +17,7 @@ function MyTabs() {
                 tabBarActiveTintColor: colors.pointBlue,
                 headerShown: false,
                 tabBarStyle: {
-                    height: 60,
+                    height: 80,
                 },
                 tabBarLabelStyle: {
                     fontSize: 14

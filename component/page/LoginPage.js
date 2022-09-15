@@ -4,10 +4,13 @@ import CustomInput from "../atom/CustomInput";
 import CustomButton from "../atom/CustomButton";
 import {colors} from "../../variable/color";
 
-function LoginPage({navigation}) {
+function LoginPage(props) {
+    const {navigate} = props.navigation
     const handleLoginButtonClick = () => {
-        navigation.navigate("MainPage")
+        // console.log("hi")
+        navigate("MainPage")
     }
+
     return (
         <View style={styles.container}>
             <CustomInput placeholder={"아이디"} width={"260px"} height={"40px"}/>
