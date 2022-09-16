@@ -1,14 +1,16 @@
 import React from 'react';
 import {Text, View} from "react-native";
 
-function MyScrapPage(props) {
+function SearchResultPage({navigation, route}) {
+    const {inputValue} = route.params;
     return (
         <View style={styles.container}>
-            <Text>MyPage</Text>
-        </View>    );
+            <Text>{inputValue}</Text>
+        </View>
+    );
 }
 
-export default MyScrapPage;
+export default SearchResultPage;
 
 const styles = {
     container: {
