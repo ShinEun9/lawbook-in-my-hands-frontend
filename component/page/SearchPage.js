@@ -14,10 +14,16 @@ function SearchPage({navigation}) {
 
     const Stack = createStackNavigator();
     return (
-            <Stack.Navigator initialRouteName={"SearchWritePage"}>
-                <Stack.Screen name="SearchWritePage" component={SearchWritePage}/>
-                <Stack.Screen name="SearchResultPage" component={SearchResultPage} />
-            </Stack.Navigator>
+        <Stack.Navigator initialRouteName={"SearchWritePage"}
+                         screenOptions={{
+                             cardStyle: {
+                                 backgroundColor: 'white',
+                             }
+                         }}
+        >
+            <Stack.Screen name="SearchWritePage" component={SearchWritePage}/>
+            <Stack.Screen name="SearchResultPage" component={SearchResultPage}/>
+        </Stack.Navigator>
     );
 }
 
