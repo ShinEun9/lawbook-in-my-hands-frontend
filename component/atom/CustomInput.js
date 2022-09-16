@@ -8,9 +8,9 @@ function CustomInput({placeholder, width, height}) {
     return (
         <StyledTextInput
             placeholder={placeholder}
-            // style={styles.input}
             width={width}
             height={height}
+            // margin={margin}
             onChangeText={onChangeText}
             value={text}
         />);
@@ -21,6 +21,7 @@ export default CustomInput;
 const StyledTextInput = styled(TextInput)`
   width: ${(props)=>props.width};
   height: ${(props)=>props.height};
+  //margin-bottom: ${(props)=>props.margin}px;
   borderWidth: 1px;
   borderColor: rgba(0,0,0,0.2);
   borderRadius: 10px;

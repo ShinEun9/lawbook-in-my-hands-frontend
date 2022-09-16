@@ -13,10 +13,19 @@ function LoginPage(props) {
 
     return (
         <View style={styles.container}>
-            <CustomInput placeholder={"아이디"} width={"260px"} height={"40px"}/>
-            <CustomInput placeholder={"비밀번호"} width={"260px"} height={"40px"}/>
-            <CustomButton content={"로그인"} handlePressButton={handleLoginButtonClick} width={"260px"} height={"40px"}
-                          background={colors.pointBlue}/>
+            <View style={{marginBottom: 10}}>
+                <CustomInput placeholder={"아이디"} width={"260px"} height={"40px"}/>
+            </View>
+            <View style={{marginBottom: 45}}>
+                <CustomInput placeholder={"비밀번호"} width={"260px"} height={"40px"}/>
+            </View>
+            <View style={{marginBottom: 20}}>
+                <CustomButton content={"로그인"} handlePressButton={handleLoginButtonClick} width={"260px"} height={"40px"}
+                              background={colors.pointBlue}/>
+            </View>
+            <CustomButton content={"회원가입"} handlePressButton={handleLoginButtonClick} width={"260px"} height={"40px"}
+                          background={colors.blue2}/>
+
         </View>
     );
 }

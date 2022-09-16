@@ -14,8 +14,8 @@ function SearchPage({navigation}) {
             <TouchableOpacity onPress={()=>{navigation.toggleDrawer()}}>
                 <Text>드로어 열기</Text>
             </TouchableOpacity>
-            <CustomMultililneInput width={"320px"} height={"500px"}/>
-            <CustomButton content={"로그인"} handlePressButton={handleSearchButtonClick} width={"260px"} height={"40px"}
+            <CustomMultililneInput width={"320px"} height={"500px"} />
+            <CustomButton content={"AI 법률조회"} handlePressButton={handleSearchButtonClick} width={"260px"} height={"40px"}
                           background={colors.pointBlue}/>
         </View>
     );
