@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from 'react';
+import * as Font from 'expo-font';
 import {NavigationContainer} from "@react-navigation/native";
+import {createDrawerNavigator} from "@react-navigation/drawer";
 import {createStackNavigator} from "@react-navigation/stack";
-import LoginPage from "./src/component/page/LoginPage";
 import SearchPage from "./src/component/page/SearchPage";
 import MyScrapPage from "./src/component/page/MyScrapPage";
-import {createDrawerNavigator} from "@react-navigation/drawer";
+import LoginPage from "./src/component/page/LoginPage";
 import SignUpPage from "./src/component/page/SignUpPage";
-import * as Font from 'expo-font';
 import {LoginContext} from "./src/store/loginStore";
 
 export default function App() {
@@ -33,10 +33,15 @@ export default function App() {
                 {
                     isReady &&
                     isLogin ?
-                        <Drawer.Navigator useLegacyImplementation={true} initialRouteName="AI 법률 조회"
-                                          screenOptions={{
-                                              drawerType: "front"
-                                          }}
+                        <Drawer.Navigator
+                            useLegacyImplementation={true}
+                            initialRouteName="AI 법률 조회"
+                            screenOptions={{
+                                drawerPosition: 'right',
+                                drawerType: "front",
+                                swipeEnabled: true,
+                                drawerHideStatusBarOnOpen: false
+                            }}
                         >
                             <Drawer.Screen name="AI 법률 조회" component={SearchPage} options={{headerShown: false}}/>
                             <Drawer.Screen name="나의 스크랩" component={MyScrapPage} options={{headerShown: false}}/>

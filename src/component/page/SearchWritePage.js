@@ -4,21 +4,33 @@ import CustomMultililneInput from "../atom/CustomMultililneInput";
 import CustomButton from "../atom/CustomButton";
 import {colors} from "../../variable/color";
 import {useInput} from "../../hooks/useInput";
+import CustomHeader from "../template/CustomHeader";
 
-function SearchWritePage({navigation}) {
+
+function SearchWritePage({navigation: stackNavigation, drawerNavigation}) {
     const [inputValue, onChange] = useInput('');
     const handleSearchButtonClick = () => {
-        navigation.navigate("SearchResultPage", {inputValue: inputValue})
+        stackNavigation.navigate("SearchResultPage", {inputValue: inputValue})
     }
 
     return (
         <SafeAreaView style={styles.container}>
-            <View style={{marginBottom: 30}}>
-                <CustomMultililneInput value={inputValue} onChange={onChange}/>
+            <View style={styles.header}>
+                <CustomHeader content={"상담내용 작성"}
+                              handlePressMoreButtonClick={() => {
+                                  drawerNavigation.toggleDrawer()
+                              }}
+                />
             </View>
-            <CustomButton content={"AI 법률조회"} handlePressButton={handleSearchButtonClick} width={"260px"}
-                          height={"40px"}
-                          background={colors.pointBlue}/>
+
+            <View style={styles.content}>
+                <View style={{marginBottom: 30}}>
+                    <CustomMultililneInput value={inputValue} onChange={onChange}/>
+                </View>
+                <CustomButton content={"AI 법률조회"} handlePressButton={handleSearchButtonClick} width={"260px"}
+                              height={"40px"}
+                              background={colors.pointBlue}/>
+            </View>
         </SafeAreaView>
     );
 }
@@ -30,5 +42,14 @@ const styles = {
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
+    },
+    header: {
+        flex: 1,
+        width: "100%",
+        backgroundColor: "orange",
+    },
+    content: {
+        flex: 4,
+        alignItems: "center"
     }
 }

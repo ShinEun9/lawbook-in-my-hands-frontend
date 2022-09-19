@@ -1,16 +1,49 @@
 import React from 'react';
-import {SafeAreaView, Text, TouchableOpacity, View} from "react-native";
+import {Image, SafeAreaView, Text, TouchableOpacity, View} from "react-native";
 import styled from "styled-components"
-import { Entypo } from '@expo/vector-icons';
+import {Entypo} from '@expo/vector-icons';
+import moreButtonImagePath from "../../img/more.png";
 
 
-function SearchResultPage({navigation, route}) {
+function SearchResultPage({navigation: stackNavigation, drawerNavigation, route}) {
     const {inputValue} = route.params;
-    const handlePressButton = ()=>{
-        navigation.navigate('SearchDetailPage');
+    const handlePressButton = () => {
+        stackNavigation.navigate('SearchDetailPage');
     }
     return (
         <SafeAreaView style={styles.container}>
+            <View style={styles.header}>
+                <View style={{
+                    width: "100%",
+                    height: 50,
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    paddingHorizontal: 25,
+                    backgroundColor: "yellow"
+
+                }}>
+                    <Text>hi</Text>
+                    {/*<Text style={{*/}
+                    {/*    fontSize: "20px",*/}
+                    {/*    fontWeight: "800",*/}
+                    {/*    marginLeft: 20,*/}
+                    {/*    color: "rgb(71, 67, 72)"*/}
+                    {/*}}>상담내용 작성</Text>*/}
+
+                    {/*<TouchableOpacity*/}
+                    {/*    onPress={() => {*/}
+                    {/*        drawerNavigation.toggleDrawer()*/}
+                    {/*    }}*/}
+                    {/*>*/}
+                    {/*    <Image*/}
+                    {/*        style={{height: 30, width: 30}}*/}
+                    {/*        source={moreButtonImagePath}*/}
+                    {/*    />*/}
+                    {/*</TouchableOpacity>*/}
+                </View>
+            </View>
+
             <Text style={styles.title}>
                 <Text style={styles.userName}>홍길동 고객님</Text>의 사례와
                 {"\n"}가장 비슷한 판례문을 찾아보았어요.
@@ -21,7 +54,7 @@ function SearchResultPage({navigation, route}) {
             <View style={styles.resultBox}>
                 <StyledButton activeOpacity={0.7} onPress={handlePressButton}>
                     <Text style={styles.buttonTitle}>대법원 2021. 3. 25. 선고 2017도17643 판결 [모욕][공2021상,943]</Text>
-                    <Entypo name="chevron-right" size={24} color="rgba(0,0,0,0.3)" />
+                    <Entypo name="chevron-right" size={24} color="rgba(0,0,0,0.3)"/>
                 </StyledButton>
             </View>
         </SafeAreaView>
@@ -74,7 +107,7 @@ const styles = {
     },
     buttonTitle: {
         width: "85%",
-        fontSize:"13px",
+        fontSize: "13px",
         fontWeight: "400"
     }
 }
