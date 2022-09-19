@@ -1,13 +1,16 @@
 import React from 'react';
-import {Text, TouchableOpacity, View} from "react-native";
+import {SafeAreaView, Text, TouchableOpacity, View} from "react-native";
 import styled from "styled-components"
 import { Entypo } from '@expo/vector-icons';
 
 
 function SearchResultPage({navigation, route}) {
     const {inputValue} = route.params;
+    const handlePressButton = ()=>{
+        navigation.navigate('SearchDetailPage');
+    }
     return (
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
             <Text style={styles.title}>
                 <Text style={styles.userName}>홍길동 고객님</Text>의 사례와
                 {"\n"}가장 비슷한 판례문을 찾아보았어요.
@@ -16,13 +19,12 @@ function SearchResultPage({navigation, route}) {
                 관련된 판례 18개</Text>
 
             <View style={styles.resultBox}>
-                <StyledButton activeOpacity={0.7}>
+                <StyledButton activeOpacity={0.7} onPress={handlePressButton}>
                     <Text style={styles.buttonTitle}>대법원 2021. 3. 25. 선고 2017도17643 판결 [모욕][공2021상,943]</Text>
                     <Entypo name="chevron-right" size={24} color="rgba(0,0,0,0.3)" />
                 </StyledButton>
-
             </View>
-        </View>
+        </SafeAreaView>
     );
 }
 

@@ -1,18 +1,23 @@
-import React from 'react';
-import {StyleSheet, Text, View} from "react-native";
+import React, {useContext} from 'react';
+import {SafeAreaView, StyleSheet, Text, View} from "react-native";
 import CustomInput from "../atom/CustomInput";
 import CustomButton from "../atom/CustomButton";
 import {colors} from "../../variable/color";
+import {LoginContext} from "../../store/loginStore";
 
-function LoginPage(props) {
-    const {navigate} = props.navigation
+function LoginPage({navigation}) {
+    const {isLogin, setIsLogin} = useContext(LoginContext);
+
     const handleLoginButtonClick = () => {
-        // console.log("hi")
-        navigate("MainPage")
+        setIsLogin(true);
+    }
+
+    const handleSignUpButtonClick = ()=>{
+        navigation.navigate("SignUpPage")
     }
 
     return (
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
             <View style={{marginBottom: 10}}>
                 <CustomInput placeholder={"아이디"} width={"260px"} height={"40px"}/>
             </View>
@@ -23,10 +28,10 @@ function LoginPage(props) {
                 <CustomButton content={"로그인"} handlePressButton={handleLoginButtonClick} width={"260px"} height={"40px"}
                               background={colors.pointBlue}/>
             </View>
-            <CustomButton content={"회원가입"} handlePressButton={handleLoginButtonClick} width={"260px"} height={"40px"}
+            <CustomButton content={"회원가입"} handlePressButton={handleSignUpButtonClick} width={"260px"} height={"40px"}
                           background={colors.blue2}/>
 
-        </View>
+        </SafeAreaView>
     );
 }
 

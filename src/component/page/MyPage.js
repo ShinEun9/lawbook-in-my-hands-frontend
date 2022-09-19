@@ -1,15 +1,15 @@
 import React from 'react';
-import {Text, View} from "react-native";
+import {SafeAreaView, Text, View} from "react-native";
 
-function MyScrapPage(props) {
+function MyPage(props) {
     return (
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
             <Text>MyPage</Text>
-        </View>
+        </SafeAreaView>
     );
 }
 
-export default MyScrapPage;
+export default MyPage;
 
 const styles = {
     container: {

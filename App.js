@@ -1,48 +1,55 @@
-import React, {useCallback, useEffect, useState} from 'react';
-import * as Font from 'expo-font';
+import React, {useEffect, useState} from 'react';
 import {NavigationContainer} from "@react-navigation/native";
 import {createStackNavigator} from "@react-navigation/stack";
-import MainPage from "./component/page/MainPage";
-import LoginPage from "./component/page/LoginPage";
-import SearchPage from "./component/page/SearchPage";
-import MyScrapPage from "./component/page/MyScrapPage";
+import LoginPage from "./src/component/page/LoginPage";
+import SearchPage from "./src/component/page/SearchPage";
+import MyScrapPage from "./src/component/page/MyScrapPage";
 import {createDrawerNavigator} from "@react-navigation/drawer";
-import SignUpPage from "./component/page/SignUpPage";
+import SignUpPage from "./src/component/page/SignUpPage";
+import * as Font from 'expo-font';
+import {LoginContext} from "./src/store/loginStore";
 
 export default function App() {
-    const [isReady, setIsReady] = useState(false);
-    const [isLogin, setIsLogin] = useState(true);
+    const [isReady, setIsReady] = useState(false); // font가 load 되면 isReady를 true로 변경
+    const [isLogin, setIsLogin] = useState(false); // 로그인 된 상태이면 isLogin을 true로 변경
+
+    const loadFont = async () => {
+        await Font.loadAsync({
+            JuaRegular: require("./assets/fonts/Jua-Regular.ttf"),
+        });
+    }
     useEffect(() => {
-        // await Font.loadAsync({
-        //     JuaRegular: require("./assets/fonts/Jua-Regular.ttf"),
-        // });
+        loadFont();
         setIsReady(true);
     }, []);
+
 
     const Stack = createStackNavigator();
     const Drawer = createDrawerNavigator();
 
     return (
-        <NavigationContainer>
-            {
-                isReady &&
-                isLogin ?
-                    <Drawer.Navigator useLegacyImplementation={true} initialRouteName="AI 법률 조회"
-                                      screenOptions={{
-                                          drawerType: "front"
-                                      }}
-                    >
-                        <Drawer.Screen name="AI 법률 조회" component={SearchPage} options={{headerShown: false}}/>
-                        <Drawer.Screen name="나의 스크랩" component={MyScrapPage} options={{headerShown: false}}/>
-                    </Drawer.Navigator>
-                    :
-                    <Stack.Navigator initialRouteName="LoginPage" screenOptions={{headerShown: false,}}>
-                        <>
-                            <Stack.Screen name="LoginPage" component={LoginPage}/>
-                            <Stack.Screen name="SignUpPage" component={SignUpPage}/>
-                        </>
-                    </Stack.Navigator>
-            }
-        </NavigationContainer>
+        <LoginContext.Provider value={{isLogin, setIsLogin}}>
+            <NavigationContainer>
+                {
+                    isReady &&
+                    isLogin ?
+                        <Drawer.Navigator useLegacyImplementation={true} initialRouteName="AI 법률 조회"
+                                          screenOptions={{
+                                              drawerType: "front"
+                                          }}
+                        >
+                            <Drawer.Screen name="AI 법률 조회" component={SearchPage} options={{headerShown: false}}/>
+                            <Drawer.Screen name="나의 스크랩" component={MyScrapPage} options={{headerShown: false}}/>
+                        </Drawer.Navigator>
+                        :
+                        <Stack.Navigator initialRouteName="LoginPage" screenOptions={{headerShown: false,}}>
+                            <>
+                                <Stack.Screen name="LoginPage" component={LoginPage}/>
+                                <Stack.Screen name="SignUpPage" component={SignUpPage}/>
+                            </>
+                        </Stack.Navigator>
+                }
+            </NavigationContainer>
+        </LoginContext.Provider>
     );
 }

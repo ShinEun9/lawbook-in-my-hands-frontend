@@ -8,9 +8,9 @@ import {SafeAreaView, Text, TouchableOpacity, View} from "react-native";
 
 function MainPage(props) {
     return (
-        <View>
+        <SafeAreaView style={styles.container}>
             <Text>MainPage</Text>
-        </View>
+        </SafeAreaView>
 
 
     );
