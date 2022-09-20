@@ -1,21 +1,19 @@
 import React from 'react';
-import {Text, TouchableOpacity, View} from 'react-native';
-import styled from 'styled-components/native';
+import {Text, TouchableOpacity, View} from "react-native";
+import styled from "styled-components/native";
 
-function CustomButton({content, handlePressButton, width, height, background}) {
+function CustomIconButton({content, icon, handlePressButton, width, height, background}) {
     return (
         <TouchableOpacity onPress={handlePressButton} activeOpacity={0.9}>
             <StyledButton width={width} height={height} background={background}>
-                <Text
-                    style={styles.buttonText}
-                >{content}</Text>
+                {icon}
+                <Text style={styles.buttonText}>{content}</Text>
             </StyledButton>
         </TouchableOpacity>
-
     );
 }
 
-export default CustomButton;
+export default CustomIconButton;
 
 const StyledButton = styled(View)`
   width: ${(props) => props.width};

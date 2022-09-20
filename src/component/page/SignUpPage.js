@@ -28,7 +28,7 @@ function SignUpPage({navigation}) {
             <View style={styles.header}>
                 <View style={{
                     height: 50,
-                    backgroundColor: "yellow",
+                    // backgroundColor: "yellow",
                     flexDirection: "row",
                     alignItems: "center",
                     width: "100%",
@@ -135,7 +135,7 @@ const styles = {
     header: {
         flex: 1,
         width: "100%",
-        backgroundColor: "orange",
+        // backgroundColor: "orange",
     },
     signUpForm: {
         flex: 9,

@@ -3,9 +3,6 @@ import {createStackNavigator} from "@react-navigation/stack";
 import SearchWritePage from "./SearchWritePage";
 import SearchResultPage from "./SearchResultPage";
 import SearchDetailPage from "./SearchDetailPage";
-import {Image, Text, View} from "react-native";
-import {TouchableOpacity} from "react-native-gesture-handler";
-import moreButtonImagePath from "../../img/more.png";
 
 function SearchPage({navigation: drawerNavigation}) {
 
@@ -22,7 +19,11 @@ function SearchPage({navigation: drawerNavigation}) {
                               <SearchResultPage navigation={navigation} drawerNavigation={drawerNavigation}
                                                 route={route}/>}
                           options={{headerShown: false}}/>
-            <Stack.Screen name="SearchDetailPage" component={SearchDetailPage} options={{headerShown: false}}/>
+            <Stack.Screen name="SearchDetailPage" component={
+                ({navigation, route}) =>
+                    <SearchDetailPage navigation={navigation} drawerNavigation={drawerNavigation}
+                                      route={route}/>
+            } options={{headerShown: false}}/>
         </Stack.Navigator>
     );
 }

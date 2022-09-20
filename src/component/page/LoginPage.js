@@ -1,9 +1,10 @@
 import React, {useContext} from 'react';
-import {SafeAreaView, StyleSheet, Text, View} from "react-native";
+import {Image, SafeAreaView, StyleSheet, Text, View} from "react-native";
 import CustomInput from "../atom/CustomInput";
 import CustomButton from "../atom/CustomButton";
 import {colors} from "../../variable/color";
 import {LoginContext} from "../../store/loginStore";
+import moreButtonImagePath from "../../img/more.png";
 
 function LoginPage({navigation}) {
     const {isLogin, setIsLogin} = useContext(LoginContext);
@@ -12,12 +13,16 @@ function LoginPage({navigation}) {
         setIsLogin(true);
     }
 
-    const handleSignUpButtonClick = ()=>{
+    const handleSignUpButtonClick = () => {
         navigation.navigate("SignUpPage")
     }
 
     return (
         <SafeAreaView style={styles.container}>
+            <Image
+                style={{height: 300, width: 300}}
+                source={require('../../img/logo.png')}
+            />
             <View style={{marginBottom: 10}}>
                 <CustomInput placeholder={"아이디"} width={"260px"} height={"40px"}/>
             </View>

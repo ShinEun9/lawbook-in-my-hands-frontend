@@ -1,24 +1,29 @@
 import React from 'react';
 import {Image, Text, TouchableOpacity, View} from "react-native";
-import styled from "styled-components"
 import moreButtonImagePath from "../../img/more.png";
+import styled from "styled-components";
+import {Entypo} from "@expo/vector-icons";
 
-function CustomHeader({content, handlePressMoreButtonClick}) {
+function CustomBackHeader({content, handlePressBackButton, handlePressMoreButton}) {
     return (
         <StyledHeader>
-            <StyledTitle>{content}</StyledTitle>
-            <TouchableOpacity onPress={handlePressMoreButtonClick}>
+            <View style={styles.titleContainer}>
+                <TouchableOpacity onPress={handlePressBackButton}>
+                    <Entypo name="chevron-left" size={24} color="rgb(71, 67, 72)"/>
+                </TouchableOpacity>
+                <StyledTitle>{content}</StyledTitle>
+            </View>
+            <TouchableOpacity onPress={handlePressMoreButton}>
                 <Image
                     style={{height: 30, width: 30}}
                     source={moreButtonImagePath}
                 />
             </TouchableOpacity>
         </StyledHeader>
-
     );
 }
 
-export default CustomHeader;
+export default CustomBackHeader;
 
 const StyledHeader = styled(View)`
   width: 100%;
@@ -29,10 +34,19 @@ const StyledHeader = styled(View)`
   padding-horizontal: 25px;
   border-bottom-color: rgb(248, 248, 248);
   border-bottom-width: 5px;
-
+  //background-color: pink;
 `
+
 const StyledTitle = styled(Text)`
   font-size: 20px;
+  margin-left: 20px;
   font-weight: 800;
   color: rgb(71, 67, 72);
 `
+
+const styles = {
+    titleContainer: {
+        flexDirection: "row",
+        alignItems: "center"
+    }
+}
