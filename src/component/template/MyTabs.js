@@ -3,8 +3,8 @@ import {NavigationContainer} from '@react-navigation/native';
 
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import MyPage from "../page/MyPage";
-import MyScrapPage from "../page/MyScrapPage";
-import SearchPage from "../page/SearchPage";
+import ScrapPage from "../page/MyScrapPage";
+import SearchPage from "../page/SearchPage/SearchPage";
 import {colors} from "../../variable/color";
 
 const Tab = createBottomTabNavigator();
@@ -35,8 +35,8 @@ function MyTabs() {
                 }}
             />
             <Tab.Screen
-                name="MyScrapPage"
-                component={MyScrapPage}
+                name="ScrapPage"
+                component={ScrapPage}
                 options={{
                     tabBarLabel: '나의 법전',
                     tabBarIcon: ({color, size}) => (

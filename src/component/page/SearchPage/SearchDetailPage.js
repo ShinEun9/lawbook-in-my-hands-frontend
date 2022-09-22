@@ -1,15 +1,17 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View, Text, SafeAreaView} from "react-native";
 import styled from "styled-components";
-import CustomBackHeader from "../template/CustomBackHeader";
-import CustomButton from "../atom/CustomButton";
-import {colors} from "../../variable/color";
+import CustomBackHeader from "../../template/CustomBackHeader";
+import CustomButton from "../../atom/CustomButton";
+import {colors} from "../../../variable/color";
 import {Entypo, Ionicons} from "@expo/vector-icons";
-import CustomIconButton from "../atom/CustomIconButton";
+import CustomIconButton from "../../atom/CustomIconButton";
 
 function SearchDetailPage({navigation: stackNavigation, drawerNavigation, route}) {
-    const handleScrapButtonClick = () => {
+    const [isScrap, setIsScrap] = useState(false);
 
+    const handleScrapButtonClick = () => {
+        setIsScrap((prev)=>!prev);
     }
     return (
         <SafeAreaView style={styles.container}>
@@ -24,12 +26,17 @@ function SearchDetailPage({navigation: stackNavigation, drawerNavigation, route}
                 />
             </View>
             <View style={styles.content}>
-                <CustomIconButton content={"스크랩"}
-                                  icon={<Ionicons name="heart-outline" size={20} color="white" />}
-                                  handlePressButton={handleScrapButtonClick} width={"75px"}
-                              height={"40px"}
-                              background={colors.pointBlue}/>
                 <Styled판례Container>
+                    <View style={{width: "100%", alignItems: "flex-end", marginBottom: 20}}>
+                        <CustomIconButton content={"스크랩"}
+                                          icon={
+                                              isScrap ? <Ionicons name="heart" size={20} color="white"/> :
+                                                  <Ionicons name="heart-outline" size={20} color="white"/>
+                                          }
+                                          handlePressButton={handleScrapButtonClick} width={"75px"}
+                                          height={"40px"}
+                                          background={colors.pointBlue}/>
+                    </View>
                     <Text>
                         【판시사항】
                         [1] 모욕죄에서 말하는 ‘모욕’의 의미 / 어떤 글이 모욕적 표현을 담고 있더라도 사회상규에 위배되지 않는 행위로서 위법성이 조각될 수 있는 경우 / 특정 사안에 대한

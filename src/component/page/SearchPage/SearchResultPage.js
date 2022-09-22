@@ -2,8 +2,8 @@ import React from 'react';
 import {Image, SafeAreaView, Text, TouchableOpacity, View} from "react-native";
 import styled from "styled-components"
 import {Entypo} from '@expo/vector-icons';
-import moreButtonImagePath from "../../img/more.png";
-import CustomBackHeader from "../template/CustomBackHeader";
+import moreButtonImagePath from "../../../img/more.png";
+import CustomBackHeader from "../../template/CustomBackHeader";
 
 
 function SearchResultPage({navigation: stackNavigation, drawerNavigation, route}) {
@@ -17,7 +17,7 @@ function SearchResultPage({navigation: stackNavigation, drawerNavigation, route}
         <View style={styles.header}>
             <CustomBackHeader content={"상담 결과"}
                               handlePressBackButton={() => {
-                                  stackNavigation.pop();
+                                  stackNavigation.navigate("SearchWritePage", {routeParams:inputValue});
                               }}
                               handlePressMoreButton={() => {
                                   drawerNavigation.toggleDrawer()

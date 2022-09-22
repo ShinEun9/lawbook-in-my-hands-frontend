@@ -1,14 +1,14 @@
 import React from 'react';
 import {SafeAreaView, View} from "react-native";
-import CustomMultililneInput from "../atom/CustomMultililneInput";
-import CustomButton from "../atom/CustomButton";
-import {colors} from "../../variable/color";
-import {useInput} from "../../hooks/useInput";
-import CustomHeader from "../template/CustomHeader";
+import CustomMultililneInput from "../../atom/CustomMultililneInput";
+import CustomButton from "../../atom/CustomButton";
+import {colors} from "../../../variable/color";
+import {useInput} from "../../../hooks/useInput";
+import CustomHeader from "../../template/CustomHeader";
 
 
-function SearchWritePage({navigation: stackNavigation, drawerNavigation}) {
-    const [inputValue, onChange] = useInput('');
+function SearchWritePage({navigation: stackNavigation, drawerNavigation, route}) {
+    const [inputValue, onChange] = useInput(!route.params ? "" : route.params.routeParams);
     const handleSearchButtonClick = () => {
         stackNavigation.navigate("SearchResultPage", {inputValue: inputValue})
     }

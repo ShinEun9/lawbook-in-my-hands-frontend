@@ -5,4 +5,5 @@ export const colors = {
     blue2: "#97B5DD",
     blue3: "#85A4D6",
     pointBlue:"#7286B8",
+    pointBlue2: "#3F5691"
 }

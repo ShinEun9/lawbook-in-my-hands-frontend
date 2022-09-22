@@ -128,7 +128,7 @@ export default SignUpPage;
 const styles = {
     container: {
         flex: 1,
-        backgroundColor: "pink",
+        // backgroundColor: "pink",
         alignItems: "center",
         // justifyContent: "center"
     },
