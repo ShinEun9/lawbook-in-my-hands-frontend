@@ -68,7 +68,6 @@ const styles = {
     header: {
         flex: 1,
         width: "100%",
-        // backgroundColor: "orange",
     }, content: {
         flex: 9,
         alignItems: "center"

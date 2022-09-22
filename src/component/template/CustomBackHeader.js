@@ -34,7 +34,6 @@ const StyledHeader = styled(View)`
   padding-horizontal: 25px;
   border-bottom-color: rgb(248, 248, 248);
   border-bottom-width: 5px;
-  //background-color: pink;
 `
 
 const StyledTitle = styled(Text)`
