@@ -17,10 +17,10 @@ function SearchDetailPage({navigation: stackNavigation, drawerNavigation, route}
         <SafeAreaView style={styles.container}>
             <View style={styles.header}>
                 <CustomBackHeader content={"대법원 2021.3.25. 선고 2017도..."}
-                                  handlePressBackButton={() => {
+                                  handleBackButtonPress={() => {
                                       stackNavigation.pop();
                                   }}
-                                  handlePressMoreButton={() => {
+                                  handleMoreButtonPress={() => {
                                       drawerNavigation.toggleDrawer()
                                   }}
                 />

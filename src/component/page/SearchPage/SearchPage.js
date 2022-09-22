@@ -38,10 +38,3 @@ function SearchPage({navigation: drawerNavigation}) {
 
 export default SearchPage;
 
-const styles = {
-    container: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-    }
-}

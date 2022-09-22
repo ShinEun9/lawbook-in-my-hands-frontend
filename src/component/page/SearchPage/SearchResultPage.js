@@ -16,10 +16,10 @@ function SearchResultPage({navigation: stackNavigation, drawerNavigation, route}
     return (<SafeAreaView style={styles.container}>
         <View style={styles.header}>
             <CustomBackHeader content={"상담 결과"}
-                              handlePressBackButton={() => {
+                              handleBackButtonPress={() => {
                                   stackNavigation.navigate("SearchWritePage", {routeParams:inputValue});
                               }}
-                              handlePressMoreButton={() => {
+                              handleMoreButtonPress={() => {
                                   drawerNavigation.toggleDrawer()
                               }}
             />

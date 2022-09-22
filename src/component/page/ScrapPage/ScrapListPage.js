@@ -6,15 +6,19 @@ import {Entypo} from "@expo/vector-icons";
 import {colors} from "../../../variable/color";
 
 function ScrapListPage({navigation: stackNavigation, drawerNavigation}) {
-    const handlePress = () => {
-        stackNavigation.navigate("SearchDetailPage")
+    const handleTitlePress = () => {
+        stackNavigation.navigate("ScrapSearchPage", {inputValue: "제가 며칠전에 어쩌고 저쩌고"})
+    }
+
+    const handle스크랩판례ButtonPress = () => {
+        stackNavigation.navigate("ScrapDetailPage")
     }
 
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.header}>
                 <CustomHeader content={"나의 스크랩"}
-                              handlePressMoreButtonClick={() => {
+                              handleMoreButtonPress={() => {
                                   drawerNavigation.toggleDrawer()
                               }}
                 />
@@ -23,16 +27,16 @@ function ScrapListPage({navigation: stackNavigation, drawerNavigation}) {
 
                 <StyledScrapContainer>
                     <View style={styles.containerTitle}>
-                        <TouchableOpacity onPress={handlePress}>
+                        <TouchableOpacity onPress={handleTitlePress}>
                             <Text style={styles.titleButtonText}>제가 며칠전에... 글 관련 스크랩 3개</Text>
                         </TouchableOpacity>
                     </View>
                     <View style={styles.containerContent}>
-                        <TouchableOpacity style={styles.스크랩판례Button}>
+                        <TouchableOpacity style={styles.스크랩판례Button} onPress={handle스크랩판례ButtonPress}>
                             <Text style={styles.buttonText}>대법원 2021. 3. 25. 선고 2017도17643 판결 [모욕][공2021상,943]</Text>
                             <Entypo name="chevron-right" size={24} color="rgba(0,0,0,0.3)"/>
                         </TouchableOpacity>
-                        <TouchableOpacity style={styles.스크랩판례Button}>
+                        <TouchableOpacity style={styles.스크랩판례Button} onPress={handle스크랩판례ButtonPress}>
                             <Text style={styles.buttonText}>대법원 2021. 3. 25. 선고 2017도17643 판결 [모욕][공2021상,943]</Text>
                             <Entypo name="chevron-right" size={24} color="rgba(0,0,0,0.3)"/>
                         </TouchableOpacity>
@@ -41,7 +45,7 @@ function ScrapListPage({navigation: stackNavigation, drawerNavigation}) {
 
                 <StyledScrapContainer>
                     <View style={styles.containerTitle}>
-                        <TouchableOpacity onPress={handlePress}>
+                        <TouchableOpacity onPress={handleTitlePress}>
                             <Text style={styles.titleButtonText}>제가 며칠전에... 글 관련 스크랩 3개</Text>
                         </TouchableOpacity>
                     </View>
@@ -61,7 +65,7 @@ const StyledScrapContainer = styled(View)`
   width: 90%;
   height: auto;
   margin-bottom: 20px;
-  border-color: rgba(0,0,0,0.2);
+  border-color: rgba(0, 0, 0, 0.2);
   border-width: 0.5px;
   border-radius: 20px;
 `;
@@ -94,9 +98,7 @@ const styles = {
         fontWeight: "700",
         color: `${colors.pointBlue2}`
     },
-    containerContent: {
-
-    },
+    containerContent: {},
     스크랩판례Button: {
         flexDirection: "row",
         alignItems: "center",

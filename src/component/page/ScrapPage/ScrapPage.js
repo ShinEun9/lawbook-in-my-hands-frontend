@@ -6,6 +6,7 @@ import SearchResultPage from "../SearchPage/SearchResultPage";
 import SearchDetailPage from "../SearchPage/SearchDetailPage";
 import {createStackNavigator} from "@react-navigation/stack";
 import ScrapListPage from "./ScrapListPage";
+import ScrapSearchPage from "./ScrapSearchPage";
 
 function ScrapPage({navigation: drawerNavigation}) {
     const Stack = createStackNavigator();
@@ -13,18 +14,30 @@ function ScrapPage({navigation: drawerNavigation}) {
     return (
         <Stack.Navigator initialRouteName={"ScrapListPage"}
                          screenOptions={{cardStyle: {backgroundColor: 'white'}}}>
-            <Stack.Screen name="ScrapListPage"
-                          component={({navigation}) =>
-                              <ScrapListPage navigation={navigation} drawerNavigation={drawerNavigation}/>}
-                          options={{headerShown: false}}/>
-            <Stack.Screen name="SearchDetailPage"
-                          component={({navigation, route}) =>
-                              <SearchDetailPage navigation={navigation} drawerNavigation={drawerNavigation}
-                                                route={route}/>}
-                          options={{headerShown: false}}/>
+            <Stack.Screen name="ScrapListPage" options={{headerShown: false}}>
+                {
+                    ({navigation}) =>
+                        <ScrapListPage navigation={navigation} drawerNavigation={drawerNavigation}/>
+                }
+            </Stack.Screen>
+            <Stack.Screen name="ScrapSearchPage" options={{headerShown: false}}>
+                {
+                    ({navigation, route}) =>
+                        <ScrapSearchPage navigation={navigation} drawerNavigation={drawerNavigation}
+                                         route={route}/>
+                }
+            </Stack.Screen>
+            <Stack.Screen name="ScrapDetailPage" options={{headerShown: false}}>
+                {
+                    ({navigation, route}) =>
+                        <SearchDetailPage navigation={navigation} drawerNavigation={drawerNavigation}
+                                          route={route}/>
+                }
+            </Stack.Screen>
         </Stack.Navigator>
     );
 }
 
 export default ScrapPage;
+
 

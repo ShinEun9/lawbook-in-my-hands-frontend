@@ -1,9 +1,12 @@
 import React, {useState} from 'react';
 import {TextInput} from "react-native";
 import styled from 'styled-components/native';
+import {colors} from "../../variable/color";
 
 function CustomInput({placeholder, width, height}) {
     const [text, onChangeText] = useState("");
+    const [isFocus, setIsFocus] = useState(false);
+
 
     return (
         <StyledTextInput
@@ -13,6 +16,13 @@ function CustomInput({placeholder, width, height}) {
             // margin={margin}
             onChangeText={onChangeText}
             value={text}
+            focus={isFocus}
+            onFocus={() => {
+                setIsFocus(true)
+            }}
+            onBlur={() => {
+                setIsFocus(false)
+            }}
         />);
 }
 
@@ -23,7 +33,7 @@ const StyledTextInput = styled(TextInput)`
   height: ${(props)=>props.height};
   //margin-bottom: ${(props)=>props.margin}px;
   borderWidth: 1px;
-  borderColor: rgba(0,0,0,0.2);
+  borderColor: ${(props) => props.focus ? `${colors.pointBlue}` : "rgba(0, 0, 0, 0.2)"};
   borderRadius: 10px;
   paddingLeft: 26px;
 `;

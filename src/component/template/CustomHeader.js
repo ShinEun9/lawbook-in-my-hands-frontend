@@ -3,11 +3,11 @@ import {Image, Text, TouchableOpacity, View} from "react-native";
 import styled from "styled-components"
 import moreButtonImagePath from "../../img/more.png";
 
-function CustomHeader({content, handlePressMoreButtonClick}) {
+function CustomHeader({content, handleMoreButtonPress}) {
     return (
         <StyledHeader>
             <StyledTitle>{content}</StyledTitle>
-            <TouchableOpacity onPress={handlePressMoreButtonClick}>
+            <TouchableOpacity onPress={handleMoreButtonPress}>
                 <Image
                     style={{height: 30, width: 30}}
                     source={moreButtonImagePath}

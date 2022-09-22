@@ -8,7 +8,7 @@ import ScrapPage from "./src/component/page/ScrapPage/ScrapPage";
 import LoginPage from "./src/component/page/LoginPage";
 import SignUpPage from "./src/component/page/SignUpPage";
 import {LoginContext} from "./src/store/loginStore";
-import MyPage from "./src/component/page/MyPage";
+import MyPage from "./src/component/page/MyPage/MyPage";
 
 export default function App() {
     const [isReady, setIsReady] = useState(false); // font가 load 되면 isReady를 true로 변경

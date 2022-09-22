@@ -4,16 +4,16 @@ import moreButtonImagePath from "../../img/more.png";
 import styled from "styled-components";
 import {Entypo} from "@expo/vector-icons";
 
-function CustomBackHeader({content, handlePressBackButton, handlePressMoreButton}) {
+function CustomBackHeader({content, handleBackButtonPress, handleMoreButtonPress}) {
     return (
         <StyledHeader>
             <View style={styles.titleContainer}>
-                <TouchableOpacity onPress={handlePressBackButton}>
+                <TouchableOpacity onPress={handleBackButtonPress}>
                     <Entypo name="chevron-left" size={24} color="rgb(71, 67, 72)"/>
                 </TouchableOpacity>
                 <StyledTitle>{content}</StyledTitle>
             </View>
-            <TouchableOpacity onPress={handlePressMoreButton}>
+            <TouchableOpacity onPress={handleMoreButtonPress}>
                 <Image
                     style={{height: 30, width: 30}}
                     source={moreButtonImagePath}
