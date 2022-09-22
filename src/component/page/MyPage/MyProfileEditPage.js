@@ -21,8 +21,6 @@ function MyProfileEditPage({navigation: stackNavigation, drawerNavigation}) {
             </View>
 
             <View style={styles.content}>
-
-
                 <View style={styles.inputContainer}>
                     <Text style={{fontSize: "15px", color: `${colors.darkgrey}`}}>이름</Text>
                     <CustomInput width={"300"} height={"40px"}/>
@@ -52,7 +50,6 @@ const styles = {
     header: {
         flex: 1,
         width: "100%",
-        // backgroundColor: "orange",
     },
     content: {
         flex: 9,
