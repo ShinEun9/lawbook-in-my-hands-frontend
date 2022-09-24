@@ -23,12 +23,12 @@ function MyProfileEditPage({navigation: stackNavigation, drawerNavigation}) {
             <View style={styles.content}>
                 <View style={styles.inputContainer}>
                     <Text style={{fontSize: "15px", color: `${colors.darkgrey}`}}>이름</Text>
-                    <CustomInput width={"300"} height={"40px"}/>
+                    <CustomInput width={"300px"} height={"40px"}/>
                 </View>
 
                 <View style={styles.inputContainer}>
                     <Text style={{fontSize: "15px", color: `${colors.darkgrey}`}}>닉네임</Text>
-                    <CustomInput width={"300"} height={"40px"}/>
+                    <CustomInput width={"300px"} height={"40px"}/>
                 </View>
 
                 <CustomButton content={"정보수정"} handlePressButton={handleEditInfoButtonPress} width={"350px"}
