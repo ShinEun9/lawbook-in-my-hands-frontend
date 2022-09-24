@@ -36,7 +36,7 @@ export default function App() {
                     isReady &&
                     isLogin ?
                         <Drawer.Navigator
-                            // drawerContent={(props) => <CustomDrawerContent {...props} />}
+                            drawerContent={(props) => <CustomDrawerContent {...props} />}
                             useLegacyImplementation={true}
                             initialRouteName="AI 법률 조회"
                             screenOptions={{

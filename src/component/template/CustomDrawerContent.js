@@ -41,13 +41,33 @@ function CustomDrawerContent({navigation}) {
 
             <View style={styles.menuContainer}>
                 <Text style={styles.menuTitle}>서비스</Text>
-                <TouchableOpacity onPress={()=>{navigation.navigate("SearchPage")}}>
-                    <Text style={styles.menuItem}>AI 판례 추천 서비스</Text>
+                <TouchableOpacity onPress={() => {
+                    navigation.navigate("SearchPage")
+                }}>
+                    <Text style={{
+                        ...styles.menuItem,
+                        // color: route.name === "SearchPage" ? `${colors.pointBlue}` : "black"
+                    }}>AI 판례 추천 서비스</Text>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={()=>{navigation.navigate("ScrapPage")}}>
+                <TouchableOpacity onPress={() => {
+                    navigation.navigate("ScrapPage")
+                }}>
                     <Text style={styles.menuItem}>나의 스크랩</Text>
                 </TouchableOpacity>
+            </View>
 
+            <View style={styles.buttonContainer}>
+                <TouchableOpacity>
+                    <Text style={styles.button}>비밀번호 변경</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity>
+                    <Text style={styles.button}>로그아웃</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity>
+                    <Text style={styles.button}>계정탈퇴</Text>
+                </TouchableOpacity>
             </View>
         </SafeAreaView>
     );
@@ -84,18 +104,29 @@ const styles = {
         color: "rgba(0,0,0,0.5)"
     },
     menuContainer: {
-        padding: 15
+        padding: 15,
+        borderBottomWidth: 5,
+        borderBottomColor: "#F8F8F8"
     },
     menuTitle: {
         fontSize: "20",
         fontWeight: "600",
-        marginBottom: 16
+        marginBottom: 20
     },
     menuItem: {
         fontSize: "18",
         fontWeight: "400",
-        marginBottom: 14,
+        marginBottom: 20,
         color: "rgba(0,0,0,0.5)"
+    },
+    buttonContainer:{
+        padding: 15,
+    },
+    button:{
+        color: "#c4c4c4",
+        fontSize: "16",
+        fontWeight: "400",
+        marginBottom: 14
     }
 }
 
