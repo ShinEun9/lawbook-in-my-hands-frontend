@@ -27,6 +27,13 @@ function ScrapPage({navigation: drawerNavigation}) {
                                          route={route}/>
                 }
             </Stack.Screen>
+            <Stack.Screen name="ScrapSearchResultPage" options={{headerShown: false}}>
+                {
+                    ({navigation, route}) =>
+                        <SearchResultPage navigation={navigation} drawerNavigation={drawerNavigation}
+                                          route={route}/>
+                }
+            </Stack.Screen>
             <Stack.Screen name="ScrapDetailPage" options={{headerShown: false}}>
                 {
                     ({navigation, route}) =>

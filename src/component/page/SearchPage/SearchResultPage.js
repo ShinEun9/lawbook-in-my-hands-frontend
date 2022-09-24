@@ -10,38 +10,52 @@ function SearchResultPage({navigation: stackNavigation, drawerNavigation, route}
     const {inputValue} = route.params;
 
     const handlePress판례Button = () => {
-        stackNavigation.navigate('SearchDetailPage');
+        if (route.name === "SearchResultPage") {
+            stackNavigation.navigate('SearchDetailPage');
+        } else {
+            stackNavigation.navigate("ScrapDetailPage");
+        }
     }
 
-    return (<SafeAreaView style={styles.container}>
-        <View style={styles.header}>
-            <CustomBackHeader content={"상담 결과"}
-                              handleBackButtonPress={() => {
-                                  stackNavigation.navigate("SearchWritePage", {routeParams:inputValue});
-                              }}
-                              handleMoreButtonPress={() => {
-                                  drawerNavigation.toggleDrawer()
-                              }}
-            />
-        </View>
+    return (
+        <SafeAreaView style={styles.container}>
+            <View style={styles.header}>
+                <CustomBackHeader content={"상담 결과"}
+                                  handleBackButtonPress={() => {
+                                      if (route.name === "ScrapSearchResultPage") {
+                                          stackNavigation.navigate("ScrapSearchPage", {routeParams: inputValue});
 
-        <View style={styles.content}>
-            <Text style={styles.title}>
-                <Text style={styles.userName}>홍길동 고객님</Text>의 사례와
-                {"\n"}가장 비슷한 판례문을 찾아보았어요.
-            </Text>
-            <Text style={styles.subTitle}>검색결과:
-                '{inputValue.length > 10 ? `${inputValue.slice(0, 10)}...` : inputValue}'와
-                관련된 판례 18개</Text>
-
-            <View style={styles.resultBox}>
-                <StyledButton activeOpacity={0.7} onPress={handlePress판례Button}>
-                    <Text style={styles.buttonTitle}>대법원 2021. 3. 25. 선고 2017도17643 판결 [모욕][공2021상,943]</Text>
-                    <Entypo name="chevron-right" size={24} color="rgba(0,0,0,0.3)"/>
-                </StyledButton>
+                                      } else {
+                                          stackNavigation.navigate("SearchWritePage", {routeParams: inputValue});
+                                      }
+                                  }}
+                                  handleMoreButtonPress={() => {
+                                      drawerNavigation.toggleDrawer()
+                                  }}
+                />
             </View>
-        </View>
-    </SafeAreaView>);
+
+            <View style={styles.content}>
+                <Text style={styles.title}>
+                    <Text style={styles.userName}>홍길동 고객님</Text>의 사례와
+                    {"\n"}가장 비슷한 판례문을 찾아보았어요.
+                </Text>
+                {
+                    inputValue &&
+                    <Text style={styles.subTitle}>
+                        검색결과: '{inputValue.length > 10 ? `${inputValue.slice(0, 10)}...` : inputValue}'와 관련된 판례 18개
+                    </Text>
+                }
+
+                <View style={styles.resultBox}>
+                    <StyledButton activeOpacity={0.7} onPress={handlePress판례Button}>
+                        <Text style={styles.buttonTitle}>대법원 2021. 3. 25. 선고 2017도17643 판결 [모욕][공2021상,943]</Text>
+                        <Entypo name="chevron-right" size={24} color="rgba(0,0,0,0.3)"/>
+                    </StyledButton>
+                </View>
+            </View>
+        </SafeAreaView>
+    );
 }
 
 export default SearchResultPage;

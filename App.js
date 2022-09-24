@@ -9,6 +9,7 @@ import LoginPage from "./src/component/page/LoginPage";
 import SignUpPage from "./src/component/page/SignUpPage";
 import {LoginContext} from "./src/store/loginStore";
 import MyPage from "./src/component/page/MyPage/MyPage";
+import CustomDrawerContent from "./src/component/template/CustomDrawerContent";
 
 export default function App() {
     const [isReady, setIsReady] = useState(false); // font가 load 되면 isReady를 true로 변경
@@ -16,7 +17,7 @@ export default function App() {
 
     const loadFont = async () => {
         await Font.loadAsync({
-            JuaRegular: require("./assets/fonts/Jua-Regular.ttf"),
+            SCDream: require("./assets/fonts/SCDream5.ttf"),
         });
     }
     useEffect(() => {
@@ -35,6 +36,7 @@ export default function App() {
                     isReady &&
                     isLogin ?
                         <Drawer.Navigator
+                            // drawerContent={(props) => <CustomDrawerContent {...props} />}
                             useLegacyImplementation={true}
                             initialRouteName="AI 법률 조회"
                             screenOptions={{
@@ -44,9 +46,9 @@ export default function App() {
                                 drawerHideStatusBarOnOpen: false
                             }}
                         >
-                            <Drawer.Screen name="AI 법률 조회" component={SearchPage} options={{headerShown: false}}/>
-                            <Drawer.Screen name="나의 스크랩" component={ScrapPage} options={{headerShown: false}}/>
-                            <Drawer.Screen name="마이 페이지" component={MyPage} options={{headerShown: false}}/>
+                            <Drawer.Screen name="SearchPage" component={SearchPage} options={{headerShown: false}}/>
+                            <Drawer.Screen name="ScrapPage" component={ScrapPage} options={{headerShown: false}}/>
+                            <Drawer.Screen name="MyPage" component={MyPage} options={{headerShown: false}}/>
 
                         </Drawer.Navigator>
                         :

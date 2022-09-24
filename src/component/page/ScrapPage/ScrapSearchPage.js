@@ -10,7 +10,7 @@ import {useInput} from "../../../hooks/useInput";
 function ScrapSearchPage({navigation: stackNavigation, drawerNavigation, route}) {
     const [inputValue, onChange] = useInput(!route.params ? "" : route.params.inputValue);
     const handleSearchButtonClick = () => {
-        stackNavigation.navigate("SearchResultPage", {inputValue: inputValue})
+        stackNavigation.navigate("ScrapSearchResultPage", {inputValue: inputValue})
     }
 
     return (
