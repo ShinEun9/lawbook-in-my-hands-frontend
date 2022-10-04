@@ -1,16 +1,56 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from "styled-components"
-import {SafeAreaView, View} from "react-native";
+import {Alert, SafeAreaView, View} from "react-native";
 import CustomInput from "../atom/CustomInput";
 import CustomButton from "../atom/CustomButton";
 import SignUpPageHeader from "../template/SignUpPageHeader";
 import {colors} from "../../variable/color";
+import {useInputs} from "../../hooks/useInputs";
+import axios from "axios";
 
 function SignUpPage({navigation}) {
+    const [value, onChange] = useInputs({loginId: "", password: "", name: "", nickname: ""})
+    const [idCheck, setIdCheck] = useState(true);
 
     const handleSignUpButtonClick = () => {
-        // alert("완료");
-        navigation.navigate('LoginPage');
+        if (idCheck) {
+            axios.post("http://127.0.0.1:5000/signup", value)
+                .then((res) => {
+                    Alert.alert(
+                        "회원가입이 완료되었습니다.",
+                        "로그인 페이지로 이동합니다.",
+                        [
+                            {
+                                text: "확인", onPress: () => {
+                                    navigation.navigate('LoginPage');
+                                }
+                            }
+                        ]
+                    );
+                })
+                .catch((err) => {
+
+                })
+        } else {
+            Alert.alert(
+                "아이디 중복 확인을 먼저 해주세요.",
+                "",
+                [
+                    {text: "확인"}
+                ]
+            );
+        }
+    }
+
+    const idCheckButtonClick = () => {
+        // Alert.alert(
+        //     "아이디 확인되었습니다.",
+        //     "",
+        //     [
+        //         { text: "확인" }
+        //     ]
+        // );
+        // setIdCheck(true);
     }
 
     return (
@@ -21,19 +61,29 @@ function SignUpPage({navigation}) {
 
             <View style={styles.signUpForm}>
                 <StyledInputContainer>
-                    <CustomInput placeholder={"아이디"} width={"350"} height={"60px"}/>
+                    <CustomInput placeholder={"아이디"} width={"240"} height={"60px"} name={"loginId"}
+                                 value={value.loginId} onChange={onChange}/>
+                    <View style={{marginLeft: 10}}>
+                        <CustomButton content={"아이디 확인"} handlePressButton={idCheckButtonClick} width={"100px"}
+                                      height={"60px"}
+                                      background={colors.pointBlue}/>
+                    </View>
+
                 </StyledInputContainer>
 
                 <StyledInputContainer>
-                    <CustomInput placeholder={"비밀번호"} width={"350"} height={"60px"}/>
+                    <CustomInput placeholder={"비밀번호"} width={"350"} height={"60px"} name={"password"}
+                                 value={value.password} onChange={onChange}/>
                 </StyledInputContainer>
 
                 <StyledInputContainer>
-                    <CustomInput placeholder={"이름"} width={"350"} height={"60px"}/>
+                    <CustomInput placeholder={"이름"} width={"350"} height={"60px"} name={"name"}
+                                 value={value.name} onChange={onChange}/>
                 </StyledInputContainer>
 
                 <StyledInputContainer>
-                    <CustomInput placeholder={"닉네임"} width={"350"} height={"60px"}/>
+                    <CustomInput placeholder={"닉네임"} width={"350"} height={"60px"} name={"nickname"}
+                                 value={value.nickname} onChange={onChange}/>
                 </StyledInputContainer>
 
 

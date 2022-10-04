@@ -12,12 +12,7 @@ import {storeToken} from "../../function/storeToken";
 
 function LoginPage({navigation}) {
     const {isLogin, setIsLogin} = useContext(LoginContext);
-    // const [loginInfo, setLoginInfo] = useState({loginId: "", password:""})
     const [value, onChange] = useInputs({loginId: "", password: ""});
-
-    useEffect(() => {
-        console.log(value);
-    }, [value])
 
     const handleLoginButtonClick = () => {
         axios.post(`http://127.0.0.1:5000/login`, value)
@@ -32,7 +27,7 @@ function LoginPage({navigation}) {
             .catch((err) => {
                 // console.log(err);
                 Alert.alert(
-                    "아이디 또는 비밀번호가 틀렸습니다. ",
+                    "아이디 또는 비밀번호가 틀렸습니다.",
                     "다시 시도해주세요.",
                     [
                         { text: "확인" }
