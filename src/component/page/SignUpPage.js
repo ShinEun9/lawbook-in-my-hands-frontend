@@ -1,9 +1,10 @@
 import React from 'react';
-import {SafeAreaView, Text, TouchableOpacity, View} from "react-native";
+import styled from "styled-components"
+import {SafeAreaView, View} from "react-native";
 import CustomInput from "../atom/CustomInput";
-import {colors} from "../../variable/color";
 import CustomButton from "../atom/CustomButton";
-import {Entypo} from "@expo/vector-icons";
+import SignUpPageHeader from "../template/SignUpPageHeader";
+import {colors} from "../../variable/color";
 
 function SignUpPage({navigation}) {
 
@@ -12,107 +13,31 @@ function SignUpPage({navigation}) {
         navigation.navigate('LoginPage');
     }
 
-    const idCheckButtonClick = () => {
-    }
-
-    const nicknameCheckButtonClick = () => {
-
-    }
-
-    const getCertificateNumClick = () => {
-
-    }
-
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.header}>
-                <View style={{
-                    height: 50,
-                    flexDirection: "row",
-                    alignItems: "center",
-                    width: "100%",
-                    paddingHorizontal: 25
-                }}>
-                    <TouchableOpacity onPress={() => {
-                        navigation.navigate("LoginPage")
-                    }}>
-                        <Entypo name="chevron-left" size={24} color="rgb(71, 67, 72)"/>
-                    </TouchableOpacity>
-                    <Text style={{
-                        fontSize: "20px",
-                        fontWeight: "800",
-                        marginLeft: 20,
-                        color: "rgb(71, 67, 72)"
-                    }}>회원가입</Text>
-                </View>
+                <SignUpPageHeader navigation={navigation}/>
             </View>
 
             <View style={styles.signUpForm}>
-                <View style={{
-                    width: 350,
-                    flexDirection: "row",
-                    justifyContent: "center",
-                }}>
-                    <View style={{marginRight: 10}}>
-                        <CustomInput placeholder={"아이디"} width={"240px"} height={"60px"}/>
-                    </View>
-                    <CustomButton content={"아이디 확인"} handlePressButton={idCheckButtonClick} width={"100px"}
-                                  height={"60px"}
-                                  background={colors.pointBlue}/>
-                </View>
+                <StyledInputContainer>
+                    <CustomInput placeholder={"아이디"} width={"350"} height={"60px"}/>
+                </StyledInputContainer>
 
-                <View style={{
-                    width: 350,
-                    marginTop: 20,
-                    flexDirection: "row",
-                    justifyContent: "center",
-                }}>
+                <StyledInputContainer>
                     <CustomInput placeholder={"비밀번호"} width={"350"} height={"60px"}/>
-                </View>
+                </StyledInputContainer>
 
-                <View style={{
-                    width: 350,
-                    marginTop: 20,
-                    flexDirection: "row",
-                    justifyContent: "center",
-                }}>
-                    <CustomInput placeholder={"비밀번호 확인"} width={"350"} height={"60px"}/>
-                </View>
+                <StyledInputContainer>
+                    <CustomInput placeholder={"이름"} width={"350"} height={"60px"}/>
+                </StyledInputContainer>
 
-                <View style={{
-                    width: 350,
-                    marginTop: 20,
-                    flexDirection: "row",
-                    justifyContent: "center",
-                }}>
-                    <View style={{marginRight: 10}}>
-                        <CustomInput placeholder={"아이디"} width={"240px"} height={"60px"}/>
-                    </View>
-                    <CustomButton content={"닉네임 확인"} handlePressButton={nicknameCheckButtonClick} width={"100px"}
-                                  height={"60px"}
-                                  background={colors.pointBlue}/>
-                </View>
+                <StyledInputContainer>
+                    <CustomInput placeholder={"닉네임"} width={"350"} height={"60px"}/>
+                </StyledInputContainer>
 
-                <View style={{
-                    width: 350,
-                    marginTop: 20,
-                    flexDirection: "row",
-                    justifyContent: "center",
-                }}>
-                    <View style={{marginRight: 10}}>
-                        <CustomInput placeholder={"휴대폰 번호"} width={"240px"} height={"60px"}/>
-                    </View>
-                    <CustomButton content={"인증번호 받기"} handlePressButton={getCertificateNumClick} width={"100px"}
-                                  height={"60px"}
-                                  background={colors.pointBlue}/>
-                </View>
 
-                <View style={{
-                    width: 350,
-                    marginTop: 20,
-                    flexDirection: "row",
-                    justifyContent: "center",
-                }}>
+                <View style={styles.buttonContainer}>
                     <CustomButton content={"회원가입"} handlePressButton={handleSignUpButtonClick} width={"350px"}
                                   height={"60px"}
                                   background={colors.pointBlue}/>
@@ -124,6 +49,14 @@ function SignUpPage({navigation}) {
 
 export default SignUpPage;
 
+const StyledInputContainer = styled(View)`
+  width: 350px;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 20px;
+`;
+
+
 const styles = {
     container: {
         flex: 1,
@@ -134,7 +67,13 @@ const styles = {
         width: "100%",
     },
     signUpForm: {
-        flex: 9,
-        justifyContent: "center"
+        flex: 10,
+        // paddingVertical: 30,
+    },
+    buttonContainer: {
+        width: 350,
+        marginTop: 40,
+        flexDirection: "row",
+        justifyContent: "center",
     }
 }
