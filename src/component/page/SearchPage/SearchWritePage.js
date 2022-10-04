@@ -1,16 +1,35 @@
 import React from 'react';
-import {SafeAreaView, View} from "react-native";
+import {Alert, SafeAreaView, View} from "react-native";
 import CustomMultililneInput from "../../atom/CustomMultililneInput";
 import CustomButton from "../../atom/CustomButton";
 import {colors} from "../../../variable/color";
 import {useInput} from "../../../hooks/useInput";
 import CustomHeader from "../../template/CustomHeader";
+import axios from "axios";
+import asyncStorage from "@react-native-async-storage/async-storage/src/AsyncStorage";
 
 
 function SearchWritePage({navigation: stackNavigation, drawerNavigation, route}) {
     const [inputValue, onChange] = useInput(!route.params ? "" : route.params.routeParams);
-    const handleSearchButtonClick = () => {
-        stackNavigation.navigate("SearchResultPage", {inputValue: inputValue})
+
+    const handleSearchButtonClick = async () => {
+        if (inputValue !== "") {
+            const token = await asyncStorage.getItem("@access_token");
+            await axios.post('http://127.0.0.1:5000/consult', {content: inputValue}, {headers: {Authorization: `Bearer ${token}`}})
+                .then((res) => {
+                    // console.log(res.data.consult_id)
+                    stackNavigation.navigate("SearchResultPage", {inputValue: inputValue})
+                })
+                .catch((err) => {
+                    console.log(err)
+                })
+        } else {
+            Alert.alert(
+                "내용을 작성해주세요.",
+                "",
+                [{text: "확인"}]
+            );
+        }
     }
 
     return (
