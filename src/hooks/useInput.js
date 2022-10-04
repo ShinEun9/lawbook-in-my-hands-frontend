@@ -1,9 +1,13 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
-export const useInput = (initialData)=>{
+export const useInput = (initialData) => {
     const [input, setInput] = useState(initialData);
 
-    const onChange = (text)=>{
+    useEffect(() => {
+        console.log(input)
+    }, [input])
+
+    const onChange = (text) => {
         setInput(text);
     }
 

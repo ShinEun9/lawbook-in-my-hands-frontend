@@ -1,13 +1,22 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {View, Text, SafeAreaView, Image, TouchableOpacity} from "react-native";
 import CustomButton from "../atom/CustomButton";
 import {colors} from "../../variable/color";
 import moreButtonImagePath from "../../img/more.png";
+import asyncStorage from "@react-native-async-storage/async-storage/src/AsyncStorage";
+import {LoginContext} from "../../store/loginStore";
 
 function CustomDrawerContent({navigation}) {
+    const {isLogin, setIsLogin} = useContext(LoginContext);
     const handle프로필수정ButtonPress = () => {
         navigation.navigate("MyPage")
     }
+
+    const handleLogoutButtonPress = async () => {
+        await asyncStorage.removeItem("@access_token");
+        setIsLogin(false);
+    }
+
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.titleContainer}>
@@ -61,7 +70,7 @@ function CustomDrawerContent({navigation}) {
                     <Text style={styles.button}>비밀번호 변경</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity>
+                <TouchableOpacity onPress={handleLogoutButtonPress}>
                     <Text style={styles.button}>로그아웃</Text>
                 </TouchableOpacity>
 
@@ -119,10 +128,10 @@ const styles = {
         marginBottom: 20,
         color: "rgba(0,0,0,0.5)"
     },
-    buttonContainer:{
+    buttonContainer: {
         padding: 15,
     },
-    button:{
+    button: {
         color: "#c4c4c4",
         fontSize: "16",
         fontWeight: "400",

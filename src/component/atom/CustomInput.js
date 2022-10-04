@@ -3,19 +3,20 @@ import {TextInput} from "react-native";
 import styled from 'styled-components/native';
 import {colors} from "../../variable/color";
 
-function CustomInput({placeholder, width, height}) {
-    const [text, onChangeText] = useState("");
+function CustomInput({placeholder, width, height, value, onChange, name, type = false}) {
     const [isFocus, setIsFocus] = useState(false);
 
 
     return (
         <StyledTextInput
+            secureTextEntry={type==="password"?true:false}
             placeholder={placeholder}
             width={width}
             height={height}
             // margin={margin}
-            onChangeText={onChangeText}
-            value={text}
+            onChangeText={(text)=>{onChange(name, text)}}
+            value={value}
+            autoCapitalize={"none"}
             focus={isFocus}
             onFocus={() => {
                 setIsFocus(true)
