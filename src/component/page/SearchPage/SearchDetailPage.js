@@ -23,6 +23,7 @@ function SearchDetailPage({navigation: stackNavigation, drawerNavigation, route}
             .then((res) => {
                 parseString(res.data, (err, result) => {
                     const response = JSON.parse(JSON.stringify((result))).PrecService;
+                    console.log(response);
                     setCaseData(response);
                     setIsLoading(false);
                 })
@@ -78,7 +79,8 @@ function SearchDetailPage({navigation: stackNavigation, drawerNavigation, route}
                                 </Text>
                                 {
                                     item[1].map((text) => {
-                                        return <Text style={styles.caseContent}>{text}</Text>
+                                        return <Text
+                                            style={styles.caseContent}>{text.split("\n").join("").replace(/\s{2,}/gi, ' ')}</Text>
                                     })
                                 }
                             </View>
