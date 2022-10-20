@@ -10,6 +10,7 @@ import SignUpPage from "./src/component/page/SignUpPage";
 import {LoginContext} from "./src/store/loginStore";
 import MyPage from "./src/component/page/MyPage/MyPage";
 import CustomDrawerContent from "./src/component/template/CustomDrawerContent";
+import asyncStorage from "@react-native-async-storage/async-storage/src/AsyncStorage";
 
 export default function App() {
     const [isReady, setIsReady] = useState(false); // font가 load 되면 isReady를 true로 변경
@@ -20,8 +21,16 @@ export default function App() {
             SCDream: require("./assets/fonts/SCDream5.ttf"),
         });
     }
+
+    const checkIsLoginOrNot = async () => {
+        const token = await asyncStorage.getItem("@access_token");
+        if (token) setIsLogin(true)
+        else setIsLogin(false)
+    }
+
     useEffect(() => {
         loadFont();
+        checkIsLoginOrNot();
         setIsReady(true);
     }, []);
 

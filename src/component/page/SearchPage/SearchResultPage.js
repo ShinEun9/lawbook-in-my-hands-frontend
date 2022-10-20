@@ -8,10 +8,11 @@ import CustomBackHeader from "../../template/CustomBackHeader";
 
 function SearchResultPage({navigation: stackNavigation, drawerNavigation, route}) {
     const {inputValue} = route.params;
+    const {cases} = route.params;
 
-    const handlePress판례Button = () => {
+    const handlePress판례Button = (url) => {
         if (route.name === "SearchResultPage") {
-            stackNavigation.navigate('SearchDetailPage');
+            stackNavigation.navigate('SearchDetailPage', {url: url});
         } else {
             stackNavigation.navigate("ScrapDetailPage");
         }
@@ -43,16 +44,34 @@ function SearchResultPage({navigation: stackNavigation, drawerNavigation, route}
                 {
                     inputValue &&
                     <Text style={styles.subTitle}>
-                        검색결과: '{inputValue.length > 10 ? `${inputValue.slice(0, 10)}...` : inputValue}'와 관련된 판례 18개
+                        검색결과: '{inputValue.length > 10 ? `${inputValue.slice(0, 10)}...` : inputValue}'와 관련된
+                        판례 {cases.length}개
                     </Text>
                 }
 
-                <View style={styles.resultBox}>
-                    <StyledButton activeOpacity={0.7} onPress={handlePress판례Button}>
-                        <Text style={styles.buttonTitle}>대법원 2021. 3. 25. 선고 2017도17643 판결 [모욕][공2021상,943]</Text>
-                        <Entypo name="chevron-right" size={24} color="rgba(0,0,0,0.3)"/>
-                    </StyledButton>
-                </View>
+                {
+                    !cases.length ?
+                        <View>
+                            <Text>검색결과가 없습니다.</Text>
+                        </View>
+                        :
+                        cases.map((item) => {
+                            return <View style={styles.resultBox}>
+                                <StyledButton activeOpacity={0.7} onPress={() => {
+                                    handlePress판례Button(item.url)
+                                }}>
+                                    <Text style={styles.buttonTitle}>
+                                        {
+                                            Object.values(item).join(' ').length > 70 ?
+                                                `${Object.values(item).join(' ').slice(0, 60)}...`
+                                                : Object.values(item).join(' ')
+                                        }
+                                    </Text>
+                                    <Entypo name="chevron-right" size={24} color="rgba(0,0,0,0.3)"/>
+                                </StyledButton>
+                            </View>
+                        })
+                }
             </View>
         </SafeAreaView>
     );
@@ -101,15 +120,17 @@ const styles = {
         color: "#A2A2A2",
         fontSize: 15,
         marginBottom: 10,
-    }, resultBox: {
+    },
+    resultBox: {
         width: "100%",
         height: 400,
         backgroundColor: "#F8F4F4",
         paddingHorizontal: 36,
         paddingVertical: 26,
         alignItems: "center",
-    }, buttonTitle: {
-        width: "85%",
+    },
+    buttonTitle: {
+        width: "95%",
         fontSize: "13px",
         fontWeight: "400"
     }
