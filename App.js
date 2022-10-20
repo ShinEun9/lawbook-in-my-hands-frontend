@@ -21,12 +21,11 @@ export default function App() {
             SCDream: require("./assets/fonts/SCDream5.ttf"),
         });
     }
+
     const checkIsLoginOrNot = async () => {
         const token = await asyncStorage.getItem("@access_token");
         if (token) setIsLogin(true)
         else setIsLogin(false)
-
-
     }
 
     useEffect(() => {
