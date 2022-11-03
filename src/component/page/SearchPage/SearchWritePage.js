@@ -18,11 +18,11 @@ function SearchWritePage({navigation: stackNavigation, drawerNavigation, route})
         setIsLoading(true)
         if (inputValue !== "") {
             const token = await asyncStorage.getItem("@access_token");
-            await axios.post(`http://54.180.82.100:5000/consult`, {content: inputValue}, {headers: {Authorization: `Bearer ${token}`}})
+            await axios.post(`http://127.0.0.1:5000/consult`, {content: inputValue}, {headers: {Authorization: `Bearer ${token}`}})
                 .then((res) => {
-                    // console.log(res.data.consult_id)
-                    console.log("cases: ", res.data.cases)
-                    stackNavigation.navigate("SearchResultPage", {inputValue, cases: res.data.cases})
+                    console.log(res.data);
+                    const {cases, consult_id} = res.data
+                    stackNavigation.navigate("SearchResultPage", {inputValue, cases, consult_id})
                     setIsLoading(false);
                 })
                 .catch((err) => {

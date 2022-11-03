@@ -8,11 +8,11 @@ import CustomBackHeader from "../../template/CustomBackHeader";
 
 function SearchResultPage({navigation: stackNavigation, drawerNavigation, route}) {
     const {inputValue} = route.params;
-    const {cases} = route.params;
+    const {cases, consult_id} = route.params;
 
-    const handlePress판례Button = (url) => {
+    const handlePress판례Button = (url, case_serial_id) => {
         if (route.name === "SearchResultPage") {
-            stackNavigation.navigate('SearchDetailPage', {url: url});
+            stackNavigation.navigate('SearchDetailPage', {url, case_serial_id, consult_id});
         } else {
             stackNavigation.navigate("ScrapDetailPage");
         }
@@ -58,7 +58,7 @@ function SearchResultPage({navigation: stackNavigation, drawerNavigation, route}
                         cases.map((item) => {
                             return <View style={styles.resultBox}>
                                 <StyledButton activeOpacity={0.7} onPress={() => {
-                                    handlePress판례Button(item.url)
+                                    handlePress판례Button(item.url, item.case_serial_id)
                                 }}>
                                     <Text style={styles.buttonTitle}>
                                         {

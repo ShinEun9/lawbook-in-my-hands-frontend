@@ -8,6 +8,7 @@ import {Entypo, Ionicons} from "@expo/vector-icons";
 import CustomIconButton from "../../atom/CustomIconButton";
 import axios from "axios";
 import {caseResult} from "../../../variable/oneCaseResult";
+import asyncStorage from "@react-native-async-storage/async-storage/src/AsyncStorage";
 
 const parseString = require('react-native-xml2js').parseString;
 
@@ -16,30 +17,62 @@ function SearchDetailPage({navigation: stackNavigation, drawerNavigation, route}
     const [caseData, setCaseData] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
 
-    const {url} = route.params;
+    const {url, case_serial_id, consult_id} = route.params;
 
     const fetchData = async () => {
-        await axios.get(url)
-            .then((res) => {
-                console.log(res);
-                parseString(res.data, (err, result) => {
-                    // console.log(result);
-                    // const response = JSON.parse(JSON.stringify((result))).PrecService;
-                    // console.log(response);
-                    // setCaseData(result.PrecService);
-                    setIsLoading(false);
+        const token = await asyncStorage.getItem("@access_token");
+        await axios.all(
+            [
+                axios.get(url),
+                axios.get(`http://127.0.0.1:5000/scrap/${case_serial_id}?consult_id=${consult_id}`, {headers: {Authorization: `Bearer ${token}`}})
+            ]
+        )
+            .then(
+                axios.spread((res1, res2) => {
+                    parseString(res1.data, (err, result) => {
+                        const response = JSON.parse(JSON.stringify((result))).PrecService;
+                        setCaseData(response);
+                        setIsLoading(false);
+                    })
+
+                    setIsScrap(res2.data.scrap);
                 })
-            })
+            )
             .catch((err) => {
-                console.log(err)
+                console.log(err);
             })
     }
+
     useEffect(() => {
         fetchData();
     }, [url])
-    const handleScrapButtonClick = () => {
-        setIsScrap((prev) => !prev);
+
+    const handleScrapButtonClick = async () => {
+        const token = await asyncStorage.getItem("@access_token");
+
+        if (!isScrap) {
+            // 스크랩 하기
+            await axios.post(`http://127.0.0.1:5000/scrap/${case_serial_id}?consult_id=${consult_id}`, {}, {
+                headers: {Authorization: `Bearer ${token}`}
+            }).then((res) => {
+                console.log(res)
+                setIsScrap(true);
+            }).catch((err) => {
+                console.log(err)
+            })
+        } else {
+            // 스크랩 취소
+            await axios.delete(`http://127.0.0.1:5000/scrap/${case_serial_id}?consult_id=${consult_id}`, {
+                headers: {Authorization: `Bearer ${token}`}
+            }).then((res) => {
+                console.log(res)
+                setIsScrap(false);
+            }).catch((err) => {
+                console.log(err)
+            })
+        }
     }
+
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.header}>
@@ -64,15 +97,6 @@ function SearchDetailPage({navigation: stackNavigation, drawerNavigation, route}
                                           height={"40px"}
                                           background={colors.pointBlue}/>
                     </View>
-                    {/*<Text>*/}
-                    {/*    【판시사항】*/}
-                    {/*    [1] 모욕죄에서 말하는 ‘모욕’의 의미 / 어떤 글이 모욕적 표현을 담고 있더라도 사회상규에 위배되지 않는 행위로서 위법성이 조각될 수 있는 경우 / 특정 사안에 대한*/}
-                    {/*    의견을 공유하는 인터넷 게시판 등의 공간에서 작성된 단문의 글에 모욕적 표현이 포함되어 있더라도 그 글을 작성한 행위가 사회상규에 위배되지 않는 행위로서 위법성이 조각되는*/}
-                    {/*    경우*/}
-                    {/*    [2] 인터넷 신문사 소속 기자 甲이 작성한 기사가 인터넷 포털 사이트의 ‘핫이슈’ 난에 게재되자, 피고인이 “이런걸 기레기라고 하죠?”라는 댓글을 게시함으로써 공연히 甲을*/}
-                    {/*    모욕하였다는 내용으로 기소된 사안에서, ‘기레기’는 모욕적 표현에 해당하나, 위 댓글의 내용, 작성 시기와 위치, 위 댓글 전후로 게시된 다른 댓글의 내용과 흐름 등을*/}
-                    {/*    종합하면, 위 댓글을 작성한 행위는 사회상규에 위배되지 않는 행위로서 형법 제20조에 의하여 위법성이 조각된다고 한 사례*/}
-                    {/*</Text>*/}
                     {
                         caseData && Object.entries(caseData).map((item) => {
                             return <View style={{marginBottom: 10}}>

@@ -15,7 +15,7 @@ function LoginPage({navigation}) {
     const [value, onChange] = useInputs({loginId: "", password: ""});
 
     const handleLoginButtonClick = () => {
-        axios.post(`http://54.180.82.100:5000/login`, value)
+        axios.post(`http://127.0.0.1:5000/login`, value)
             .then((res) => {
                 if(res.status===200){
                     storeToken(res.data.access_token)

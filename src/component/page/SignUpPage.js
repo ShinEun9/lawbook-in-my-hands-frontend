@@ -44,7 +44,7 @@ function SignUpPage({navigation}) {
 
     const idCheckButtonClick = () => {
         console.log(value.loginId);
-        axios.get(`http://54.180.82.100:5000/loginid/${value.loginId}`)
+        axios.get(`http://127.0.0.1:5000/loginid/${value.loginId}`)
             .then((res) => {
                 Alert.alert(
                     "아이디 확인이 완료되었습니다.",
