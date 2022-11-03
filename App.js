@@ -16,10 +16,13 @@ export default function App() {
     const [isReady, setIsReady] = useState(false); // font가 load 되면 isReady를 true로 변경
     const [isLogin, setIsLogin] = useState(false); // 로그인 된 상태이면 isLogin을 true로 변경
 
-    const loadFont = async () => {
+    const initialize = async () => {
         await Font.loadAsync({
             SCDream: require("./assets/fonts/SCDream5.ttf"),
-        });
+        }).then(()=>{
+            setIsReady(true);
+            checkIsLoginOrNot();
+        })
     }
 
     const checkIsLoginOrNot = async () => {
@@ -29,9 +32,7 @@ export default function App() {
     }
 
     useEffect(() => {
-        loadFont();
-        checkIsLoginOrNot();
-        setIsReady(true);
+        initialize();
     }, []);
 
 
