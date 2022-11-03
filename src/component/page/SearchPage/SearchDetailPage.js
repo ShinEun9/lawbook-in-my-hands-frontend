@@ -21,10 +21,12 @@ function SearchDetailPage({navigation: stackNavigation, drawerNavigation, route}
     const fetchData = async () => {
         await axios.get(url)
             .then((res) => {
+                console.log(res);
                 parseString(res.data, (err, result) => {
-                    const response = JSON.parse(JSON.stringify((result))).PrecService;
-                    console.log(response);
-                    setCaseData(response);
+                    // console.log(result);
+                    // const response = JSON.parse(JSON.stringify((result))).PrecService;
+                    // console.log(response);
+                    // setCaseData(result.PrecService);
                     setIsLoading(false);
                 })
             })
