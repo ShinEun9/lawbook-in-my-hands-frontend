@@ -8,7 +8,7 @@ import {colors} from "../../variable/color";
 import {LoginContext} from "../../store/loginStore";
 import moreButtonImagePath from "../../img/more.png";
 import {useInputs} from "../../hooks/useInputs";
-import {storeToken} from "../../function/storeToken";
+// import {storeToken} from "../../function/storeToken";
 
 function LoginPage({navigation}) {
     const {isLogin, setIsLogin} = useContext(LoginContext);
@@ -16,9 +16,10 @@ function LoginPage({navigation}) {
 
     const handleLoginButtonClick = () => {
         axios.post(`http://127.0.0.1:5000/login`, value)
-            .then((res) => {
+            .then(async(res) => {
                 if(res.status===200){
-                    storeToken(res.data.access_token)
+                    // storeToken(res.data.access_token)
+                    await AsyncStorage.setItem('@access_token', res.data.access_token)
                     setIsLogin(true);
                 }
                 // console.log(res);

@@ -20,6 +20,7 @@ function SearchDetailPage({navigation: stackNavigation, drawerNavigation, route}
     const {url, case_serial_id, consult_id} = route.params;
 
     const fetchData = async () => {
+        console.log(case_serial_id, consult_id);
         const token = await asyncStorage.getItem("@access_token");
         await axios.all(
             [
@@ -35,6 +36,7 @@ function SearchDetailPage({navigation: stackNavigation, drawerNavigation, route}
                         setIsLoading(false);
                     })
 
+                    console.log(res2.data.scrap);
                     setIsScrap(res2.data.scrap);
                 })
             )
@@ -99,14 +101,14 @@ function SearchDetailPage({navigation: stackNavigation, drawerNavigation, route}
                     </View>
                     {
                         caseData && Object.entries(caseData).map((item) => {
-                            return <View style={{marginBottom: 10}}>
+                            return <View style={{marginBottom: 10}} key={item[0]}>
                                 <Text style={styles.caseTitle}>
                                     【{item[0]}】
                                 </Text>
                                 {
-                                    item[1].map((text) => {
-                                        return <Text
-                                            style={styles.caseContent}>{text.split("\n").join("").replace(/\s{2,}/gi, ' ')}</Text>
+                                    item[1].map((text, index) => {
+                                        return <Text key={index}
+                                                     style={styles.caseContent}>{text.split("\n").join("").replace(/\s{2,}/gi, ' ')}</Text>
                                     })
                                 }
                             </View>

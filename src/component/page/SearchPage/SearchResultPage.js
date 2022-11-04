@@ -7,8 +7,7 @@ import CustomBackHeader from "../../template/CustomBackHeader";
 
 
 function SearchResultPage({navigation: stackNavigation, drawerNavigation, route}) {
-    const {inputValue} = route.params;
-    const {cases, consult_id} = route.params;
+    const {inputValue, consult_id, cases} = route.params;
 
     const handlePress판례Button = (url, case_serial_id) => {
         if (route.name === "SearchResultPage") {
@@ -55,8 +54,8 @@ function SearchResultPage({navigation: stackNavigation, drawerNavigation, route}
                             <Text>검색결과가 없습니다.</Text>
                         </View>
                         :
-                        cases.map((item) => {
-                            return <View style={styles.resultBox}>
+                        cases.map((item, index) => {
+                            return <View style={styles.resultBox} key={index}>
                                 <StyledButton activeOpacity={0.7} onPress={() => {
                                     handlePress판례Button(item.url, item.case_serial_id)
                                 }}>
