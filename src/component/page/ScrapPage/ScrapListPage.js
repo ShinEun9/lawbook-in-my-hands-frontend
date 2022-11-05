@@ -38,11 +38,10 @@ function ScrapListPage({navigation: stackNavigation, drawerNavigation}) {
         stackNavigation.navigate("ScrapSearchPage", {consult_content, consult_id})
     }
 
-    const handle스크랩판례ButtonPress = (상담내역, oneCase) => {
+    const handle스크랩판례ButtonPress = (상담내역, oneCase, title) => {
         const {consult_id} = 상담내역;
         const {url, case_serial_id} = oneCase
-        console.log(case_serial_id, consult_id);
-        stackNavigation.navigate("ScrapDetailPage", {url, case_serial_id, consult_id})
+        stackNavigation.navigate("ScrapDetailPage", {url, case_serial_id, consult_id, title: `${title.slice(0,15)}...`})
     }
 
     useEffect(() => {
@@ -99,7 +98,7 @@ function ScrapListPage({navigation: stackNavigation, drawerNavigation}) {
                                                         return <TouchableOpacity key={case_serial_id}
                                                                                  style={styles.스크랩판례Button}
                                                                                  onPress={() => {
-                                                                                     handle스크랩판례ButtonPress(상담내역, oneCase)
+                                                                                     handle스크랩판례ButtonPress(상담내역, oneCase, title)
                                                                                  }}>
                                                             <Text style={styles.buttonText}>
                                                                 {title.slice(0, 40)}...

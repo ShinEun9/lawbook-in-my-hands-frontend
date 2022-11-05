@@ -1,9 +1,5 @@
 import React from 'react';
-import ScrapListPage from "../ScrapPage/ScrapListPage";
-import ScrapSearchPage from "../ScrapPage/ScrapSearchPage";
-import SearchDetailPage from "../SearchPage/SearchDetailPage";
 import {createStackNavigator} from "@react-navigation/stack";
-import MyPageMain from "./MyPageMain";
 import MyProfileEditPage from "./MyProfileEditPage";
 
 function MyPage({navigation: drawerNavigation}) {
