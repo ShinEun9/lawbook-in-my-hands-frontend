@@ -1,8 +1,7 @@
 import React from 'react';
-import {Image, SafeAreaView, Text, TouchableOpacity, View} from "react-native";
+import {SafeAreaView, Text, TouchableOpacity, View} from "react-native";
 import styled from "styled-components"
 import {Entypo} from '@expo/vector-icons';
-import moreButtonImagePath from "../../../img/more.png";
 import CustomBackHeader from "../../template/CustomBackHeader";
 
 

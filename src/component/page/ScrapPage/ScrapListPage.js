@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {SafeAreaView, View, Text, TouchableOpacity, ActivityIndicator, ScrollView} from "react-native";
+import {SafeAreaView, View, Text, TouchableOpacity, ActivityIndicator, ScrollView, RefreshControl} from "react-native";
 import CustomHeader from "../../template/CustomHeader";
 import styled from "styled-components"
 import {Entypo} from "@expo/vector-icons";
@@ -10,6 +10,17 @@ import asyncStorage from "@react-native-async-storage/async-storage/src/AsyncSto
 function ScrapListPage({navigation: stackNavigation, drawerNavigation}) {
     const [consultList, setConsultList] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+
+    // ScrollView Refresh Control 관련
+    const [refreshing, setRefreshing] = React.useState(false);
+    const wait = (timeout) => {
+        return new Promise(resolve => setTimeout(resolve, timeout));
+    }
+
+    const onRefresh = React.useCallback(() => {
+        setRefreshing(true);
+        wait(2000).then(() => fetch스크랩리스트Data().then(() => setRefreshing(false)));
+    }, []);
 
     const fetch스크랩리스트Data = async () => {
         const token = await asyncStorage.getItem("@access_token");
@@ -23,7 +34,7 @@ function ScrapListPage({navigation: stackNavigation, drawerNavigation}) {
     }
 
     const handleTitlePress = (consult_content, consult_id) => {
-        console.log(consult_content, consult_id)
+        // console.log(consult_content, consult_id)
         stackNavigation.navigate("ScrapSearchPage", {consult_content, consult_id})
     }
 
@@ -50,7 +61,14 @@ function ScrapListPage({navigation: stackNavigation, drawerNavigation}) {
                 />
             </View>
             <View style={styles.content}>
-                <ScrollView style={styles.scrollView} contentContainerStyle={{alignItems: "center"}}>
+                <ScrollView style={styles.scrollView} contentContainerStyle={{alignItems: "center"}}
+                            refreshControl={
+                                <RefreshControl
+                                    refreshing={refreshing}
+                                    onRefresh={onRefresh}
+                                />
+                            }
+                >
                     {
                         isLoading ?
                             <ActivityIndicator/>

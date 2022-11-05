@@ -11,7 +11,6 @@ function ScrapSearchPage({navigation: stackNavigation, drawerNavigation, route})
     const {consult_content, consult_id: consult_id_params} = route.params;
     const [isLoading, setIsLoading] = useState(false);
 
-    // const [inputValue, onChange] = useInput(!route.params ? "" : route.params.inputValue);
     const handleSearchButtonClick = async () => {
         setIsLoading(true);
         const token = await asyncStorage.getItem("@access_token");
