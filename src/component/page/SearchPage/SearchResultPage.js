@@ -7,13 +7,13 @@ import CustomBackHeader from "../../template/CustomBackHeader";
 
 
 function SearchResultPage({navigation: stackNavigation, drawerNavigation, route}) {
-    const {inputValue, consult_id, cases} = route.params;
+    const {consult_content, consult_id, cases} = route.params;
 
     const handlePress판례Button = (url, case_serial_id) => {
         if (route.name === "SearchResultPage") {
             stackNavigation.navigate('SearchDetailPage', {url, case_serial_id, consult_id});
-        } else {
-            stackNavigation.navigate("ScrapDetailPage");
+        } else if(route.name === "ScrapSearchResultPage") {
+            stackNavigation.navigate("ScrapDetailPage", {url, case_serial_id, consult_id});
         }
     }
 
@@ -22,11 +22,11 @@ function SearchResultPage({navigation: stackNavigation, drawerNavigation, route}
             <View style={styles.header}>
                 <CustomBackHeader content={"상담 결과"}
                                   handleBackButtonPress={() => {
-                                      if (route.name === "ScrapSearchResultPage") {
-                                          stackNavigation.navigate("ScrapSearchPage", {routeParams: inputValue});
-
-                                      } else {
-                                          stackNavigation.navigate("SearchWritePage", {routeParams: inputValue});
+                                      if(route.name==="SearchResultPage"){
+                                          stackNavigation.navigate("SearchWritePage");
+                                      }
+                                      else if(route.name==="ScrapSearchResultPage"){
+                                          stackNavigation.navigate("ScrapSearchPage", {consult_content, consult_id});
                                       }
                                   }}
                                   handleMoreButtonPress={() => {
@@ -41,9 +41,9 @@ function SearchResultPage({navigation: stackNavigation, drawerNavigation, route}
                     {"\n"}가장 비슷한 판례문을 찾아보았어요.
                 </Text>
                 {
-                    inputValue &&
+                    consult_content &&
                     <Text style={styles.subTitle}>
-                        검색결과: '{inputValue.length > 10 ? `${inputValue.slice(0, 10)}...` : inputValue}'와 관련된
+                        검색결과: '{consult_content.length > 10 ? `${consult_content.slice(0, 10)}...` : consult_content}'와 관련된
                         판례 {cases.length}개
                     </Text>
                 }

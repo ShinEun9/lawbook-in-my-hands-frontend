@@ -13,19 +13,17 @@ function ScrapListPage({navigation: stackNavigation, drawerNavigation}) {
 
     const fetch스크랩리스트Data = async () => {
         const token = await asyncStorage.getItem("@access_token");
-        console.log(token);
         await axios.get(`http://127.0.0.1:5000/scrap`, {
             headers: {Authorization: `Bearer ${token}`}
         }).then((res) => {
-            console.log(res.data.consult_list)
             setConsultList(res.data.consult_list);
-
         }).catch((err) => {
             console.log(err)
         })
     }
 
     const handleTitlePress = (consult_content, consult_id) => {
+        console.log(consult_content, consult_id)
         stackNavigation.navigate("ScrapSearchPage", {consult_content, consult_id})
     }
 
@@ -59,10 +57,12 @@ function ScrapListPage({navigation: stackNavigation, drawerNavigation}) {
                             :
                             consultList.length !== 0 ?
                                 consultList.map((상담내역, index) => {
-                                    const {consult_content: title, scrap_list: scrapList} = 상담내역;
+                                    const {consult_content: title, scrap_list: scrapList, consult_id} = 상담내역;
                                     return <StyledScrapContainer key={index}>
                                         <View style={styles.containerTitle}>
-                                            <TouchableOpacity onPress={handleTitlePress}>
+                                            <TouchableOpacity onPress={() => {
+                                                handleTitlePress(title, consult_id)
+                                            }}>
                                                 <Text style={styles.titleButtonText}>{title.slice(0, 10)}...글 관련
                                                     스크랩 {scrapList.length}개</Text>
                                             </TouchableOpacity>
@@ -167,14 +167,3 @@ const styles = {
         color: `${colors.darkgrey}`
     }
 }
-
-
-// <TouchableOpacity style={styles.스크랩판례Button}
-//                   onPress={handle스크랩판례ButtonPress}>
-//     <Text style={styles.buttonText}>대법원 2021. 3. 25. 선고 2017도17643 판결
-//         [모욕][공2021상,943]</Text>
-//     <Entypo name="chevron-right" size={24} color="rgba(0,0,0,0.3)"/>
-// </TouchableOpacity>
-//
-//
-// <Text style={styles.noScrapContent}>스크랩된 판례가 없습니다.</Text>

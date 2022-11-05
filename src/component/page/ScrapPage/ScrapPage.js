@@ -14,7 +14,9 @@ function ScrapPage({navigation: drawerNavigation}) {
     return (
         <Stack.Navigator initialRouteName={"ScrapListPage"}
                          screenOptions={{cardStyle: {backgroundColor: 'white'}}}>
-            <Stack.Screen name="ScrapListPage" options={{headerShown: false}}>
+            <Stack.Screen name="ScrapListPage" options={{
+                headerShown: false,
+            }}>
                 {
                     ({navigation}) =>
                         <ScrapListPage navigation={navigation} drawerNavigation={drawerNavigation}/>

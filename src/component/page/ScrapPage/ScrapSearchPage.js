@@ -1,17 +1,32 @@
-import React from 'react';
-import {SafeAreaView, View} from "react-native";
-import CustomHeader from "../../template/CustomHeader";
+import React, {useState} from 'react';
+import {ActivityIndicator, SafeAreaView, View} from "react-native";
 import CustomMultililneInput from "../../atom/CustomMultililneInput";
 import CustomButton from "../../atom/CustomButton";
 import {colors} from "../../../variable/color";
 import CustomBackHeader from "../../template/CustomBackHeader";
-import {useInput} from "../../../hooks/useInput";
+import axios from "axios";
+import asyncStorage from "@react-native-async-storage/async-storage/src/AsyncStorage";
 
 function ScrapSearchPage({navigation: stackNavigation, drawerNavigation, route}) {
-    const [inputValue, onChange] = useInput(!route.params ? "" : route.params.inputValue);
+    const {consult_content, consult_id: consult_id_params} = route.params;
+    const [isLoading, setIsLoading] = useState(false);
 
-    const handleSearchButtonClick = () => {
-        stackNavigation.navigate("ScrapSearchResultPage", {inputValue: inputValue})
+    // const [inputValue, onChange] = useInput(!route.params ? "" : route.params.inputValue);
+    const handleSearchButtonClick = async () => {
+        setIsLoading(true);
+        const token = await asyncStorage.getItem("@access_token");
+        await axios.get(`http://127.0.0.1:5000/consult/${consult_id_params}`, {
+            headers: {Authorization: `Bearer ${token}`}
+        })
+            .then((res) => {
+                setIsLoading(false);
+                const {cases, consult_id} = res.data
+                stackNavigation.navigate("ScrapSearchResultPage", {consult_content, cases, consult_id})
+            })
+            .catch((err) => {
+                setIsLoading(false);
+                console.log(err)
+            })
     }
 
     return (
@@ -30,9 +45,13 @@ function ScrapSearchPage({navigation: stackNavigation, drawerNavigation, route})
 
             <View style={styles.content}>
                 <View style={{marginBottom: 30}}>
-                    <CustomMultililneInput value={inputValue} onChange={onChange} editable={false}/>
+                    <CustomMultililneInput
+                        value={consult_content}
+                        // onChange={onChange}
+                        editable={false}/>
                 </View>
-                <CustomButton content={"AI 법률조회"} handlePressButton={handleSearchButtonClick} width={"260px"}
+                <CustomButton content={isLoading ? <ActivityIndicator/> : "AI 법률조회"}
+                              handlePressButton={handleSearchButtonClick} width={"260px"}
                               height={"40px"}
                               background={colors.pointBlue}/>
             </View>

@@ -22,7 +22,7 @@ function SearchWritePage({navigation: stackNavigation, drawerNavigation, route})
                 .then((res) => {
                     console.log(res.data);
                     const {cases, consult_id} = res.data
-                    stackNavigation.navigate("SearchResultPage", {inputValue, cases, consult_id})
+                    stackNavigation.navigate("SearchResultPage", {consult_content: inputValue, cases, consult_id})
                     setIsLoading(false);
                 })
                 .catch((err) => {
