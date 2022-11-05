@@ -1,20 +1,18 @@
 import React from 'react';
-import {Image, SafeAreaView, Text, TouchableOpacity, View} from "react-native";
+import {SafeAreaView, Text, TouchableOpacity, View} from "react-native";
 import styled from "styled-components"
 import {Entypo} from '@expo/vector-icons';
-import moreButtonImagePath from "../../../img/more.png";
 import CustomBackHeader from "../../template/CustomBackHeader";
 
 
 function SearchResultPage({navigation: stackNavigation, drawerNavigation, route}) {
-    const {inputValue} = route.params;
-    const {cases} = route.params;
+    const {consult_content, consult_id, cases} = route.params;
 
-    const handlePress판례Button = (url) => {
+    const handlePress판례Button = (url, case_serial_id) => {
         if (route.name === "SearchResultPage") {
-            stackNavigation.navigate('SearchDetailPage', {url: url});
-        } else {
-            stackNavigation.navigate("ScrapDetailPage");
+            stackNavigation.navigate('SearchDetailPage', {url, case_serial_id, consult_id});
+        } else if(route.name === "ScrapSearchResultPage") {
+            stackNavigation.navigate("ScrapDetailPage", {url, case_serial_id, consult_id});
         }
     }
 
@@ -23,11 +21,11 @@ function SearchResultPage({navigation: stackNavigation, drawerNavigation, route}
             <View style={styles.header}>
                 <CustomBackHeader content={"상담 결과"}
                                   handleBackButtonPress={() => {
-                                      if (route.name === "ScrapSearchResultPage") {
-                                          stackNavigation.navigate("ScrapSearchPage", {routeParams: inputValue});
-
-                                      } else {
-                                          stackNavigation.navigate("SearchWritePage", {routeParams: inputValue});
+                                      if(route.name==="SearchResultPage"){
+                                          stackNavigation.navigate("SearchWritePage");
+                                      }
+                                      else if(route.name==="ScrapSearchResultPage"){
+                                          stackNavigation.navigate("ScrapSearchPage", {consult_content, consult_id});
                                       }
                                   }}
                                   handleMoreButtonPress={() => {
@@ -42,9 +40,9 @@ function SearchResultPage({navigation: stackNavigation, drawerNavigation, route}
                     {"\n"}가장 비슷한 판례문을 찾아보았어요.
                 </Text>
                 {
-                    inputValue &&
+                    consult_content &&
                     <Text style={styles.subTitle}>
-                        검색결과: '{inputValue.length > 10 ? `${inputValue.slice(0, 10)}...` : inputValue}'와 관련된
+                        검색결과: '{consult_content.length > 10 ? `${consult_content.slice(0, 10)}...` : consult_content}'와 관련된
                         판례 {cases.length}개
                     </Text>
                 }
@@ -55,10 +53,10 @@ function SearchResultPage({navigation: stackNavigation, drawerNavigation, route}
                             <Text>검색결과가 없습니다.</Text>
                         </View>
                         :
-                        cases.map((item) => {
-                            return <View style={styles.resultBox}>
+                        cases.map((item, index) => {
+                            return <View style={styles.resultBox} key={index}>
                                 <StyledButton activeOpacity={0.7} onPress={() => {
-                                    handlePress판례Button(item.url)
+                                    handlePress판례Button(item.url, item.case_serial_id)
                                 }}>
                                     <Text style={styles.buttonTitle}>
                                         {
