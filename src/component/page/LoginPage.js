@@ -18,7 +18,7 @@ function LoginPage({navigation}) {
         axios.post(`http://127.0.0.1:5000/login`, value)
             .then(async(res) => {
                 if(res.status===200){
-                    // storeToken(res.data.access_token)
+                    console.log(res.data.access_token)
                     await AsyncStorage.setItem('@access_token', res.data.access_token)
                     setIsLogin(true);
                 }

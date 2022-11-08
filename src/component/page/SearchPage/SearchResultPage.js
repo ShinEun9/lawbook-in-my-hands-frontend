@@ -124,7 +124,6 @@ const styles = {
     },
     resultBox: {
         width: "100%",
-        height: 400,
         backgroundColor: "#F8F4F4",
         paddingHorizontal: 36,
         paddingVertical: 26,
