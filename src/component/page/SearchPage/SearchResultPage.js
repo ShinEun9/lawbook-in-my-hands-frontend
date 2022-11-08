@@ -55,15 +55,15 @@ function SearchResultPage({navigation: stackNavigation, drawerNavigation, route}
                         </View>
                         :
                         cases.map((item, index) => {
-                            const url = item.url
-                            delete item.url;
-                            const title =  Object.values(item).join(' ').length > 70 ?
-                                `${Object.values(item).join(' ').slice(0, 60)}...`
-                                : Object.values(item).join(' ');
+                            const copy = JSON.parse(JSON.stringify(item));
+                            delete copy.url
+                            const title =  Object.values(copy).join(' ').length > 70 ?
+                                `${Object.values(copy).join(' ').slice(0, 60)}...`
+                                : Object.values(copy).join(' ');
 
                             return <View style={styles.resultBox} key={index}>
                                 <StyledButton activeOpacity={0.7} onPress={() => {
-                                    handlePress판례Button(url, item.case_serial_id, title)
+                                    handlePress판례Button(item.url, item.case_serial_id, title)
                                 }}>
                                     <Text style={styles.buttonTitle}>
                                         {
