@@ -55,9 +55,11 @@ function SearchResultPage({navigation: stackNavigation, drawerNavigation, route}
                         </View>
                         :
                         cases.map((item, index) => {
-                            const title =  Object.values(item).join(' ').length > 70 ?
-                                `${Object.values(item).join(' ').slice(0, 60)}...`
-                                : Object.values(item).join(' ');
+                            const object = item;
+                            delete object.url
+                            const title =  Object.values(object).join(' ').length > 70 ?
+                                `${Object.values(object).join(' ').slice(0, 60)}...`
+                                : Object.values(object).join(' ');
 
                             return <View style={styles.resultBox} key={index}>
                                 <StyledButton activeOpacity={0.7} onPress={() => {
