@@ -41,7 +41,12 @@ function ScrapListPage({navigation: stackNavigation, drawerNavigation}) {
     const handle스크랩판례ButtonPress = (상담내역, oneCase, title) => {
         const {consult_id} = 상담내역;
         const {url, case_serial_id} = oneCase
-        stackNavigation.navigate("ScrapDetailPage", {url, case_serial_id, consult_id, title: `${title.slice(0,15)}...`})
+        stackNavigation.navigate("ScrapDetailPage", {
+            url,
+            case_serial_id,
+            consult_id,
+            title: `${title.slice(0, 15)}...`
+        })
     }
 
     useEffect(() => {
@@ -74,12 +79,18 @@ function ScrapListPage({navigation: stackNavigation, drawerNavigation}) {
                             :
                             consultList.length !== 0 ?
                                 consultList.map((상담내역, index) => {
-                                    const {consult_content: title, scrap_list: scrapList, consult_id} = 상담내역;
+                                    const {
+                                        consult_content: title,
+                                        scrap_list: scrapList,
+                                        consult_id,
+                                        created_at
+                                    } = 상담내역;
                                     return <StyledScrapContainer key={index}>
                                         <View style={styles.containerTitle}>
                                             <TouchableOpacity onPress={() => {
                                                 handleTitlePress(title, consult_id)
                                             }}>
+                                                <Text style={styles.titleButtonText}>{created_at.slice(2, 16)}</Text>
                                                 <Text style={styles.titleButtonText}>{title.slice(0, 10)}...글 관련
                                                     스크랩 {scrapList.length}개</Text>
                                             </TouchableOpacity>
