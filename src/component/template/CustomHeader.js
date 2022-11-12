@@ -27,8 +27,8 @@ const StyledHeader = styled(View)`
   justify-content: space-between;
   align-items: center;
   padding-horizontal: 25px;
-  border-bottom-color: rgb(248, 248, 248);
-  border-bottom-width: 5px;
+  border-bottom-color: rgba(0,0,0,0.1);
+  border-bottom-width: 2px;
 
 `
 const StyledTitle = styled(Text)`

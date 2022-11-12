@@ -3,7 +3,7 @@ import {TextInput} from "react-native";
 import styled from "styled-components/native";
 import {colors} from "../../variable/color";
 
-function CustomMultililneInput({value, onChange, editable = true}) {
+function CustomMultilineInput({value, onChange, editable = true}) {
     const [isFocus, setIsFocus] = useState(false);
     return (
         <StyledTextInput // margin={margin}
@@ -25,7 +25,7 @@ function CustomMultililneInput({value, onChange, editable = true}) {
     );
 }
 
-export default CustomMultililneInput;
+export default CustomMultilineInput;
 
 const StyledTextInput = styled(TextInput)`
   width: ${(props) => props.width};

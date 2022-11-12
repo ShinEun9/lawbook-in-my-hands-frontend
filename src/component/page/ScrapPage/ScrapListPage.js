@@ -85,42 +85,46 @@ function ScrapListPage({navigation: stackNavigation, drawerNavigation}) {
                                         consult_id,
                                         created_at
                                     } = 상담내역;
-                                    return <StyledScrapContainer key={index}>
-                                        <View style={styles.containerTitle}>
-                                            <TouchableOpacity onPress={() => {
-                                                handleTitlePress(title, consult_id)
-                                            }}>
-                                                <Text style={styles.titleButtonText}>{created_at.slice(2, 16)}</Text>
-                                                <Text style={styles.titleButtonText}>{title.slice(0, 10)}...글 관련
-                                                    스크랩 {scrapList.length}개</Text>
-                                            </TouchableOpacity>
-                                        </View>
-                                        <View style={styles.containerContent}>
-                                            {
-                                                !scrapList.length ?
-                                                    <Text style={styles.noScrapContent}>스크랩된 판례가 없습니다.</Text>
-                                                    :
-                                                    scrapList.map((oneCase) => {
-                                                        const {
-                                                            case_serial_id, 법원명, 사건명, 사건번호, 선고, 선고일자, 판결유형
-                                                        } = oneCase
-                                                        const title = `${법원명} ${사건명} ${사건번호} ${선고} ${선고일자} ${판결유형}`
 
-                                                        return <TouchableOpacity key={case_serial_id}
-                                                                                 style={styles.스크랩판례Button}
-                                                                                 onPress={() => {
-                                                                                     handle스크랩판례ButtonPress(상담내역, oneCase, title)
-                                                                                 }}>
-                                                            <Text style={styles.buttonText}>
-                                                                {title.slice(0, 40)}...
-                                                            </Text>
-                                                            <Entypo name="chevron-right" size={24}
-                                                                    color="rgba(0,0,0,0.3)"/>
-                                                        </TouchableOpacity>
-                                                    })
-                                            }
-                                        </View>
-                                    </StyledScrapContainer>
+                                    return <View style={{width:"100%", alignItems:"center",}}>
+                                        <Text style={styles.time}>{created_at.slice(2, 16)}</Text>
+                                        <StyledScrapContainer >
+                                            <View style={styles.containerTitle}>
+                                                <TouchableOpacity onPress={() => {
+                                                    handleTitlePress(title, consult_id)
+                                                }}>
+                                                    <Text style={styles.titleButtonText}>{title.slice(0, 10)}...글 관련
+                                                        스크랩 {scrapList.length}개</Text>
+                                                </TouchableOpacity>
+                                            </View>
+                                            <View style={styles.containerContent}>
+                                                {
+                                                    !scrapList.length ?
+                                                        <Text style={styles.noScrapContent}>스크랩된 판례가 없습니다.</Text>
+                                                        :
+                                                        scrapList.map((oneCase) => {
+                                                            const {
+                                                                case_serial_id, 법원명, 사건명, 사건번호, 선고, 선고일자, 판결유형
+                                                            } = oneCase
+                                                            const title = `${법원명} ${사건명} ${사건번호} ${선고} ${선고일자} ${판결유형}`
+
+                                                            return <TouchableOpacity key={case_serial_id}
+                                                                                     style={styles.스크랩판례Button}
+                                                                                     onPress={() => {
+                                                                                         handle스크랩판례ButtonPress(상담내역, oneCase, title)
+                                                                                     }}>
+                                                                <Text style={styles.buttonText}>
+                                                                    {title.slice(0, 40)}...
+                                                                </Text>
+                                                                <Entypo name="chevron-right" size={24}
+                                                                        color="rgba(0,0,0,0.3)"/>
+                                                            </TouchableOpacity>
+                                                        })
+                                                }
+                                            </View>
+                                        </StyledScrapContainer>
+                                    </View>
+
                                 })
 
                                 :
@@ -162,6 +166,14 @@ const styles = {
     scrollView: {
         flex: 9,
         width: "100%"
+    },
+    time:{
+     alignSelf:"flex-start",
+        paddingHorizontal:"7%",
+        marginBottom: 5,
+        fontSize: "16px",
+        fontWeight: "700",
+        color: `${colors.pointBlue2}`
     },
     containerTitle: {
         backgroundColor: "rgba(233,235,239, 0.8)",

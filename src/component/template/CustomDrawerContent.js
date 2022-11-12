@@ -45,7 +45,7 @@ function CustomDrawerContent({navigation}) {
                     {/*<Text style={{fontSize: "16"}}>은구찡</Text>*/}
                 </View>
                 <CustomButton content={"프로필 수정"} handlePressButton={handle프로필수정ButtonPress}
-                              width={"100px"} height={"30px"} background={colors.pointBlue}/>
+                              width={"100px"} height={"40px"} background={colors.pointBlue}/>
             </TouchableOpacity>
 
             <View style={styles.menuContainer}>
@@ -93,7 +93,7 @@ const styles = {
         padding: 15
     },
     title: {
-        fontFamily: "SCDream",
+        fontFamily: "SCDream7",
         fontSize: "22",
     },
     profileContainer: {
@@ -110,11 +110,11 @@ const styles = {
     },
     profileNickName: {
         fontSize: "16",
-        color: "rgba(0,0,0,0.5)"
+        // color: "rgba(0,0,0,0.5)"
     },
     menuContainer: {
         padding: 15,
-        borderBottomWidth: 5,
+        borderBottomWidth: 1,
         borderBottomColor: "#F8F8F8"
     },
     menuTitle: {

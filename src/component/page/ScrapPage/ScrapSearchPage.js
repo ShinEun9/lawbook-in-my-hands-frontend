@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {ActivityIndicator, SafeAreaView, View} from "react-native";
-import CustomMultililneInput from "../../atom/CustomMultililneInput";
+import CustomMultilineInput from "../../atom/CustomMultilineInput";
 import CustomButton from "../../atom/CustomButton";
 import {colors} from "../../../variable/color";
 import CustomBackHeader from "../../template/CustomBackHeader";
@@ -44,14 +44,14 @@ function ScrapSearchPage({navigation: stackNavigation, drawerNavigation, route})
 
             <View style={styles.content}>
                 <View style={{marginBottom: 30}}>
-                    <CustomMultililneInput
+                    <CustomMultilineInput
                         value={consult_content}
                         // onChange={onChange}
                         editable={false}/>
                 </View>
                 <CustomButton content={isLoading ? <ActivityIndicator/> : "AI 법률조회"}
                               handlePressButton={handleSearchButtonClick} width={"260px"}
-                              height={"40px"}
+                              height={"50px"}
                               background={colors.pointBlue}/>
             </View>
         </SafeAreaView>

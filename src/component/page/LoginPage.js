@@ -1,6 +1,6 @@
 import React, {useContext, useEffect, useState} from 'react';
 import axios from "axios";
-import {Alert, Image, SafeAreaView, View} from "react-native";
+import {Alert, Image, SafeAreaView, Text, View} from "react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import CustomInput from "../atom/CustomInput";
 import CustomButton from "../atom/CustomButton";
@@ -45,21 +45,21 @@ function LoginPage({navigation}) {
         <SafeAreaView style={styles.container}>
             <Image
                 style={{height: 300, width: 300}}
-                source={require('../../img/logo.png')}
-            />
+                source={require('../../img/logo.png')} />
+            {/*<Text style={{fontFamily:"SCDream7", fontSize:"40px",fontWeight:"bold", color:colors.pointBlue2, marginBottom: 40}} >내 손안의 법전</Text>*/}
             <View style={{marginBottom: 10}}>
-                <CustomInput name="loginId" placeholder={"아이디"} width={"260px"} height={"40px"} value={value.loginId}
+                <CustomInput name="loginId" placeholder={"아이디"} width={"260px"} height={"45px"} value={value.loginId}
                              onChange={onChange}/>
             </View>
             <View style={{marginBottom: 45}}>
-                <CustomInput name="password" placeholder={"비밀번호"} width={"260px"} height={"40px"} value={value.password}
+                <CustomInput name="password" placeholder={"비밀번호"} width={"260px"} height={"45px"} value={value.password}
                              onChange={onChange} type={"password"}/>
             </View>
             <View style={{marginBottom: 20}}>
-                <CustomButton content={"로그인"} handlePressButton={handleLoginButtonClick} width={"260px"} height={"40px"}
+                <CustomButton content={"로그인"} handlePressButton={handleLoginButtonClick} width={"260px"} height={"50px"}
                               background={colors.pointBlue}/>
             </View>
-            <CustomButton content={"회원가입"} handlePressButton={handleSignUpButtonClick} width={"260px"} height={"40px"}
+            <CustomButton content={"회원가입"} handlePressButton={handleSignUpButtonClick} width={"260px"} height={"50px"}
                           background={colors.blue2}/>
 
         </SafeAreaView>

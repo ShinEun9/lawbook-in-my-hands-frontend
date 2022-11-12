@@ -76,7 +76,7 @@ function SignUpPage({navigation}) {
 
             <View style={styles.signUpForm}>
                 <StyledInputContainer>
-                    <CustomInput placeholder={"아이디"} width={"240"} height={"60px"} name={"loginId"}
+                    <CustomInput placeholder={"아이디"} width={"240px"} height={"60px"} name={"loginId"}
                                  value={value.loginId} onChange={onChange}/>
                     <View style={{marginLeft: 10}}>
                         <CustomButton content={"아이디 확인"} handlePressButton={idCheckButtonClick} width={"100px"}
