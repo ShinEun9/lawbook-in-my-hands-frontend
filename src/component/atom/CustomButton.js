@@ -21,7 +21,7 @@ const StyledButton = styled(View)`
   width: ${(props) => props.width};
   height: ${(props) => props.height};
   background: ${(props)=>props.background};
-  borderRadius: 10px;
+  borderRadius: 5px;
   flex-direction: row;
   justifyContent: center;
   alignItems: center;

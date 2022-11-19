@@ -27,6 +27,7 @@ function ScrapListPage({navigation: stackNavigation, drawerNavigation}) {
         await axios.get(`http://127.0.0.1:5000/scrap`, {
             headers: {Authorization: `Bearer ${token}`}
         }).then((res) => {
+            console.log(res.data.consult_list)
             setConsultList(res.data.consult_list);
         }).catch((err) => {
             console.log(err)
@@ -86,7 +87,7 @@ function ScrapListPage({navigation: stackNavigation, drawerNavigation}) {
                                         created_at
                                     } = 상담내역;
 
-                                    return <View style={{width:"100%", alignItems:"center",}}>
+                                    return <View style={{width:"100%", alignItems:"center",}} key={index}>
                                         <Text style={styles.time}>{created_at.slice(2, 16)}</Text>
                                         <StyledScrapContainer >
                                             <View style={styles.containerTitle}>

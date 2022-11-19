@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {View, Text, SafeAreaView, ScrollView, ActivityIndicator} from "react-native";
+import {View, Text, SafeAreaView, ScrollView, ActivityIndicator, Alert} from "react-native";
 import styled from "styled-components";
 import CustomBackHeader from "../../template/CustomBackHeader";
 import CustomButton from "../../atom/CustomButton";
@@ -18,6 +18,7 @@ function SearchDetailPage({navigation: stackNavigation, drawerNavigation, route}
     const [isLoading, setIsLoading] = useState(true);
 
     const {url, case_serial_id, consult_id, title} = route.params;
+    console.log(case_serial_id, consult_id)
 
     const fetchData = async () => {
         const token = await asyncStorage.getItem("@access_token");
@@ -34,6 +35,8 @@ function SearchDetailPage({navigation: stackNavigation, drawerNavigation, route}
                         setCaseData(response);
                         setIsLoading(false);
                     })
+
+                    console.log(res2.data.scrap);
 
                     setIsScrap(res2.data.scrap);
                 })
@@ -55,6 +58,13 @@ function SearchDetailPage({navigation: stackNavigation, drawerNavigation, route}
             await axios.post(`http://127.0.0.1:5000/scrap/${case_serial_id}?consult_id=${consult_id}`, {}, {
                 headers: {Authorization: `Bearer ${token}`}
             }).then((res) => {
+                Alert.alert(
+                    "스크랩이 완료되었습니다.",
+                    "",
+                    [
+                        {text: "확인"}
+                    ]
+                );
                 setIsScrap(true);
             }).catch((err) => {
                 console.log(err)
@@ -64,6 +74,13 @@ function SearchDetailPage({navigation: stackNavigation, drawerNavigation, route}
             await axios.delete(`http://127.0.0.1:5000/scrap/${case_serial_id}?consult_id=${consult_id}`, {
                 headers: {Authorization: `Bearer ${token}`}
             }).then((res) => {
+                Alert.alert(
+                    "스크랩 취소가 완료되었습니다.",
+                    "",
+                    [
+                        {text: "확인"}
+                    ]
+                );
                 setIsScrap(false);
             }).catch((err) => {
                 console.log(err)

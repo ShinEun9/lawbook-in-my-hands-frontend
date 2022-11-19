@@ -37,7 +37,7 @@ function SearchResultPage({navigation: stackNavigation, drawerNavigation, route}
 
             <View style={styles.content}>
                 <Text style={styles.title}>
-                    <Text style={styles.userName}>홍길동 고객님</Text>의 사례와
+                    <Text style={styles.userName}>고객님</Text>의 사례와
                     {"\n"}가장 비슷한 판례문을 찾아보았어요.
                 </Text>
                 {

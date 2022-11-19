@@ -11,7 +11,8 @@ import {LoginContext} from "./src/store/loginStore";
 import MyPage from "./src/component/page/MyPage/MyPage";
 import CustomDrawerContent from "./src/component/template/CustomDrawerContent";
 import asyncStorage from "@react-native-async-storage/async-storage/src/AsyncStorage";
-import { LogBox } from 'react-native';
+import {LogBox} from 'react-native';
+
 LogBox.ignoreLogs(['Sending']);
 
 export default function App() {
@@ -65,7 +66,13 @@ export default function App() {
 
                             </Drawer.Navigator>
                             :
-                            <Stack.Navigator initialRouteName="LoginPage" screenOptions={{headerShown: false,}}>
+                            <Stack.Navigator initialRouteName="LoginPage"
+                                             screenOptions={{
+                                                 headerShown: false,
+                                                 cardStyle: {
+                                                     backgroundColor: 'white',
+                                                 },
+                                             }}>
                                 <>
                                     <Stack.Screen name="LoginPage" component={LoginPage}/>
                                     <Stack.Screen name="SignUpPage" component={SignUpPage}/>

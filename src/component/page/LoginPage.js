@@ -1,6 +1,6 @@
 import React, {useContext, useEffect, useState} from 'react';
 import axios from "axios";
-import {Alert, Image, SafeAreaView, Text, View} from "react-native";
+import {Alert, Image, SafeAreaView, Text, TouchableOpacity, View} from "react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import CustomInput from "../atom/CustomInput";
 import CustomButton from "../atom/CustomButton";
@@ -8,6 +8,9 @@ import {colors} from "../../variable/color";
 import {LoginContext} from "../../store/loginStore";
 import moreButtonImagePath from "../../img/more.png";
 import {useInputs} from "../../hooks/useInputs";
+import CustomIconButton from "../atom/CustomIconButton";
+import CustomIconInput from "../atom/CustomIconInput";
+
 // import {storeToken} from "../../function/storeToken";
 
 function LoginPage({navigation}) {
@@ -16,8 +19,8 @@ function LoginPage({navigation}) {
 
     const handleLoginButtonClick = () => {
         axios.post(`http://127.0.0.1:5000/login`, value)
-            .then(async(res) => {
-                if(res.status===200){
+            .then(async (res) => {
+                if (res.status === 200) {
                     console.log(res.data.access_token)
                     await AsyncStorage.setItem('@access_token', res.data.access_token)
                     setIsLogin(true);
@@ -31,7 +34,7 @@ function LoginPage({navigation}) {
                     "아이디 또는 비밀번호가 틀렸습니다.",
                     "다시 시도해주세요.",
                     [
-                        { text: "확인" }
+                        {text: "확인"}
                     ]
                 );
             })
@@ -44,23 +47,26 @@ function LoginPage({navigation}) {
     return (
         <SafeAreaView style={styles.container}>
             <Image
-                style={{height: 300, width: 300}}
-                source={require('../../img/logo.png')} />
-            {/*<Text style={{fontFamily:"SCDream7", fontSize:"40px",fontWeight:"bold", color:colors.pointBlue2, marginBottom: 40}} >내 손안의 법전</Text>*/}
+                style={{height: 350, width: 350}}
+                source={require('../../img/logo.png')}/>
             <View style={{marginBottom: 10}}>
-                <CustomInput name="loginId" placeholder={"아이디"} width={"260px"} height={"45px"} value={value.loginId}
-                             onChange={onChange}/>
+                <CustomIconInput name="loginId" placeholder={"LoginID"} width={"260px"} height={"45px"}
+                                 value={value.loginId}
+                                 onChange={onChange} iconName={"user"}/>
             </View>
             <View style={{marginBottom: 45}}>
-                <CustomInput name="password" placeholder={"비밀번호"} width={"260px"} height={"45px"} value={value.password}
-                             onChange={onChange} type={"password"}/>
+                <CustomIconInput name="password" placeholder={"Password"} width={"260px"} height={"45px"}
+                                 value={value.password}
+                                 onChange={onChange} type={"password"} iconName={"lock"}/>
+
             </View>
             <View style={{marginBottom: 20}}>
                 <CustomButton content={"로그인"} handlePressButton={handleLoginButtonClick} width={"260px"} height={"50px"}
-                              background={colors.pointBlue}/>
+                              background={colors.gold}/>
             </View>
-            <CustomButton content={"회원가입"} handlePressButton={handleSignUpButtonClick} width={"260px"} height={"50px"}
-                          background={colors.blue2}/>
+
+            <CustomButton content={"회원가입"} handlePressButton={handleSignUpButtonClick} width={"260px"}
+                          height={"50px"} background={colors.pointBlue}/>
 
         </SafeAreaView>
     );
