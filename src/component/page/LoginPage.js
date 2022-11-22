@@ -1,6 +1,6 @@
 import React, {useContext, useEffect, useState} from 'react';
 import axios from "axios";
-import {Alert, Image, SafeAreaView, View} from "react-native";
+import {ActivityIndicator, Alert, Image, SafeAreaView, View} from "react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {colors} from "../../variable/color";
 import {LoginContext} from "../../store/loginStore";
@@ -11,20 +11,27 @@ import CustomButton from "../atom/CustomButton";
 function LoginPage({navigation}) {
     const {isLogin, setIsLogin} = useContext(LoginContext);
     const [value, onChange] = useInputs({loginId: "", password: ""});
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleLoginButtonClick = () => {
-        axios.post(`http://127.0.0.1:5000/login`, value)
+        setIsLoading(true)
+        axios.post(`http://3.39.59.151:5000/login`, value)
             .then(async (res) => {
                 if (res.status === 200) {
-                    console.log(res.data.access_token)
-                    await AsyncStorage.setItem('@access_token', res.data.access_token)
+                    const {access_token, loginid, name, nickname} = res.data
+                    await AsyncStorage.setItem('@access_token', access_token)
+                    await AsyncStorage.setItem("@name", name);
+                    await AsyncStorage.setItem("@loginId", loginid);
+                    await AsyncStorage.setItem("@nickname", nickname);
                     setIsLogin(true);
+                    setIsLoading(false);
                 }
                 // console.log(res);
                 // console.log(res.data)
             })
             .catch((err) => {
                 // console.log(err);
+                setIsLoading(false);
                 Alert.alert(
                     "아이디 또는 비밀번호가 틀렸습니다.",
                     "다시 시도해주세요.",
@@ -57,11 +64,14 @@ function LoginPage({navigation}) {
             </View>
             <View style={{marginBottom: 20}}>
                 <CustomButton handlePressButton={handleLoginButtonClick} width={"260px"} height={"50px"}
-                              pointColor={colors.gold} borderRadius={"5px"}>로그인</CustomButton>
+                              pointColor={colors.gold} borderRadius={"5px"}>
+                    {isLoading ? <ActivityIndicator/> : "로그인"}
+                </CustomButton>
             </View>
 
             <CustomButton handlePressButton={handleSignUpButtonClick} width={"260px"}
-                          height={"50px"} pointColor={colors.pointBlue} borderRadius={"5px"}>회원가입
+                          height={"50px"} pointColor={colors.pointBlue} borderRadius={"5px"}>
+                회원가입
             </CustomButton>
 
         </SafeAreaView>
