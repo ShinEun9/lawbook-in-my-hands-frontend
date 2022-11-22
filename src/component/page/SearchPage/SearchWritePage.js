@@ -1,12 +1,12 @@
 import React, {useState} from 'react';
 import {ActivityIndicator, Alert, SafeAreaView, View} from "react-native";
 import CustomMultilineInput from "../../atom/CustomMultilineInput";
-import CustomButton from "../../atom/CustomButton";
 import {colors} from "../../../variable/color";
 import {useInput} from "../../../hooks/useInput";
 import CustomHeader from "../../template/CustomHeader";
 import axios from "axios";
 import asyncStorage from "@react-native-async-storage/async-storage/src/AsyncStorage";
+import CustomButton from "../../atom/CustomButton";
 
 
 function SearchWritePage({navigation: stackNavigation, drawerNavigation, route}) {
@@ -41,6 +41,7 @@ function SearchWritePage({navigation: stackNavigation, drawerNavigation, route})
                     setIsLoading(false);
                 })
         } else {
+            setIsLoading(false);
             Alert.alert(
                 "내용을 작성해주세요.",
                 "",
@@ -63,10 +64,11 @@ function SearchWritePage({navigation: stackNavigation, drawerNavigation, route})
                 <View style={{marginBottom: 30}}>
                     <CustomMultilineInput value={inputValue} onChange={onChange}/>
                 </View>
-                <CustomButton content={isLoading ? <ActivityIndicator/> : "AI 법률조회"}
-                              handlePressButton={handleSearchButtonClick} width={"260px"}
+                <CustomButton handlePressButton={handleSearchButtonClick} width={"260px"}
                               height={"50px"}
-                              background={colors.pointBlue}/>
+                              pointColor={colors.pointBlue} borderRadius={"5px"}>
+                    {isLoading ? <ActivityIndicator/> : "AI 법률조회"}
+                </CustomButton>
             </View>
         </SafeAreaView>
     );

@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
 import {ActivityIndicator, SafeAreaView, View} from "react-native";
 import CustomMultilineInput from "../../atom/CustomMultilineInput";
-import CustomButton from "../../atom/CustomButton";
 import {colors} from "../../../variable/color";
 import CustomBackHeader from "../../template/CustomBackHeader";
 import axios from "axios";
 import asyncStorage from "@react-native-async-storage/async-storage/src/AsyncStorage";
+import CustomButton from "../../atom/CustomButton";
 
 function ScrapSearchPage({navigation: stackNavigation, drawerNavigation, route}) {
     const {consult_content, consult_id: consult_id_params} = route.params;
@@ -49,10 +49,10 @@ function ScrapSearchPage({navigation: stackNavigation, drawerNavigation, route})
                         // onChange={onChange}
                         editable={false}/>
                 </View>
-                <CustomButton content={isLoading ? <ActivityIndicator/> : "AI 법률조회"}
-                              handlePressButton={handleSearchButtonClick} width={"260px"}
-                              height={"50px"}
-                              background={colors.pointBlue}/>
+                <CustomButton handlePressButton={handleSearchButtonClick} width={"260px"} height={"50px"}
+                              pointColor={colors.pointBlue} borderRadius={"5px"}>
+                    {isLoading ? <ActivityIndicator/> : "AI 법률조회"}
+                </CustomButton>
             </View>
         </SafeAreaView>
     );

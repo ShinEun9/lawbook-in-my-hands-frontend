@@ -2,13 +2,12 @@ import React from 'react';
 import {Text, TouchableOpacity, View} from 'react-native';
 import styled from 'styled-components/native';
 
-function CustomButton({content, handlePressButton, width, height, background}) {
+// type이 a 것은 버튼 색깔 있는 것, b인 것은 버튼 색깔 흰색에 테두리
+function CustomButton({type = "a", children, handlePressButton, width, height, pointColor, borderRadius}) {
     return (
         <TouchableOpacity onPress={handlePressButton} activeOpacity={0.9}>
-            <StyledButton width={width} height={height} background={background}>
-                <Text
-                    style={styles.buttonText}
-                >{content}</Text>
+            <StyledButton type={type} width={width} height={height} pointColor={pointColor} borderRadius={borderRadius}>
+                <StyledButtonText type={type} pointColor={pointColor}>{children}</StyledButtonText>
             </StyledButton>
         </TouchableOpacity>
 
@@ -20,18 +19,18 @@ export default CustomButton;
 const StyledButton = styled(View)`
   width: ${(props) => props.width};
   height: ${(props) => props.height};
-  background: ${(props)=>props.background};
-  borderRadius: 5px;
+  background: ${(props) => props.type === "a" ? props.pointColor : "white"};
+  borderRadius: ${(props) => props.borderRadius};
+  border-width: 1px;
+  border-color: ${(props) => props.pointColor};
   flex-direction: row;
   justifyContent: center;
   alignItems: center;
 `;
 
-
-const styles = {
-    buttonText: {
-        fontSize: "14px",
-        color: "white",
-        textAlign: "center"
-    }
-}
+const StyledButtonText = styled(Text)`
+  fontSize: 14px;
+  color: ${(props) => props.type === "b" ? `${props.pointColor}` : "white"};
+  textAlign: center;
+  font-family: NanumSquareB;
+`;

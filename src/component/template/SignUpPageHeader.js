@@ -29,6 +29,6 @@ const styles = {
         fontSize: "20px",
         fontWeight: "800",
         marginLeft: 20,
-        color: "rgb(71, 67, 72)"
+        // color: "rgb(71, 67, 72)"
     }
 }

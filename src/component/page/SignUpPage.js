@@ -2,11 +2,11 @@ import React, {useState} from 'react';
 import styled from "styled-components"
 import {Alert, SafeAreaView, View} from "react-native";
 import CustomInput from "../atom/CustomInput";
-import CustomButton from "../atom/CustomButton";
 import SignUpPageHeader from "../template/SignUpPageHeader";
 import {colors} from "../../variable/color";
 import {useInputs} from "../../hooks/useInputs";
 import axios from "axios";
+import CustomButton from "../atom/CustomButton";
 
 function SignUpPage({navigation}) {
     const [value, onChange] = useInputs({loginId: "", password: "", name: "", nickname: ""})
@@ -76,36 +76,39 @@ function SignUpPage({navigation}) {
 
             <View style={styles.signUpForm}>
                 <StyledInputContainer>
-                    <CustomInput placeholder={"아이디"} width={"240px"} height={"60px"} name={"loginId"}
+                    <CustomInput placeholder={"LoginID"} width={"240px"} height={"60px"} name={"loginId"}
                                  value={value.loginId} onChange={onChange}/>
                     <View style={{marginLeft: 10}}>
-                        <CustomButton content={"중복 확인"} handlePressButton={idCheckButtonClick} width={"100px"}
-                                      height={"60px"}
-                                      background={colors.pointBlue}/>
+                        <CustomButton type={"b"} width={"100px"} height={"50px"} borderRadius={"50%"}
+                                      pointColor={colors.pointBlue}
+                                      handlePressButton={idCheckButtonClick}>
+                            중복 확인
+                        </CustomButton>
                     </View>
 
                 </StyledInputContainer>
 
                 <StyledInputContainer>
-                    <CustomInput placeholder={"비밀번호"} width={"350px"} height={"60px"} name={"password"}
+                    <CustomInput placeholder={"Password"} width={"350px"} height={"60px"} name={"password"}
                                  value={value.password} onChange={onChange}/>
                 </StyledInputContainer>
 
                 <StyledInputContainer>
-                    <CustomInput placeholder={"이름"} width={"350px"} height={"60px"} name={"name"}
+                    <CustomInput placeholder={"Name"} width={"350px"} height={"60px"} name={"name"}
                                  value={value.name} onChange={onChange}/>
                 </StyledInputContainer>
 
                 <StyledInputContainer>
-                    <CustomInput placeholder={"닉네임"} width={"350px"} height={"60px"} name={"nickname"}
+                    <CustomInput placeholder={"NickName"} width={"350px"} height={"60px"} name={"nickname"}
                                  value={value.nickname} onChange={onChange}/>
                 </StyledInputContainer>
 
 
                 <View style={styles.buttonContainer}>
-                    <CustomButton content={"회원가입"} handlePressButton={handleSignUpButtonClick} width={"350px"}
-                                  height={"60px"}
-                                  background={colors.pointBlue}/>
+                    <CustomButton width={"350px"} height={"60px"} borderRadius={"50%"} pointColor={colors.pointBlue}
+                                  handlePressButton={handleSignUpButtonClick}>
+                        회원가입
+                    </CustomButton>
                 </View>
             </View>
         </SafeAreaView>
@@ -117,6 +120,7 @@ export default SignUpPage;
 const StyledInputContainer = styled(View)`
   width: 350px;
   flex-direction: row;
+  align-items: center;
   justify-content: center;
   margin-top: 20px;
 `;

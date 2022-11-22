@@ -34,6 +34,8 @@ const StyledTextInput = styled(TextInput)`
     // margin-bottom:  ${(props) => parseInt(props.margin)}px;
   borderWidth: 1px;
   borderColor: ${(props) => props.focus ? `${colors.pointBlue}` : "rgba(0, 0, 0, 0.2)"};
-  borderRadius: 10px;
+  borderRadius: 5px;
   padding: 20px;
+  font-family: NanumSquareR;
+  font-size: 14px;
 `;

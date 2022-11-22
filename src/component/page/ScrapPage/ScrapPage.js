@@ -1,7 +1,4 @@
 import React from 'react';
-import {SafeAreaView, Text, View} from "react-native";
-import CustomHeader from "../../template/CustomHeader";
-import SearchWritePage from "../SearchPage/SearchWritePage";
 import SearchResultPage from "../SearchPage/SearchResultPage";
 import SearchDetailPage from "../SearchPage/SearchDetailPage";
 import {createStackNavigator} from "@react-navigation/stack";

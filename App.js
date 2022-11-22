@@ -21,11 +21,15 @@ export default function App() {
 
     const initialize = async () => {
         await Font.loadAsync({
-            SCDream5: require("./assets/fonts/SCDream5.ttf"),
-            SCDream7: require("./assets/fonts/SCDream7.otf"),
+            NanumSquareR: require("./assets/fonts/NanumSquareR.otf"),
+            NanumSquareB: require("./assets/fonts/NanumSquareB.otf"),
+            NanumSquareEB: require("./assets/fonts/NanumSquareEB.otf"),
+            DrawerTitle: require("./assets/fonts/문화재돌봄체Bold.ttf")
         }).then(() => {
             setIsReady(true);
             checkIsLoginOrNot();
+        }).catch((error) => {
+            setIsReady(true);
         })
     }
 

@@ -87,9 +87,9 @@ function ScrapListPage({navigation: stackNavigation, drawerNavigation}) {
                                         created_at
                                     } = 상담내역;
 
-                                    return <View style={{width:"100%", alignItems:"center",}} key={index}>
-                                        <Text style={styles.time}>{created_at.slice(2, 16)}</Text>
-                                        <StyledScrapContainer >
+                                    return <View style={{width: "100%", alignItems: "center",}} key={index}>
+                                        <Text style={styles.timeText}>{created_at.slice(2, 16)}</Text>
+                                        <StyledScrapContainer>
                                             <View style={styles.containerTitle}>
                                                 <TouchableOpacity onPress={() => {
                                                     handleTitlePress(title, consult_id)
@@ -143,7 +143,7 @@ export default ScrapListPage;
 const StyledScrapContainer = styled(View)`
   width: 90%;
   height: auto;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
   border-color: rgba(0, 0, 0, 0.2);
   border-width: 0.5px;
   border-radius: 20px;
@@ -168,13 +168,13 @@ const styles = {
         flex: 9,
         width: "100%"
     },
-    time:{
-     alignSelf:"flex-start",
-        paddingHorizontal:"7%",
-        marginBottom: 5,
+    timeText: {
         fontSize: "16px",
-        fontWeight: "700",
-        color: `${colors.pointBlue2}`
+        color: `${colors.gold}`,
+        fontFamily: "NanumSquareEB",
+        alignSelf: "flex-start",
+        paddingHorizontal: "7%",
+        marginBottom: 8
     },
     containerTitle: {
         backgroundColor: "rgba(233,235,239, 0.8)",
@@ -184,9 +184,9 @@ const styles = {
         borderTopRightRadius: 20,
     },
     titleButtonText: {
+        fontFamily: "NanumSquareEB",
         fontSize: "16px",
-        fontWeight: "700",
-        color: `${colors.pointBlue2}`
+        color: `${colors.pointBlue}`
     },
     containerContent: {},
     스크랩판례Button: {
@@ -199,10 +199,14 @@ const styles = {
         borderBottomWidth: "0.5px",
     },
     buttonText: {
+        fontFamily: "NanumSquareB",
+        fontSize: "13px",
         width: "85%",
     },
 
     noScrapContent: {
+        fontFamily: "NanumSquareB",
+        fontSize: "13px",
         width: "100%",
         padding: 20,
         color: `${colors.darkgrey}`

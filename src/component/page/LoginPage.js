@@ -1,17 +1,12 @@
 import React, {useContext, useEffect, useState} from 'react';
 import axios from "axios";
-import {Alert, Image, SafeAreaView, Text, TouchableOpacity, View} from "react-native";
+import {Alert, Image, SafeAreaView, View} from "react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import CustomInput from "../atom/CustomInput";
-import CustomButton from "../atom/CustomButton";
 import {colors} from "../../variable/color";
 import {LoginContext} from "../../store/loginStore";
-import moreButtonImagePath from "../../img/more.png";
 import {useInputs} from "../../hooks/useInputs";
-import CustomIconButton from "../atom/CustomIconButton";
 import CustomIconInput from "../atom/CustomIconInput";
-
-// import {storeToken} from "../../function/storeToken";
+import CustomButton from "../atom/CustomButton";
 
 function LoginPage({navigation}) {
     const {isLogin, setIsLogin} = useContext(LoginContext);
@@ -61,12 +56,13 @@ function LoginPage({navigation}) {
 
             </View>
             <View style={{marginBottom: 20}}>
-                <CustomButton content={"로그인"} handlePressButton={handleLoginButtonClick} width={"260px"} height={"50px"}
-                              background={colors.gold}/>
+                <CustomButton handlePressButton={handleLoginButtonClick} width={"260px"} height={"50px"}
+                              pointColor={colors.gold} borderRadius={"5px"}>로그인</CustomButton>
             </View>
 
-            <CustomButton content={"회원가입"} handlePressButton={handleSignUpButtonClick} width={"260px"}
-                          height={"50px"} background={colors.pointBlue}/>
+            <CustomButton handlePressButton={handleSignUpButtonClick} width={"260px"}
+                          height={"50px"} pointColor={colors.pointBlue} borderRadius={"5px"}>회원가입
+            </CustomButton>
 
         </SafeAreaView>
     );

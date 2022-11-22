@@ -2,12 +2,10 @@ import React, {useEffect, useState} from 'react';
 import {View, Text, SafeAreaView, ScrollView, ActivityIndicator, Alert} from "react-native";
 import styled from "styled-components";
 import CustomBackHeader from "../../template/CustomBackHeader";
-import CustomButton from "../../atom/CustomButton";
 import {colors} from "../../../variable/color";
 import {Entypo, Ionicons} from "@expo/vector-icons";
 import CustomIconButton from "../../atom/CustomIconButton";
 import axios from "axios";
-import {caseResult} from "../../../variable/oneCaseResult";
 import asyncStorage from "@react-native-async-storage/async-storage/src/AsyncStorage";
 
 const parseString = require('react-native-xml2js').parseString;
@@ -164,10 +162,13 @@ const styles = {
         // alignItems: "center"
     },
     caseTitle: {
+        fontFamily: "NanumSquareB",
         fontSize: "18px",
-        fontWeight: "600",
         marginBottom: 5
     },
-    caseContent: {}
+    caseContent: {
+        fontFamily: "NanumSquareB",
+        fontSize: "16px",
+    }
 
 }

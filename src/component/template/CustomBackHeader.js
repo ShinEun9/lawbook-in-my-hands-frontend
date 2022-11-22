@@ -37,6 +37,7 @@ const StyledHeader = styled(View)`
 `
 
 const StyledTitle = styled(Text)`
+  font-family: NanumSquareEB;
   font-size: 20px;
   margin-left: 20px;
   font-weight: 800;
