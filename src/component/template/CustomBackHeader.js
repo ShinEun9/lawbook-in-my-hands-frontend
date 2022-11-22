@@ -4,6 +4,9 @@ import moreButtonImagePath from "../../img/more.png";
 import styled from "styled-components";
 import {Entypo} from "@expo/vector-icons";
 
+import {Dimensions} from 'react-native';
+const {width} = Dimensions.get('window')
+
 function CustomBackHeader({content, handleBackButtonPress, handleMoreButtonPress}) {
     return (
         <StyledHeader>
@@ -38,10 +41,9 @@ const StyledHeader = styled(View)`
 
 const StyledTitle = styled(Text)`
   font-family: NanumSquareEB;
-  font-size: 20px;
+  font-size: ${width > 375 ? "20px" : "18px"};
   margin-left: 20px;
-  font-weight: 800;
-  color: rgb(71, 67, 72);
+  color: black;
 `
 
 const styles = {

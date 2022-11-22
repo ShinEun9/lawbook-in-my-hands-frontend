@@ -27,8 +27,11 @@ function CustomMultilineInput({value, onChange, editable = true}) {
 
 export default CustomMultilineInput;
 
+import {Dimensions} from 'react-native';
+const {width} = Dimensions.get('window')
+
 const StyledTextInput = styled(TextInput)`
-  width: ${(props) => props.width};
+  width: ${width * 0.9}px;
   height: ${(props) => props.height};
   background-color: ${(props) => props.editable ? "white" : "#ebeae4"};
     // margin-bottom:  ${(props) => parseInt(props.margin)}px;

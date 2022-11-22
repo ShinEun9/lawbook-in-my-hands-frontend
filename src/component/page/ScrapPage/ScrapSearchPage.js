@@ -14,7 +14,7 @@ function ScrapSearchPage({navigation: stackNavigation, drawerNavigation, route})
     const handleSearchButtonClick = async () => {
         setIsLoading(true);
         const token = await asyncStorage.getItem("@access_token");
-        await axios.get(`http://127.0.0.1:5000/consult/${consult_id_params}`, {
+        await axios.get(`http://3.39.59.151:5000/consult/${consult_id_params}`, {
             headers: {Authorization: `Bearer ${token}`}
         })
             .then((res) => {

@@ -24,7 +24,7 @@ function ScrapListPage({navigation: stackNavigation, drawerNavigation}) {
 
     const fetch스크랩리스트Data = async () => {
         const token = await asyncStorage.getItem("@access_token");
-        await axios.get(`http://127.0.0.1:5000/scrap`, {
+        await axios.get(`http://3.39.59.151:5000/scrap`, {
             headers: {Authorization: `Bearer ${token}`}
         }).then((res) => {
             console.log(res.data.consult_list)

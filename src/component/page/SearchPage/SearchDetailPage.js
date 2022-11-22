@@ -23,7 +23,7 @@ function SearchDetailPage({navigation: stackNavigation, drawerNavigation, route}
         await axios.all(
             [
                 axios.get(url),
-                axios.get(`http://127.0.0.1:5000/scrap/${case_serial_id}?consult_id=${consult_id}`, {headers: {Authorization: `Bearer ${token}`}})
+                axios.get(`http://3.39.59.151:5000/scrap/${case_serial_id}?consult_id=${consult_id}`, {headers: {Authorization: `Bearer ${token}`}})
             ]
         )
             .then(
@@ -53,7 +53,7 @@ function SearchDetailPage({navigation: stackNavigation, drawerNavigation, route}
 
         if (!isScrap) {
             // 스크랩 하기
-            await axios.post(`http://127.0.0.1:5000/scrap/${case_serial_id}?consult_id=${consult_id}`, {}, {
+            await axios.post(`http://3.39.59.151:5000/scrap/${case_serial_id}?consult_id=${consult_id}`, {}, {
                 headers: {Authorization: `Bearer ${token}`}
             }).then((res) => {
                 Alert.alert(
@@ -69,7 +69,7 @@ function SearchDetailPage({navigation: stackNavigation, drawerNavigation, route}
             })
         } else {
             // 스크랩 취소
-            await axios.delete(`http://127.0.0.1:5000/scrap/${case_serial_id}?consult_id=${consult_id}`, {
+            await axios.delete(`http://3.39.59.151:5000/scrap/${case_serial_id}?consult_id=${consult_id}`, {
                 headers: {Authorization: `Bearer ${token}`}
             }).then((res) => {
                 Alert.alert(

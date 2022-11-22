@@ -20,7 +20,7 @@ const loginRequest = {
             "forcedJSONParsing": true,
             "silentJSONParsing": true,
         },
-        "url": "http://127.0.0.1:5000/login",
+        "url": "http://3.39.59.151:5000/login",
         "validateStatus": "",
         "xsrfCookieName": "XSRF-TOKEN",
         "xsrfHeaderName": "X-XSRF-TOKEN",
@@ -81,7 +81,7 @@ const loginRequest = {
             "_method":
                 "POST",
             "_perfKey":
-                "network__http://127.0.0.1:5000/login",
+                "network__http://3.39.59.151:5000/login",
             "_": {
                 "_closed":
                     false,
@@ -101,7 +101,7 @@ const loginRequest = {
                 ,
                 "_timespans":
                     {
-                        "network__http://127.0.0.1:5000/login":
+                        "network__http://3.39.59.151:5000/login":
                             {
                                 "endExtras":
                                 undefined,
@@ -149,7 +149,7 @@ const loginRequest = {
             "_trackingName":
                 "unknown",
             "_url":
-                "http://127.0.0.1:5000/login",
+                "http://3.39.59.151:5000/login",
             "readyState":
                 4,
             "responseHeaders":
@@ -167,7 +167,7 @@ const loginRequest = {
                 }
             ,
             "responseURL":
-                "http://127.0.0.1:5000/login",
+                "http://3.39.59.151:5000/login",
             "status":
                 200,
             "timeout":

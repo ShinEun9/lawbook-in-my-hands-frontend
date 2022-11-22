@@ -1,31 +1,40 @@
-import React from 'react';
-import {SafeAreaView, Text, TouchableOpacity, View} from "react-native";
+import React, {useEffect, useState} from 'react';
+import {Dimensions, SafeAreaView, ScrollView, Text, TouchableOpacity, View} from "react-native";
 import styled from "styled-components"
 import {Entypo} from '@expo/vector-icons';
 import CustomBackHeader from "../../template/CustomBackHeader";
+import asyncStorage from "@react-native-async-storage/async-storage/src/AsyncStorage";
 
 
 function SearchResultPage({navigation: stackNavigation, drawerNavigation, route}) {
     const {consult_content, consult_id, cases} = route.params;
+    const [userName, setUserName] = useState(null);
 
     const handlePress판례Button = (url, case_serial_id, title) => {
-        const titleTmp  = `${title.slice(0,20)}...`
+        const titleTmp = `${title.slice(0, 15)}...`
         if (route.name === "SearchResultPage") {
             stackNavigation.navigate('SearchDetailPage', {url, case_serial_id, consult_id, title: titleTmp});
-        } else if(route.name === "ScrapSearchResultPage") {
+        } else if (route.name === "ScrapSearchResultPage") {
             stackNavigation.navigate("ScrapDetailPage", {url, case_serial_id, consult_id, title: titleTmp});
         }
     }
+
+    const fetchUserName = async () => {
+        const userName = await asyncStorage.getItem("@name");
+        setUserName(userName);
+    }
+    useEffect(() => {
+        fetchUserName();
+    }, [])
 
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.header}>
                 <CustomBackHeader content={"상담 결과"}
                                   handleBackButtonPress={() => {
-                                      if(route.name==="SearchResultPage"){
+                                      if (route.name === "SearchResultPage") {
                                           stackNavigation.navigate("SearchWritePage");
-                                      }
-                                      else if(route.name==="ScrapSearchResultPage"){
+                                      } else if (route.name === "ScrapSearchResultPage") {
                                           stackNavigation.navigate("ScrapSearchPage", {consult_content, consult_id});
                                       }
                                   }}
@@ -37,13 +46,14 @@ function SearchResultPage({navigation: stackNavigation, drawerNavigation, route}
 
             <View style={styles.content}>
                 <Text style={styles.title}>
-                    <Text style={styles.userName}>고객님</Text>의 사례와
+                    <Text style={styles.userName}>{userName} 고객님</Text>의 사례와
                     {"\n"}가장 비슷한 판례문을 찾아보았어요.
                 </Text>
                 {
                     consult_content &&
                     <Text style={styles.subTitle}>
-                        검색결과: '{consult_content.length > 10 ? `${consult_content.slice(0, 10)}...` : consult_content}'와 관련된
+                        검색결과: '{consult_content.length > 10 ? `${consult_content.slice(0, 10)}...` : consult_content}'와
+                        관련된
                         판례 {cases.length}개
                     </Text>
                 }
@@ -51,29 +61,30 @@ function SearchResultPage({navigation: stackNavigation, drawerNavigation, route}
                 {
                     !cases.length ?
                         <View>
-                            <Text>검색결과가 없습니다.</Text>
+                            <Text style={{fontFamily: "NanumSquareB"}}>검색결과가 없습니다.</Text>
                         </View>
                         :
-                        cases.map((item, index) => {
-                            const copy = JSON.parse(JSON.stringify(item));
-                            delete copy.url
-                            const title =  Object.values(copy).join(' ').length > 70 ?
-                                `${Object.values(copy).join(' ').slice(0, 60)}...`
-                                : Object.values(copy).join(' ');
+                        <ScrollView contentContainerStyle={styles.resultBox}>
+                            {
+                                cases.map((item, index) => {
+                                    const copy = JSON.parse(JSON.stringify(item));
+                                    delete copy.url
+                                    const title = Object.values(copy).join(' ').length > 70 ?
+                                        `${Object.values(copy).join(' ').slice(0, 60)}...`
+                                        : Object.values(copy).join(' ');
 
-                            return <View style={styles.resultBox} key={index}>
-                                <StyledButton activeOpacity={0.7} onPress={() => {
-                                    handlePress판례Button(item.url, item.case_serial_id, title)
-                                }}>
-                                    <Text style={styles.buttonTitle}>
-                                        {
-                                          title
-                                        }
-                                    </Text>
-                                    <Entypo name="chevron-right" size={24} color="rgba(0,0,0,0.3)"/>
-                                </StyledButton>
-                            </View>
-                        })
+                                    return <StyledButton key={index} activeOpacity={0.7} onPress={() => {
+                                        handlePress판례Button(item.url, item.case_serial_id, title)
+                                    }}>
+                                        <Text style={styles.buttonTitle}>
+                                            {title}
+                                        </Text>
+                                        <Entypo name="chevron-right" size={24} color="rgba(0,0,0,0.3)"/>
+                                    </StyledButton>
+                                })
+                            }
+                        </ScrollView>
+
                 }
             </View>
         </SafeAreaView>
@@ -84,6 +95,7 @@ export default SearchResultPage;
 
 const StyledButton = styled(TouchableOpacity)`
   background-color: white;
+  margin-bottom: 20px;
   width: 100%;
   height: 73px;
   border-radius: 10px;
@@ -104,36 +116,39 @@ const styles = {
     header: {
         flex: 1,
         width: "100%",
-    }, content: {
+    },
+    content: {
         flex: 9,
+        width: "100%",
         alignItems: "center"
     },
     title: {
         textAlign: "center",
         width: 360,
+        fontFamily: "NanumSquareB",
         fontSize: 20,
-        fontWeight: "400",
         marginTop: 24,
         marginBottom: 50
     },
     userName: {
-        fontWeight: "800"
+        fontFamily: "NanumSquareEB",
     },
     subTitle: {
-        color: "#A2A2A2",
+        fontFamily: "NanumSquareB",
         fontSize: 15,
+        color: "#A2A2A2",
         marginBottom: 10,
     },
     resultBox: {
-        width: "100%",
+        width: Dimensions.get('window').width,
         backgroundColor: "#F8F4F4",
-        paddingHorizontal: 36,
-        paddingVertical: 26,
         alignItems: "center",
+        paddingHorizontal: 20,
+        paddingVertical: 26,
     },
     buttonTitle: {
-        width: "95%",
-        fontSize: "13px",
-        fontWeight: "400"
+        width: "90%",
+        fontFamily: "NanumSquareR",
+        fontSize: "12px",
     }
 }

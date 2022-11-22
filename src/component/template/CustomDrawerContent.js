@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {View, Text, SafeAreaView, Image, TouchableOpacity, TouchableHighlight} from "react-native";
 import {colors} from "../../variable/color";
 import asyncStorage from "@react-native-async-storage/async-storage/src/AsyncStorage";
@@ -7,7 +7,9 @@ import {AntDesign, FontAwesome} from "@expo/vector-icons"
 import logoImagePath from "../../img/logo2.png";
 
 function CustomDrawerContent({navigation}) {
+    const [userInfo, setUserInfo] = useState(null)
     const {isLogin, setIsLogin} = useContext(LoginContext);
+
     const handle프로필수정ButtonPress = () => {
         navigation.navigate("MyPage")
     }
@@ -17,6 +19,17 @@ function CustomDrawerContent({navigation}) {
         setIsLogin(false);
     }
 
+    const fetchUserData = async () => {
+        const nickname = await asyncStorage.getItem("@nickname");
+        const loginId = await asyncStorage.getItem("@loginId");
+        const name = await asyncStorage.getItem("@name");
+        await setUserInfo({nickname, loginId, name});
+
+    }
+
+    useEffect(() => {
+        fetchUserData();
+    }, [])
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.titleContainer}>
@@ -31,10 +44,13 @@ function CustomDrawerContent({navigation}) {
             >
                 <View style={styles.profileContainer}>
                     <FontAwesome name={"user-circle"} color={"#eeeeee"} size={40} style={{marginRight: 10}}/>
-                    <View>
-                        <Text style={styles.profileName}>신은수</Text>
-                        <Text style={styles.profileNickName}>은구찡(ses2201)</Text>
-                    </View>
+                    {
+                        !userInfo ? null :
+                            <View>
+                                <Text style={styles.profileName}>{userInfo.name}</Text>
+                                <Text style={styles.profileNickName}>{userInfo.nickname}({userInfo.loginId})</Text>
+                            </View>
+                    }
                 </View>
 
             </TouchableHighlight>
@@ -102,7 +118,7 @@ const styles = {
     profileContainer: {
         flexDirection: "row",
         alignItems: "center",
-        paddingHorizontal:15,
+        paddingHorizontal: 15,
         paddingVertical: 20
     },
     profileName: {

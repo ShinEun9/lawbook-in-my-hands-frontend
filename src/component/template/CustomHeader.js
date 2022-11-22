@@ -3,6 +3,8 @@ import {Image, Text, TouchableOpacity, View} from "react-native";
 import styled from "styled-components"
 import moreButtonImagePath from "../../img/more.png";
 import {colors} from "../../variable/color";
+import {Dimensions} from 'react-native';
+const {width} = Dimensions.get('window')
 
 function CustomHeader({content, handleMoreButtonPress}) {
     return (
@@ -33,7 +35,7 @@ const StyledHeader = styled(View)`
 
 `
 const StyledTitle = styled(Text)`
-  font-size: 20px;
+  font-size: ${width > 375 ? "20px" : "18px"};
   font-weight: 800;
   // color: ${colors.pointBlue};
   font-family: NanumSquareEB;
