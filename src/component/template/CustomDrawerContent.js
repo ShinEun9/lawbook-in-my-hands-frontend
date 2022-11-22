@@ -1,10 +1,10 @@
 import React, {useContext} from 'react';
-import {View, Text, SafeAreaView, Image, TouchableOpacity} from "react-native";
-import CustomButton from "../atom/CustomButton";
+import {View, Text, SafeAreaView, Image, TouchableOpacity, TouchableHighlight} from "react-native";
 import {colors} from "../../variable/color";
-import moreButtonImagePath from "../../img/more.png";
 import asyncStorage from "@react-native-async-storage/async-storage/src/AsyncStorage";
 import {LoginContext} from "../../store/loginStore";
+import {AntDesign, FontAwesome} from "@expo/vector-icons"
+import logoImagePath from "../../img/logo2.png";
 
 function CustomDrawerContent({navigation}) {
     const {isLogin, setIsLogin} = useContext(LoginContext);
@@ -21,48 +21,49 @@ function CustomDrawerContent({navigation}) {
         <SafeAreaView style={styles.container}>
             <View style={styles.titleContainer}>
                 <Text style={styles.title}>내 손안의 법전</Text>
-            </View>
-            <TouchableOpacity style={styles.profileContainer} onPress={handle프로필수정ButtonPress}>
-                <View
-                    style={{
-                        width: 100,
-                        height: 40,
-                        flexDirection: "row",
-                        alignItems: "center",
-                        justifyContent: "space-between"
-                    }}
-                >
-                    <Image
-                        source={require("../../img/user.png")}
-                        style={{height: 40, width: 40}}
-                    />
-                    <View style={{height: 40, justifyContent: "space-between"}}>
-                        <Text style={styles.profileName}>신은수</Text>
-                        <Text style={styles.profileNickName}>은구찡</Text>
-                    </View>
 
-                    {/*<Text style={styles.profileName}>신은수</Text>*/}
-                    {/*<Text style={{fontSize: "16"}}>은구찡</Text>*/}
+            </View>
+
+            <TouchableHighlight
+                activeOpacity={0.6}
+                underlayColor="#d1d0d5"
+                onPress={handle프로필수정ButtonPress}
+            >
+                <View style={styles.profileContainer}>
+                    <FontAwesome name={"user-circle"} color={"#eeeeee"} size={40} style={{marginRight: 10}}/>
+                    <View>
+                        <Text style={styles.profileName}>신은수</Text>
+                        <Text style={styles.profileNickName}>은구찡(ses2201)</Text>
+                    </View>
                 </View>
-                <CustomButton content={"프로필 수정"} handlePressButton={handle프로필수정ButtonPress}
-                              width={"100px"} height={"30px"} background={colors.pointBlue}/>
-            </TouchableOpacity>
+
+            </TouchableHighlight>
 
             <View style={styles.menuContainer}>
                 <Text style={styles.menuTitle}>서비스</Text>
-                <TouchableOpacity onPress={() => {
-                    navigation.navigate("SearchPage")
-                }}>
-                    <Text style={{
-                        ...styles.menuItem,
-                        // color: route.name === "SearchPage" ? `${colors.pointBlue}` : "black"
-                    }}>AI 판례 추천 서비스</Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => {
-                    navigation.navigate("ScrapPage")
-                }}>
-                    <Text style={styles.menuItem}>나의 스크랩</Text>
-                </TouchableOpacity>
+                <TouchableHighlight
+                    activeOpacity={0.6}
+                    underlayColor="#d1d0d5"
+                    onPress={() => {
+                        navigation.navigate("SearchPage")
+                    }}>
+                    <View style={styles.menuItem}>
+                        <FontAwesome name={"search"} size={20} color={`${colors.pointBlue2}`}
+                                     style={{marginRight: 10}}/>
+                        <Text style={styles.menuItemText}>AI 판례 추천 서비스</Text>
+                    </View>
+                </TouchableHighlight>
+                <TouchableHighlight
+                    activeOpacity={0.6}
+                    underlayColor="#d1d0d5"
+                    onPress={() => {
+                        navigation.navigate("ScrapPage")
+                    }}>
+                    <View style={styles.menuItem}>
+                        <AntDesign name={"star"} size={20} color={"#FCE205"} style={{marginRight: 10}}/>
+                        <Text style={styles.menuItemText}>나의 스크랩</Text>
+                    </View>
+                </TouchableHighlight>
             </View>
 
             <View style={styles.buttonContainer}>
@@ -90,52 +91,61 @@ const styles = {
         paddingHorizontal: 10,
     },
     titleContainer: {
-        padding: 15
+        width: "100%",
+        padding: 15,
     },
     title: {
-        fontFamily: "SCDream",
+        fontFamily: "DrawerTitle",
         fontSize: "22",
+
     },
     profileContainer: {
-        padding: 15,
         flexDirection: "row",
-        justifyContent: "space-between",
         alignItems: "center",
-        marginBottom: 20
+        paddingHorizontal:15,
+        paddingVertical: 20
     },
     profileName: {
-        fontSize: "18",
+        fontFamily: "NanumSquareB",
+        fontSize: "16",
         marginBottom: 10,
-        fontWeight: "400"
     },
     profileNickName: {
-        fontSize: "16",
-        color: "rgba(0,0,0,0.5)"
+        fontFamily: "NanumSquareR",
+        fontSize: "14",
+        // color: "rgba(0,0,0,0.5)"
     },
     menuContainer: {
-        padding: 15,
-        borderBottomWidth: 5,
-        borderBottomColor: "#F8F8F8"
+        borderBottomWidth: 1,
+        borderBottomColor: "#F8F8F8",
+        marginBottom: 10
     },
     menuTitle: {
-        fontSize: "20",
-        fontWeight: "600",
-        marginBottom: 20
+        fontFamily: "NanumSquareEB",
+        fontSize: "18",
+        paddingTop: 20,
+        paddingHorizontal: 15,
+        marginBottom: 8
     },
     menuItem: {
-        fontSize: "18",
-        fontWeight: "400",
-        marginBottom: 20,
-        color: "rgba(0,0,0,0.5)"
+        flexDirection: "row",
+        alignItems: "center",
+        paddingHorizontal: 15,
+        paddingVertical: 20,
+    },
+    menuItemText: {
+        fontFamily: "NanumSquareB",
+        fontSize: "16",
+        color: "rgba(0,0,0,0.7)"
     },
     buttonContainer: {
         padding: 15,
     },
     button: {
-        color: "#c4c4c4",
-        fontSize: "16",
-        fontWeight: "400",
-        marginBottom: 14
+        fontFamily: "NanumSquareR",
+        color: "rgba(0,0,0,0.5)",
+        fontSize: "14",
+        marginBottom: 20
     }
 }
 

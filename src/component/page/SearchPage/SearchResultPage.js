@@ -8,11 +8,12 @@ import CustomBackHeader from "../../template/CustomBackHeader";
 function SearchResultPage({navigation: stackNavigation, drawerNavigation, route}) {
     const {consult_content, consult_id, cases} = route.params;
 
-    const handlePress판례Button = (url, case_serial_id) => {
+    const handlePress판례Button = (url, case_serial_id, title) => {
+        const titleTmp  = `${title.slice(0,20)}...`
         if (route.name === "SearchResultPage") {
-            stackNavigation.navigate('SearchDetailPage', {url, case_serial_id, consult_id});
+            stackNavigation.navigate('SearchDetailPage', {url, case_serial_id, consult_id, title: titleTmp});
         } else if(route.name === "ScrapSearchResultPage") {
-            stackNavigation.navigate("ScrapDetailPage", {url, case_serial_id, consult_id});
+            stackNavigation.navigate("ScrapDetailPage", {url, case_serial_id, consult_id, title: titleTmp});
         }
     }
 
@@ -36,7 +37,7 @@ function SearchResultPage({navigation: stackNavigation, drawerNavigation, route}
 
             <View style={styles.content}>
                 <Text style={styles.title}>
-                    <Text style={styles.userName}>홍길동 고객님</Text>의 사례와
+                    <Text style={styles.userName}>고객님</Text>의 사례와
                     {"\n"}가장 비슷한 판례문을 찾아보았어요.
                 </Text>
                 {
@@ -54,15 +55,19 @@ function SearchResultPage({navigation: stackNavigation, drawerNavigation, route}
                         </View>
                         :
                         cases.map((item, index) => {
+                            const copy = JSON.parse(JSON.stringify(item));
+                            delete copy.url
+                            const title =  Object.values(copy).join(' ').length > 70 ?
+                                `${Object.values(copy).join(' ').slice(0, 60)}...`
+                                : Object.values(copy).join(' ');
+
                             return <View style={styles.resultBox} key={index}>
                                 <StyledButton activeOpacity={0.7} onPress={() => {
-                                    handlePress판례Button(item.url, item.case_serial_id)
+                                    handlePress판례Button(item.url, item.case_serial_id, title)
                                 }}>
                                     <Text style={styles.buttonTitle}>
                                         {
-                                            Object.values(item).join(' ').length > 70 ?
-                                                `${Object.values(item).join(' ').slice(0, 60)}...`
-                                                : Object.values(item).join(' ')
+                                          title
                                         }
                                     </Text>
                                     <Entypo name="chevron-right" size={24} color="rgba(0,0,0,0.3)"/>
@@ -121,7 +126,6 @@ const styles = {
     },
     resultBox: {
         width: "100%",
-        height: 400,
         backgroundColor: "#F8F4F4",
         paddingHorizontal: 36,
         paddingVertical: 26,

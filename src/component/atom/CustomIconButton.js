@@ -28,6 +28,7 @@ const StyledButton = styled(View)`
 
 const styles = {
     buttonText: {
+        fontFamily: "NanumSquareB",
         fontSize: "14px",
         color: "white",
         textAlign: "center"

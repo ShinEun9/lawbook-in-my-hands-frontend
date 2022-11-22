@@ -27,6 +27,7 @@ function ScrapListPage({navigation: stackNavigation, drawerNavigation}) {
         await axios.get(`http://127.0.0.1:5000/scrap`, {
             headers: {Authorization: `Bearer ${token}`}
         }).then((res) => {
+            console.log(res.data.consult_list)
             setConsultList(res.data.consult_list);
         }).catch((err) => {
             console.log(err)
@@ -38,11 +39,15 @@ function ScrapListPage({navigation: stackNavigation, drawerNavigation}) {
         stackNavigation.navigate("ScrapSearchPage", {consult_content, consult_id})
     }
 
-    const handle스크랩판례ButtonPress = (상담내역, oneCase) => {
+    const handle스크랩판례ButtonPress = (상담내역, oneCase, title) => {
         const {consult_id} = 상담내역;
         const {url, case_serial_id} = oneCase
-        console.log(case_serial_id, consult_id);
-        stackNavigation.navigate("ScrapDetailPage", {url, case_serial_id, consult_id})
+        stackNavigation.navigate("ScrapDetailPage", {
+            url,
+            case_serial_id,
+            consult_id,
+            title: `${title.slice(0, 15)}...`
+        })
     }
 
     useEffect(() => {
@@ -75,42 +80,52 @@ function ScrapListPage({navigation: stackNavigation, drawerNavigation}) {
                             :
                             consultList.length !== 0 ?
                                 consultList.map((상담내역, index) => {
-                                    const {consult_content: title, scrap_list: scrapList, consult_id} = 상담내역;
-                                    return <StyledScrapContainer key={index}>
-                                        <View style={styles.containerTitle}>
-                                            <TouchableOpacity onPress={() => {
-                                                handleTitlePress(title, consult_id)
-                                            }}>
-                                                <Text style={styles.titleButtonText}>{title.slice(0, 10)}...글 관련
-                                                    스크랩 {scrapList.length}개</Text>
-                                            </TouchableOpacity>
-                                        </View>
-                                        <View style={styles.containerContent}>
-                                            {
-                                                !scrapList.length ?
-                                                    <Text style={styles.noScrapContent}>스크랩된 판례가 없습니다.</Text>
-                                                    :
-                                                    scrapList.map((oneCase) => {
-                                                        const {
-                                                            case_serial_id, 법원명, 사건명, 사건번호, 선고, 선고일자, 판결유형
-                                                        } = oneCase
-                                                        const title = `${법원명} ${사건명} ${사건번호} ${선고} ${선고일자} ${판결유형}`
+                                    const {
+                                        consult_content: title,
+                                        scrap_list: scrapList,
+                                        consult_id,
+                                        created_at
+                                    } = 상담내역;
 
-                                                        return <TouchableOpacity key={case_serial_id}
-                                                                                 style={styles.스크랩판례Button}
-                                                                                 onPress={() => {
-                                                                                     handle스크랩판례ButtonPress(상담내역, oneCase)
-                                                                                 }}>
-                                                            <Text style={styles.buttonText}>
-                                                                {title.slice(0, 40)}...
-                                                            </Text>
-                                                            <Entypo name="chevron-right" size={24}
-                                                                    color="rgba(0,0,0,0.3)"/>
-                                                        </TouchableOpacity>
-                                                    })
-                                            }
-                                        </View>
-                                    </StyledScrapContainer>
+                                    return <View style={{width: "100%", alignItems: "center",}} key={index}>
+                                        <Text style={styles.timeText}>{created_at.slice(2, 16)}</Text>
+                                        <StyledScrapContainer>
+                                            <View style={styles.containerTitle}>
+                                                <TouchableOpacity onPress={() => {
+                                                    handleTitlePress(title, consult_id)
+                                                }}>
+                                                    <Text style={styles.titleButtonText}>{title.slice(0, 10)}...글 관련
+                                                        스크랩 {scrapList.length}개</Text>
+                                                </TouchableOpacity>
+                                            </View>
+                                            <View style={styles.containerContent}>
+                                                {
+                                                    !scrapList.length ?
+                                                        <Text style={styles.noScrapContent}>스크랩된 판례가 없습니다.</Text>
+                                                        :
+                                                        scrapList.map((oneCase) => {
+                                                            const {
+                                                                case_serial_id, 법원명, 사건명, 사건번호, 선고, 선고일자, 판결유형
+                                                            } = oneCase
+                                                            const title = `${법원명} ${사건명} ${사건번호} ${선고} ${선고일자} ${판결유형}`
+
+                                                            return <TouchableOpacity key={case_serial_id}
+                                                                                     style={styles.스크랩판례Button}
+                                                                                     onPress={() => {
+                                                                                         handle스크랩판례ButtonPress(상담내역, oneCase, title)
+                                                                                     }}>
+                                                                <Text style={styles.buttonText}>
+                                                                    {title.slice(0, 40)}...
+                                                                </Text>
+                                                                <Entypo name="chevron-right" size={24}
+                                                                        color="rgba(0,0,0,0.3)"/>
+                                                            </TouchableOpacity>
+                                                        })
+                                                }
+                                            </View>
+                                        </StyledScrapContainer>
+                                    </View>
+
                                 })
 
                                 :
@@ -128,7 +143,7 @@ export default ScrapListPage;
 const StyledScrapContainer = styled(View)`
   width: 90%;
   height: auto;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
   border-color: rgba(0, 0, 0, 0.2);
   border-width: 0.5px;
   border-radius: 20px;
@@ -153,6 +168,14 @@ const styles = {
         flex: 9,
         width: "100%"
     },
+    timeText: {
+        fontSize: "16px",
+        color: `${colors.gold}`,
+        fontFamily: "NanumSquareEB",
+        alignSelf: "flex-start",
+        paddingHorizontal: "7%",
+        marginBottom: 8
+    },
     containerTitle: {
         backgroundColor: "rgba(233,235,239, 0.8)",
         paddingHorizontal: 20,
@@ -161,9 +184,9 @@ const styles = {
         borderTopRightRadius: 20,
     },
     titleButtonText: {
+        fontFamily: "NanumSquareEB",
         fontSize: "16px",
-        fontWeight: "700",
-        color: `${colors.pointBlue2}`
+        color: `${colors.pointBlue}`
     },
     containerContent: {},
     스크랩판례Button: {
@@ -176,10 +199,14 @@ const styles = {
         borderBottomWidth: "0.5px",
     },
     buttonText: {
+        fontFamily: "NanumSquareB",
+        fontSize: "13px",
         width: "85%",
     },
 
     noScrapContent: {
+        fontFamily: "NanumSquareB",
+        fontSize: "13px",
         width: "100%",
         padding: 20,
         color: `${colors.darkgrey}`

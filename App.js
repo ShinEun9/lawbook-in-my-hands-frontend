@@ -11,6 +11,9 @@ import {LoginContext} from "./src/store/loginStore";
 import MyPage from "./src/component/page/MyPage/MyPage";
 import CustomDrawerContent from "./src/component/template/CustomDrawerContent";
 import asyncStorage from "@react-native-async-storage/async-storage/src/AsyncStorage";
+import {LogBox} from 'react-native';
+
+LogBox.ignoreLogs(['Sending']);
 
 export default function App() {
     const [isReady, setIsReady] = useState(false); // font가 load 되면 isReady를 true로 변경
@@ -18,10 +21,15 @@ export default function App() {
 
     const initialize = async () => {
         await Font.loadAsync({
-            SCDream: require("./assets/fonts/SCDream5.ttf"),
-        }).then(()=>{
+            NanumSquareR: require("./assets/fonts/NanumSquareR.otf"),
+            NanumSquareB: require("./assets/fonts/NanumSquareB.otf"),
+            NanumSquareEB: require("./assets/fonts/NanumSquareEB.otf"),
+            DrawerTitle: require("./assets/fonts/문화재돌봄체Bold.ttf")
+        }).then(() => {
             setIsReady(true);
             checkIsLoginOrNot();
+        }).catch((error) => {
+            setIsReady(true);
         })
     }
 
@@ -43,31 +51,39 @@ export default function App() {
         <LoginContext.Provider value={{isLogin, setIsLogin}}>
             <NavigationContainer>
                 {
-                    isReady &&
-                    isLogin ?
-                        <Drawer.Navigator
-                            drawerContent={(props) => <CustomDrawerContent {...props} />}
-                            useLegacyImplementation={true}
-                            initialRouteName="AI 법률 조회"
-                            screenOptions={{
-                                drawerPosition: 'right',
-                                drawerType: "front",
-                                swipeEnabled: true,
-                                drawerHideStatusBarOnOpen: false
-                            }}
-                        >
-                            <Drawer.Screen name="SearchPage" component={SearchPage} options={{headerShown: false}}/>
-                            <Drawer.Screen name="ScrapPage" component={ScrapPage} options={{headerShown: false}}/>
-                            <Drawer.Screen name="MyPage" component={MyPage} options={{headerShown: false}}/>
+                    isReady ?
+                        isLogin ?
+                            <Drawer.Navigator
+                                drawerContent={(props) => <CustomDrawerContent {...props} />}
+                                useLegacyImplementation={true}
+                                initialRouteName="AI 법률 조회"
+                                screenOptions={{
+                                    drawerPosition: 'right',
+                                    drawerType: "front",
+                                    swipeEnabled: true,
+                                    drawerHideStatusBarOnOpen: false
+                                }}
+                            >
+                                <Drawer.Screen name="SearchPage" component={SearchPage} options={{headerShown: false}}/>
+                                <Drawer.Screen name="ScrapPage" component={ScrapPage} options={{headerShown: false}}/>
+                                <Drawer.Screen name="MyPage" component={MyPage} options={{headerShown: false}}/>
 
-                        </Drawer.Navigator>
+                            </Drawer.Navigator>
+                            :
+                            <Stack.Navigator initialRouteName="LoginPage"
+                                             screenOptions={{
+                                                 headerShown: false,
+                                                 cardStyle: {
+                                                     backgroundColor: 'white',
+                                                 },
+                                             }}>
+                                <>
+                                    <Stack.Screen name="LoginPage" component={LoginPage}/>
+                                    <Stack.Screen name="SignUpPage" component={SignUpPage}/>
+                                </>
+                            </Stack.Navigator>
                         :
-                        <Stack.Navigator initialRouteName="LoginPage" screenOptions={{headerShown: false,}}>
-                            <>
-                                <Stack.Screen name="LoginPage" component={LoginPage}/>
-                                <Stack.Screen name="SignUpPage" component={SignUpPage}/>
-                            </>
-                        </Stack.Navigator>
+                        null
                 }
             </NavigationContainer>
         </LoginContext.Provider>

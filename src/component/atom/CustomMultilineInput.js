@@ -3,7 +3,7 @@ import {TextInput} from "react-native";
 import styled from "styled-components/native";
 import {colors} from "../../variable/color";
 
-function CustomMultililneInput({value, onChange, editable = true}) {
+function CustomMultilineInput({value, onChange, editable = true}) {
     const [isFocus, setIsFocus] = useState(false);
     return (
         <StyledTextInput // margin={margin}
@@ -25,7 +25,7 @@ function CustomMultililneInput({value, onChange, editable = true}) {
     );
 }
 
-export default CustomMultililneInput;
+export default CustomMultilineInput;
 
 const StyledTextInput = styled(TextInput)`
   width: ${(props) => props.width};
@@ -34,6 +34,8 @@ const StyledTextInput = styled(TextInput)`
     // margin-bottom:  ${(props) => parseInt(props.margin)}px;
   borderWidth: 1px;
   borderColor: ${(props) => props.focus ? `${colors.pointBlue}` : "rgba(0, 0, 0, 0.2)"};
-  borderRadius: 10px;
+  borderRadius: 5px;
   padding: 20px;
+  font-family: NanumSquareR;
+  font-size: 14px;
 `;

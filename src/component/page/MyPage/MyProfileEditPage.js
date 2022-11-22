@@ -1,10 +1,9 @@
 import React from 'react';
 import {SafeAreaView, Text, TouchableOpacity, View} from "react-native";
 import CustomHeader from "../../template/CustomHeader";
-import CustomBackHeader from "../../template/CustomBackHeader";
 import CustomInput from "../../atom/CustomInput";
-import CustomButton from "../../atom/CustomButton";
 import {colors} from "../../../variable/color";
+import CustomButton from "../../atom/CustomButton";
 
 function MyProfileEditPage({navigation: stackNavigation, drawerNavigation}) {
     const handleEditInfoButtonPress = () => {
@@ -15,8 +14,8 @@ function MyProfileEditPage({navigation: stackNavigation, drawerNavigation}) {
             <View style={styles.header}>
                 <CustomHeader content={"마이페이지 수정"}
                               handleMoreButtonPress={() => {
-                                      drawerNavigation.toggleDrawer()
-                                  }}
+                                  drawerNavigation.toggleDrawer()
+                              }}
                 />
             </View>
 
@@ -26,14 +25,15 @@ function MyProfileEditPage({navigation: stackNavigation, drawerNavigation}) {
                     <CustomInput width={"300px"} height={"40px"}/>
                 </View>
 
-                <View style={styles.inputContainer}>
+                <View style={{...styles.inputContainer, marginBottom: 60}}>
                     <Text style={{fontSize: "15px", color: `${colors.darkgrey}`}}>닉네임</Text>
                     <CustomInput width={"300px"} height={"40px"}/>
                 </View>
 
-                <CustomButton content={"정보수정"} handlePressButton={handleEditInfoButtonPress} width={"350px"}
-                              height={"60px"}
-                              background={colors.pointBlue}/>
+                <CustomButton handlePressButton={handleEditInfoButtonPress} width={"350px"} height={"60px"}
+                              pointColor={colors.pointBlue} borderRadius={"50%"}>
+                    정보수정
+                </CustomButton>
 
             </View>
         </SafeAreaView>);

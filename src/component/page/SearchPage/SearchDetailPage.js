@@ -1,13 +1,11 @@
 import React, {useEffect, useState} from 'react';
-import {View, Text, SafeAreaView, ScrollView} from "react-native";
+import {View, Text, SafeAreaView, ScrollView, ActivityIndicator, Alert} from "react-native";
 import styled from "styled-components";
 import CustomBackHeader from "../../template/CustomBackHeader";
-import CustomButton from "../../atom/CustomButton";
 import {colors} from "../../../variable/color";
 import {Entypo, Ionicons} from "@expo/vector-icons";
 import CustomIconButton from "../../atom/CustomIconButton";
 import axios from "axios";
-import {caseResult} from "../../../variable/oneCaseResult";
 import asyncStorage from "@react-native-async-storage/async-storage/src/AsyncStorage";
 
 const parseString = require('react-native-xml2js').parseString;
@@ -17,10 +15,10 @@ function SearchDetailPage({navigation: stackNavigation, drawerNavigation, route}
     const [caseData, setCaseData] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
 
-    const {url, case_serial_id, consult_id} = route.params;
+    const {url, case_serial_id, consult_id, title} = route.params;
+    console.log(case_serial_id, consult_id)
 
     const fetchData = async () => {
-        console.log(case_serial_id, consult_id);
         const token = await asyncStorage.getItem("@access_token");
         await axios.all(
             [
@@ -37,6 +35,7 @@ function SearchDetailPage({navigation: stackNavigation, drawerNavigation, route}
                     })
 
                     console.log(res2.data.scrap);
+
                     setIsScrap(res2.data.scrap);
                 })
             )
@@ -57,7 +56,13 @@ function SearchDetailPage({navigation: stackNavigation, drawerNavigation, route}
             await axios.post(`http://127.0.0.1:5000/scrap/${case_serial_id}?consult_id=${consult_id}`, {}, {
                 headers: {Authorization: `Bearer ${token}`}
             }).then((res) => {
-                console.log(res)
+                Alert.alert(
+                    "스크랩이 완료되었습니다.",
+                    "",
+                    [
+                        {text: "확인"}
+                    ]
+                );
                 setIsScrap(true);
             }).catch((err) => {
                 console.log(err)
@@ -67,7 +72,13 @@ function SearchDetailPage({navigation: stackNavigation, drawerNavigation, route}
             await axios.delete(`http://127.0.0.1:5000/scrap/${case_serial_id}?consult_id=${consult_id}`, {
                 headers: {Authorization: `Bearer ${token}`}
             }).then((res) => {
-                console.log(res)
+                Alert.alert(
+                    "스크랩 취소가 완료되었습니다.",
+                    "",
+                    [
+                        {text: "확인"}
+                    ]
+                );
                 setIsScrap(false);
             }).catch((err) => {
                 console.log(err)
@@ -78,7 +89,7 @@ function SearchDetailPage({navigation: stackNavigation, drawerNavigation, route}
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.header}>
-                <CustomBackHeader content={"대법원 2021.3.25. 선고 2017도..."}
+                <CustomBackHeader content={title}
                                   handleBackButtonPress={() => {
                                       stackNavigation.pop();
                                   }}
@@ -88,42 +99,41 @@ function SearchDetailPage({navigation: stackNavigation, drawerNavigation, route}
                 />
             </View>
             <Styled판례Container>
-                <ScrollView style={styles.content}>
-                    <View style={{width: "100%", alignItems: "flex-end", marginBottom: 20}}>
-                        <CustomIconButton content={"스크랩"}
-                                          icon={
-                                              isScrap ? <Ionicons name="heart" size={20} color="white"/> :
-                                                  <Ionicons name="heart-outline" size={20} color="white"/>
-                                          }
-                                          handlePressButton={handleScrapButtonClick} width={"75px"}
-                                          height={"40px"}
-                                          background={colors.pointBlue}/>
-                    </View>
-                    {
-                        caseData && Object.entries(caseData).map((item) => {
-                            return <View style={{marginBottom: 10}} key={item[0]}>
-                                <Text style={styles.caseTitle}>
-                                    【{item[0]}】
-                                </Text>
-                                {
-                                    item[1].map((text, index) => {
-                                        return <Text key={index}
-                                                     style={styles.caseContent}>{text.split("\n").join("").replace(/\s{2,}/gi, ' ')}</Text>
-                                    })
-                                }
+                {
+                    isLoading ?
+                        <ActivityIndicator/>
+                        :
+                        <ScrollView style={styles.content}>
+                            <View style={{width: "100%", alignItems: "flex-end", marginBottom: 20}}>
+                                <CustomIconButton content={"스크랩"}
+                                                  icon={
+                                                      isScrap ? <Ionicons name="heart" size={20} color="white"/> :
+                                                          <Ionicons name="heart-outline" size={20} color="white"/>
+                                                  }
+                                                  handlePressButton={handleScrapButtonClick} width={"75px"}
+                                                  height={"40px"}
+                                                  background={colors.pointBlue}/>
                             </View>
-                        })
-                    }
-                </ScrollView>
+                            {
+                                caseData && Object.entries(caseData).map((item) => {
+                                    return <View style={{marginBottom: 10}} key={item[0]}>
+                                        <Text style={styles.caseTitle}>
+                                            【{item[0]}】
+                                        </Text>
+                                        {
+                                            item[1].map((text, index) => {
+                                                return <Text key={index}
+                                                             style={styles.caseContent}>{text.split("\n").join("").replace(/\s{2,}/gi, ' ')}</Text>
+                                            })
+                                        }
+                                    </View>
+                                })
+                            }
+                        </ScrollView>
+
+                }
             </Styled판례Container>
         </SafeAreaView>
-        // <StyledResultContainer>
-        //     <CustomButton content={"스크랩"} handlePressButton={handleScrapButtonClick} width={"75px"} height={"30px"}
-        //                   background={colors.pointBlue}/>
-        //     <Text>
-        //
-        //     </Text>
-        // </StyledResultContainer>
     );
 }
 
@@ -152,10 +162,13 @@ const styles = {
         // alignItems: "center"
     },
     caseTitle: {
+        fontFamily: "NanumSquareB",
         fontSize: "18px",
-        fontWeight: "600",
         marginBottom: 5
     },
-    caseContent: {}
+    caseContent: {
+        fontFamily: "NanumSquareB",
+        fontSize: "16px",
+    }
 
 }
