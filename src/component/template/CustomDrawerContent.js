@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {View, Text, SafeAreaView, Image, TouchableOpacity, TouchableHighlight} from "react-native";
+import {View, Text, SafeAreaView, Image, TouchableOpacity, TouchableHighlight, Platform} from "react-native";
 import {colors} from "../../variable/color";
 import asyncStorage from "@react-native-async-storage/async-storage/src/AsyncStorage";
 import {LoginContext} from "../../store/loginStore";
@@ -37,7 +37,7 @@ function CustomDrawerContent({navigation}) {
     }, [asyncStorage.getItem("@nickname"), asyncStorage.getItem("@name")])
     return (
         <SafeAreaView style={styles.container}>
-            <View style={styles.titleContainer}>
+            <View style={{...styles.titleContainer, paddingTop: Platform.OS==="ios" ? 0 : 40}}>
                 <Text style={styles.title}>내 손안의 법전</Text>
 
             </View>
