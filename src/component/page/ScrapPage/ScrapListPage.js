@@ -1,4 +1,6 @@
 import React, {useEffect, useState} from 'react';
+import axios from "axios";
+import asyncStorage from "@react-native-async-storage/async-storage/src/AsyncStorage";
 import {
     SafeAreaView,
     View,
@@ -13,8 +15,6 @@ import CustomHeader from "../../template/CustomHeader";
 import styled from "styled-components"
 import {Entypo} from "@expo/vector-icons";
 import {colors} from "../../../variable/color";
-import axios from "axios";
-import asyncStorage from "@react-native-async-storage/async-storage/src/AsyncStorage";
 
 function ScrapListPage({navigation: stackNavigation, drawerNavigation}) {
     const [consultList, setConsultList] = useState([]);

@@ -1,18 +1,20 @@
 import React, {useEffect, useState} from 'react';
 import * as Font from 'expo-font';
+import {LoginContext} from "./src/store/loginStore";
+import asyncStorage from "@react-native-async-storage/async-storage/src/AsyncStorage";
 import {NavigationContainer} from "@react-navigation/native";
 import {createDrawerNavigator} from "@react-navigation/drawer";
 import {createStackNavigator} from "@react-navigation/stack";
+import CustomDrawerContent from "./src/component/template/CustomDrawerContent";
 import SearchPage from "./src/component/page/SearchPage/SearchPage";
 import ScrapPage from "./src/component/page/ScrapPage/ScrapPage";
 import LoginPage from "./src/component/page/LoginPage";
 import SignUpPage from "./src/component/page/SignUpPage";
-import {LoginContext} from "./src/store/loginStore";
 import MyPage from "./src/component/page/MyPage/MyPage";
-import CustomDrawerContent from "./src/component/template/CustomDrawerContent";
-import asyncStorage from "@react-native-async-storage/async-storage/src/AsyncStorage";
+import PasswordChangePage from "./src/component/page/PasswordChangePage";
 import {LogBox} from 'react-native';
-import PasswordChangePage from "./src/component/page/MyPage/PasswordChangePage";
+
+// react, hooks, library, component, style 등의 순으로 import 정리
 
 LogBox.ignoreLogs(['Sending']);
 LogBox.ignoreLogs(['Expected']);

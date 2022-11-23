@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react';
+import asyncStorage from "@react-native-async-storage/async-storage/src/AsyncStorage";
 import {Dimensions, SafeAreaView, ScrollView, Text, TouchableOpacity, View} from "react-native";
+import CustomBackHeader from "../../template/CustomBackHeader";
 import styled from "styled-components"
 import {Entypo} from '@expo/vector-icons';
-import CustomBackHeader from "../../template/CustomBackHeader";
-import asyncStorage from "@react-native-async-storage/async-storage/src/AsyncStorage";
 
 
 function SearchResultPage({navigation: stackNavigation, drawerNavigation, route}) {

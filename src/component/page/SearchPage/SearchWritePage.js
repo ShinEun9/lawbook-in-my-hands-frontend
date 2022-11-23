@@ -1,12 +1,12 @@
 import React, {useState} from 'react';
-import {ActivityIndicator, Alert, SafeAreaView, View} from "react-native";
-import CustomMultilineInput from "../../atom/CustomMultilineInput";
-import {colors} from "../../../variable/color";
 import {useInput} from "../../../hooks/useInput";
-import CustomHeader from "../../template/CustomHeader";
 import axios from "axios";
 import asyncStorage from "@react-native-async-storage/async-storage/src/AsyncStorage";
+import {ActivityIndicator, Alert, SafeAreaView, View} from "react-native";
+import CustomMultilineInput from "../../atom/CustomMultilineInput";
+import CustomHeader from "../../template/CustomHeader";
 import CustomButton from "../../atom/CustomButton";
+import {colors} from "../../../variable/color";
 
 
 function SearchWritePage({navigation: stackNavigation, drawerNavigation, route}) {
@@ -32,7 +32,6 @@ function SearchWritePage({navigation: stackNavigation, drawerNavigation, route})
             await axios.post(`http://3.39.59.151:5000/consult`, {content: inputValue},
                 {headers: {Authorization: `Bearer ${token}`}})
                 .then((res) => {
-                    console.log(res.data);
                     const {cases, consult_id} = res.data
                     stackNavigation.navigate("SearchResultPage", {consult_content: inputValue, cases, consult_id})
                     setIsLoading(false);

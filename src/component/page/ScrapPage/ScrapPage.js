@@ -1,7 +1,7 @@
 import React from 'react';
+import {createStackNavigator} from "@react-navigation/stack";
 import SearchResultPage from "../SearchPage/SearchResultPage";
 import SearchDetailPage from "../SearchPage/SearchDetailPage";
-import {createStackNavigator} from "@react-navigation/stack";
 import ScrapListPage from "./ScrapListPage";
 import ScrapSearchPage from "./ScrapSearchPage";
 

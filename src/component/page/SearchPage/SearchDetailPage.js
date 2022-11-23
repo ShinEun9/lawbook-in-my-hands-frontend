@@ -1,13 +1,12 @@
 import React, {useEffect, useState} from 'react';
-import {View, Text, SafeAreaView, ScrollView, ActivityIndicator, Alert} from "react-native";
-import styled from "styled-components";
-import CustomBackHeader from "../../template/CustomBackHeader";
-import {colors} from "../../../variable/color";
-import {Entypo, Ionicons} from "@expo/vector-icons";
-import CustomIconButton from "../../atom/CustomIconButton";
 import axios from "axios";
 import asyncStorage from "@react-native-async-storage/async-storage/src/AsyncStorage";
-import CustomButton from "../../atom/CustomButton";
+import {View, Text, SafeAreaView, ScrollView, ActivityIndicator, Alert} from "react-native";
+import CustomBackHeader from "../../template/CustomBackHeader";
+import CustomIconButton from "../../atom/CustomIconButton";
+import styled from "styled-components";
+import {colors} from "../../../variable/color";
+import {Ionicons} from "@expo/vector-icons";
 
 const parseString = require('react-native-xml2js').parseString;
 

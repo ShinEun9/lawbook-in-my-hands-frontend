@@ -1,12 +1,12 @@
-import React, {useEffect, useState} from 'react';
+import React, { useState} from 'react';
 import {ActivityIndicator, Alert, Dimensions, SafeAreaView, Text, TouchableOpacity, View} from "react-native";
-import CustomHeader from "../../template/CustomHeader";
-import CustomInput from "../../atom/CustomInput";
-import {colors} from "../../../variable/color";
-import CustomButton from "../../atom/CustomButton";
+import CustomInput from "../atom/CustomInput";
+import {colors} from "../../variable/color";
+import CustomButton from "../atom/CustomButton";
 import asyncStorage from "@react-native-async-storage/async-storage/src/AsyncStorage";
-import {useInputs} from "../../../hooks/useInputs";
+import {useInputs} from "../../hooks/useInputs";
 import axios from "axios";
+import CustomHeader from "../template/CustomHeader";
 
 function PasswordChangePage({navigation: drawerNavigation}) {
     const [value, onChange] = useInputs({pwd: "", pwd_check: ""});

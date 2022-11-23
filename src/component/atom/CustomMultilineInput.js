@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Keyboard, TextInput, TouchableWithoutFeedback} from "react-native";
+import {TextInput} from "react-native";
 import styled from "styled-components/native";
 import {colors} from "../../variable/color";
 
