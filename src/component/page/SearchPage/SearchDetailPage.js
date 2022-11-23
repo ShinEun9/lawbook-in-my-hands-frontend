@@ -7,6 +7,7 @@ import {Entypo, Ionicons} from "@expo/vector-icons";
 import CustomIconButton from "../../atom/CustomIconButton";
 import axios from "axios";
 import asyncStorage from "@react-native-async-storage/async-storage/src/AsyncStorage";
+import CustomButton from "../../atom/CustomButton";
 
 const parseString = require('react-native-xml2js').parseString;
 
@@ -16,7 +17,6 @@ function SearchDetailPage({navigation: stackNavigation, drawerNavigation, route}
     const [isLoading, setIsLoading] = useState(true);
 
     const {url, case_serial_id, consult_id, title} = route.params;
-    console.log(case_serial_id, consult_id)
 
     const fetchData = async () => {
         const token = await asyncStorage.getItem("@access_token");
@@ -33,8 +33,6 @@ function SearchDetailPage({navigation: stackNavigation, drawerNavigation, route}
                         setCaseData(response);
                         setIsLoading(false);
                     })
-
-                    console.log(res2.data.scrap);
 
                     setIsScrap(res2.data.scrap);
                 })
@@ -88,62 +86,67 @@ function SearchDetailPage({navigation: stackNavigation, drawerNavigation, route}
 
     return (
         <SafeAreaView style={styles.container}>
-            <View style={styles.header}>
-                <CustomBackHeader content={title}
-                                  handleBackButtonPress={() => {
-                                      stackNavigation.pop();
-                                  }}
-                                  handleMoreButtonPress={() => {
-                                      drawerNavigation.toggleDrawer()
-                                  }}
-                />
-            </View>
-            <Styled판례Container>
-                {
-                    isLoading ?
+            {/*<View style={styles.header}>*/}
+            <CustomBackHeader content={title}
+                              handleBackButtonPress={() => {
+                                  stackNavigation.pop();
+                              }}
+                              handleMoreButtonPress={() => {
+                                  drawerNavigation.toggleDrawer()
+                              }}
+            />
+            {/*</View>*/}
+            {
+                isLoading ?
+                    <Styled판례Container>
                         <ActivityIndicator/>
-                        :
-                        <ScrollView style={styles.content}>
-                            <View style={{width: "100%", alignItems: "flex-end", marginBottom: 20}}>
-                                <CustomIconButton content={"스크랩"}
-                                                  icon={
-                                                      isScrap ? <Ionicons name="heart" size={20} color="white"/> :
-                                                          <Ionicons name="heart-outline" size={20} color="white"/>
-                                                  }
-                                                  handlePressButton={handleScrapButtonClick} width={"75px"}
-                                                  height={"40px"}
-                                                  background={colors.pointBlue}/>
-                            </View>
+                    </Styled판례Container>
+                    :
+                    <ScrollView style={styles.content}>
+                        <View style={{width: "100%", alignItems: "flex-end", marginBottom: 20}}>
                             {
-                                caseData && Object.entries(caseData).map((item) => {
-                                    return <View style={{marginBottom: 10}} key={item[0]}>
-                                        <Text style={styles.caseTitle}>
-                                            【{item[0]}】
-                                        </Text>
-                                        {
-                                            item[1].map((text, index) => {
-                                                return <Text key={index}
-                                                             style={styles.caseContent}>{text.split("\n").join("").replace(/\s{2,}/gi, ' ')}</Text>
-                                            })
-                                        }
-                                    </View>
-                                })
+                                isScrap ? <CustomIconButton content={"스크랩"}
+                                                            icon={<Ionicons name="heart" size={20}
+                                                                            color="white"/>}
+                                                            handlePressButton={handleScrapButtonClick} /> :
+                                    <CustomIconButton type={"b"}
+                                                      content={"스크랩"}
+                                                      icon={<Ionicons name="heart-outline" size={20}
+                                                                      color={colors.pointBlue}/>}
+                                                      handlePressButton={handleScrapButtonClick}
+                                    />
                             }
-                        </ScrollView>
+                        </View>
+                        {
+                            caseData && Object.entries(caseData).map((item) => {
+                                return <View style={{marginBottom: 10}} key={item[0]}>
+                                    <Text style={styles.caseTitle}>
+                                        【{item[0]}】
+                                    </Text>
+                                    {
+                                        item[1].map((text, index) => {
+                                            return <Text key={index}
+                                                         style={styles.caseContent}>{text.split("\n").join("").replace(/\s{2,}/gi, ' ')}</Text>
+                                        })
+                                    }
+                                </View>
+                            })
+                        }
+                    </ScrollView>
 
-                }
-            </Styled판례Container>
+            }
         </SafeAreaView>
-    );
+    )
+        ;
 }
 
 export default SearchDetailPage;
 
 const Styled판례Container = styled(View)`
-  flex: 9;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
   width: 100%;
-  border-bottom-color: rgb(248, 248, 248);
-  border-bottom-width: 5px;
 `;
 
 const styles = {
@@ -152,14 +155,10 @@ const styles = {
         alignItems: 'center',
         justifyContent: 'center',
     },
-    header: {
+    content: {
         flex: 1,
         width: "100%",
-    },
-    content: {
-        width: "100%",
         padding: 10
-        // alignItems: "center"
     },
     caseTitle: {
         fontFamily: "NanumSquareB",

@@ -23,11 +23,10 @@ const styles = {
         flexDirection: "row",
         alignItems: "center",
         width: "100%",
-        paddingHorizontal: 25
+        paddingHorizontal: 25,
     },
     text: {
         fontSize: 20,
-        fontWeight: "800",
         marginLeft: 20,
         // color: "rgb(71, 67, 72)"
     }

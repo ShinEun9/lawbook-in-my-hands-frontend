@@ -63,13 +63,15 @@ export default function App() {
                                     drawerPosition: 'right',
                                     drawerType: "front",
                                     swipeEnabled: true,
-                                    drawerHideStatusBarOnOpen: false
+                                    drawerHideStatusBarOnOpen: false,
                                 }}
                             >
                                 <Drawer.Screen name="SearchPage" component={SearchPage} options={{headerShown: false}}/>
                                 <Drawer.Screen name="ScrapPage" component={ScrapPage} options={{headerShown: false}}/>
                                 <Drawer.Screen name="MyPage" component={MyPage} options={{headerShown: false}}/>
-                                <Drawer.Screen name="PasswordChangePage" component={PasswordChangePage} options={{headerShown: false}}/>
+                                <Drawer.Screen name="PasswordChangePage" component={PasswordChangePage} options={{
+                                    headerShown: false
+                                }}/>
 
                             </Drawer.Navigator>
                             :

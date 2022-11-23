@@ -18,7 +18,7 @@ function CustomBackHeader({content, handleBackButtonPress, handleMoreButtonPress
             </View>
             <TouchableOpacity onPress={handleMoreButtonPress}>
                 <Image
-                    style={{height: 30, width: 30}}
+                    style={{height: 20, width: 20}}
                     source={moreButtonImagePath}
                 />
             </TouchableOpacity>
@@ -30,15 +30,14 @@ export default CustomBackHeader;
 
 const StyledHeader = styled(View)`
   background-color: white;
-
   width: 100%;
   height: 50px;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding-horizontal: 25px;
+  padding-horizontal: 10px;
   border-bottom-color: rgb(248, 248, 248);
-  border-bottom-width: 5px;
+  border-bottom-width: 2px;
 `
 
 const StyledTitle = styled(Text)`

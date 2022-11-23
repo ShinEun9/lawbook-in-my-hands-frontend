@@ -69,7 +69,7 @@ function CustomDrawerContent({navigation}) {
                         navigation.navigate("SearchPage")
                     }}>
                     <View style={styles.menuItem}>
-                        <FontAwesome name={"search"} size={20} color={`${colors.pointBlue2}`}
+                        <FontAwesome name={"search"} size={20} color={`${colors.pointBlue}`}
                                      style={{marginRight: 10}}/>
                         <Text style={styles.menuItemText}>AI 판례 추천 서비스</Text>
                     </View>
@@ -88,7 +88,7 @@ function CustomDrawerContent({navigation}) {
             </View>
 
             <View style={styles.buttonContainer}>
-                <TouchableOpacity onPress={handlePasswordChangeButtonPress}>
+                <TouchableOpacity  onPress={handlePasswordChangeButtonPress}>
                     <Text style={styles.button}>비밀번호 변경</Text>
                 </TouchableOpacity>
 
@@ -96,7 +96,7 @@ function CustomDrawerContent({navigation}) {
                     <Text style={styles.button}>로그아웃</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity>
+                <TouchableOpacity  onPress={()=>{console.log("hi")}}>
                     <Text style={styles.button}>계정탈퇴</Text>
                 </TouchableOpacity>
             </View>
@@ -116,6 +116,7 @@ const styles = {
         padding: 15,
     },
     title: {
+        color: colors.pointBlue,
         fontFamily: "DrawerTitle",
         fontSize: 22,
 
@@ -164,7 +165,7 @@ const styles = {
     },
     button: {
         fontFamily: "NanumSquareR",
-        color: "rgba(0,0,0,0.5)",
+        color: colors.pointBlue,
         fontSize: 14,
         marginBottom: 20
     }

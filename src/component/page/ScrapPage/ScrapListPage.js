@@ -1,5 +1,14 @@
 import React, {useEffect, useState} from 'react';
-import {SafeAreaView, View, Text, TouchableOpacity, ActivityIndicator, ScrollView, RefreshControl} from "react-native";
+import {
+    SafeAreaView,
+    View,
+    Text,
+    TouchableOpacity,
+    ActivityIndicator,
+    ScrollView,
+    RefreshControl,
+    Platform
+} from "react-native";
 import CustomHeader from "../../template/CustomHeader";
 import styled from "styled-components"
 import {Entypo} from "@expo/vector-icons";
@@ -27,7 +36,6 @@ function ScrapListPage({navigation: stackNavigation, drawerNavigation}) {
         await axios.get(`http://3.39.59.151:5000/scrap`, {
             headers: {Authorization: `Bearer ${token}`}
         }).then((res) => {
-            console.log(res.data.consult_list)
             setConsultList(res.data.consult_list);
         }).catch((err) => {
             console.log(err)
@@ -40,13 +48,14 @@ function ScrapListPage({navigation: stackNavigation, drawerNavigation}) {
     }
 
     const handle스크랩판례ButtonPress = (상담내역, oneCase, title) => {
+        const titleTmp = `${title.slice(0,15)}...`
         const {consult_id} = 상담내역;
         const {url, case_serial_id} = oneCase
         stackNavigation.navigate("ScrapDetailPage", {
             url,
             case_serial_id,
             consult_id,
-            title: `${title.slice(0, 15)}...`
+            title: titleTmp
         })
     }
 
@@ -65,7 +74,7 @@ function ScrapListPage({navigation: stackNavigation, drawerNavigation}) {
                               }}
                 />
             </View>
-            <View style={styles.content}>
+            <View style={{...styles.content, paddingTop: Platform.OS === "ios" ? 0 : 40}}>
                 <ScrollView style={styles.scrollView} contentContainerStyle={{alignItems: "center"}}
                             refreshControl={
                                 <RefreshControl
@@ -99,30 +108,30 @@ function ScrapListPage({navigation: stackNavigation, drawerNavigation}) {
                                                 </TouchableOpacity>
                                             </View>
                                             <View style={styles.containerContent}>
-                                                        {
-                                                            !scrapList.length ?
-                                                                <Text style={styles.noScrapContent}>스크랩된 판례가
-                                                                    없습니다.</Text>
-                                                                :
-                                                                scrapList.map((oneCase) => {
-                                                                    const {
-                                                                        case_serial_id, 법원명, 사건명, 사건번호, 선고, 선고일자, 판결유형
-                                                                    } = oneCase
-                                                                    const title = `${법원명} ${사건명} ${사건번호} ${선고} ${선고일자} ${판결유형}`
+                                                {
+                                                    !scrapList.length ?
+                                                        <Text style={styles.noScrapContent}>스크랩된 판례가
+                                                            없습니다.</Text>
+                                                        :
+                                                        scrapList.map((oneCase) => {
+                                                            const {
+                                                                case_serial_id, 법원명, 사건명, 사건번호, 선고, 선고일자, 판결유형
+                                                            } = oneCase
+                                                            const title = `${법원명} ${사건명} ${사건번호} ${선고} ${선고일자} ${판결유형}`
 
-                                                                    return <TouchableOpacity key={case_serial_id}
-                                                                                             style={styles.스크랩판례Button}
-                                                                                             onPress={() => {
-                                                                                                 handle스크랩판례ButtonPress(상담내역, oneCase, title)
-                                                                                             }}>
-                                                                        <Text style={styles.buttonText}>
-                                                                            {title.slice(0, 40)}...
-                                                                        </Text>
-                                                                        <Entypo name="chevron-right" size={24}
-                                                                                color="rgba(0,0,0,0.3)"/>
-                                                                    </TouchableOpacity>
-                                                                })
-                                                        }
+                                                            return <TouchableOpacity key={case_serial_id}
+                                                                                     style={styles.스크랩판례Button}
+                                                                                     onPress={() => {
+                                                                                         handle스크랩판례ButtonPress(상담내역, oneCase, title)
+                                                                                     }}>
+                                                                <Text style={styles.buttonText}>
+                                                                    {title.slice(0, 40)}...
+                                                                </Text>
+                                                                <Entypo name="chevron-right" size={24}
+                                                                        color="rgba(0,0,0,0.3)"/>
+                                                            </TouchableOpacity>
+                                                        })
+                                                }
                                             </View>
                                         </StyledScrapContainer>
                                     </View>
@@ -147,7 +156,7 @@ const StyledScrapContainer = styled(View)`
   margin-bottom: 24px;
   border-color: rgba(0, 0, 0, 0.2);
   border-width: 0.5px;
-  border-radius: 20px;
+  border-radius: 10px;
 `;
 
 const styles = {
@@ -161,7 +170,6 @@ const styles = {
         width: "100%",
     },
     content: {
-        paddingTop: 20,
         flex: 9,
         width: "100%",
         alignItems: "center",
@@ -181,9 +189,9 @@ const styles = {
     containerTitle: {
         backgroundColor: "rgba(233,235,239, 0.8)",
         paddingHorizontal: 20,
-        paddingVertical: 20,
-        borderTopLeftRadius: 20,
-        borderTopRightRadius: 20,
+        paddingVertical: 15,
+        borderTopLeftRadius: 5,
+        borderTopRightRadius: 10,
     },
     titleButtonText: {
         fontFamily: "NanumSquareEB",

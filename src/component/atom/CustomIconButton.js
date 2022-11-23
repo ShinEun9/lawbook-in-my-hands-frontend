@@ -1,13 +1,14 @@
 import React from 'react';
 import {Text, TouchableOpacity, View} from "react-native";
 import styled from "styled-components/native";
+import {colors} from "../../variable/color";
 
-function CustomIconButton({content, icon, handlePressButton, width, height, background}) {
+function CustomIconButton({type = "a", content, icon, handlePressButton}) {
     return (
         <TouchableOpacity onPress={handlePressButton} activeOpacity={0.9}>
-            <StyledButton width={width} height={height} background={background}>
+            <StyledButton type={type}>
                 {icon}
-                <Text style={styles.buttonText}>{content}</Text>
+                <StyledText type={type}>{content}</StyledText>
             </StyledButton>
         </TouchableOpacity>
     );
@@ -16,21 +17,21 @@ function CustomIconButton({content, icon, handlePressButton, width, height, back
 export default CustomIconButton;
 
 const StyledButton = styled(View)`
-  width: ${(props) => props.width};
-  height: ${(props) => props.height};
-  background: ${(props)=>props.background};
-  borderRadius: 10px;
+  width: 75px;
+  height: 45px;
+  background: ${(props) => props.type === "a" ? `${colors.pointBlue}` : "white"};
+  border-width: 1px;
+  border-color: ${colors.pointBlue};
+  borderRadius: 50;
+  padding-horizontal: 10;
   flex-direction: row;
   justifyContent: center;
   alignItems: center;
 `;
 
-
-const styles = {
-    buttonText: {
-        fontFamily: "NanumSquareB",
-        fontSize: 14,
-        color: "white",
-        textAlign: "center"
-    }
-}
+const StyledText = styled(Text)`
+  fontFamily: NanumSquareB;
+  fontSize: 14;
+  color: ${(props) => props.type === "a" ? "white" : `${colors.pointBlue}`}
+  textAlign: center;
+`;
