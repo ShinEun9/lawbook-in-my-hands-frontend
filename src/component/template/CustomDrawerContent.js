@@ -117,7 +117,7 @@ const styles = {
     },
     title: {
         fontFamily: "DrawerTitle",
-        fontSize: "22",
+        fontSize: 22,
 
     },
     profileContainer: {
@@ -128,12 +128,12 @@ const styles = {
     },
     profileName: {
         fontFamily: "NanumSquareB",
-        fontSize: "16",
+        fontSize: 16,
         marginBottom: 10,
     },
     profileNickName: {
         fontFamily: "NanumSquareR",
-        fontSize: "14",
+        fontSize: 14,
         // color: "rgba(0,0,0,0.5)"
     },
     menuContainer: {
@@ -143,7 +143,7 @@ const styles = {
     },
     menuTitle: {
         fontFamily: "NanumSquareEB",
-        fontSize: "18",
+        fontSize: 18,
         paddingTop: 20,
         paddingHorizontal: 15,
         marginBottom: 8
@@ -156,7 +156,7 @@ const styles = {
     },
     menuItemText: {
         fontFamily: "NanumSquareB",
-        fontSize: "16",
+        fontSize: 16,
         color: "rgba(0,0,0,0.7)"
     },
     buttonContainer: {
@@ -165,7 +165,7 @@ const styles = {
     button: {
         fontFamily: "NanumSquareR",
         color: "rgba(0,0,0,0.5)",
-        fontSize: "14",
+        fontSize: 14,
         marginBottom: 20
     }
 }

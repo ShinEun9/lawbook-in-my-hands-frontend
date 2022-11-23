@@ -99,29 +99,30 @@ function ScrapListPage({navigation: stackNavigation, drawerNavigation}) {
                                                 </TouchableOpacity>
                                             </View>
                                             <View style={styles.containerContent}>
-                                                {
-                                                    !scrapList.length ?
-                                                        <Text style={styles.noScrapContent}>스크랩된 판례가 없습니다.</Text>
-                                                        :
-                                                        scrapList.map((oneCase) => {
-                                                            const {
-                                                                case_serial_id, 법원명, 사건명, 사건번호, 선고, 선고일자, 판결유형
-                                                            } = oneCase
-                                                            const title = `${법원명} ${사건명} ${사건번호} ${선고} ${선고일자} ${판결유형}`
+                                                        {
+                                                            !scrapList.length ?
+                                                                <Text style={styles.noScrapContent}>스크랩된 판례가
+                                                                    없습니다.</Text>
+                                                                :
+                                                                scrapList.map((oneCase) => {
+                                                                    const {
+                                                                        case_serial_id, 법원명, 사건명, 사건번호, 선고, 선고일자, 판결유형
+                                                                    } = oneCase
+                                                                    const title = `${법원명} ${사건명} ${사건번호} ${선고} ${선고일자} ${판결유형}`
 
-                                                            return <TouchableOpacity key={case_serial_id}
-                                                                                     style={styles.스크랩판례Button}
-                                                                                     onPress={() => {
-                                                                                         handle스크랩판례ButtonPress(상담내역, oneCase, title)
-                                                                                     }}>
-                                                                <Text style={styles.buttonText}>
-                                                                    {title.slice(0, 40)}...
-                                                                </Text>
-                                                                <Entypo name="chevron-right" size={24}
-                                                                        color="rgba(0,0,0,0.3)"/>
-                                                            </TouchableOpacity>
-                                                        })
-                                                }
+                                                                    return <TouchableOpacity key={case_serial_id}
+                                                                                             style={styles.스크랩판례Button}
+                                                                                             onPress={() => {
+                                                                                                 handle스크랩판례ButtonPress(상담내역, oneCase, title)
+                                                                                             }}>
+                                                                        <Text style={styles.buttonText}>
+                                                                            {title.slice(0, 40)}...
+                                                                        </Text>
+                                                                        <Entypo name="chevron-right" size={24}
+                                                                                color="rgba(0,0,0,0.3)"/>
+                                                                    </TouchableOpacity>
+                                                                })
+                                                        }
                                             </View>
                                         </StyledScrapContainer>
                                     </View>
@@ -160,6 +161,7 @@ const styles = {
         width: "100%",
     },
     content: {
+        paddingTop: 20,
         flex: 9,
         width: "100%",
         alignItems: "center",
@@ -169,7 +171,7 @@ const styles = {
         width: "100%"
     },
     timeText: {
-        fontSize: "16px",
+        fontSize: 16,
         color: `${colors.gold}`,
         fontFamily: "NanumSquareEB",
         alignSelf: "flex-start",
@@ -185,7 +187,7 @@ const styles = {
     },
     titleButtonText: {
         fontFamily: "NanumSquareEB",
-        fontSize: "16px",
+        fontSize: 16,
         color: `${colors.pointBlue}`
     },
     containerContent: {},
@@ -196,19 +198,19 @@ const styles = {
         paddingHorizontal: 20,
         paddingVertical: 20,
         borderBottomColor: "rgb(241,241,241)",
-        borderBottomWidth: "0.5px",
+        borderBottomWidth: 0.5,
     },
     buttonText: {
         fontFamily: "NanumSquareB",
-        fontSize: "13px",
+        fontSize: 13,
         width: "85%",
     },
 
     noScrapContent: {
         fontFamily: "NanumSquareB",
-        fontSize: "13px",
+        fontSize: 13,
         width: "100%",
         padding: 20,
-        color: `${colors.darkgrey}`
+        color: "grey"
     }
 }

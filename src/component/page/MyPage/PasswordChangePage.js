@@ -48,18 +48,18 @@ function PasswordChangePage({navigation: drawerNavigation}) {
 
             <View style={styles.content}>
                 <View style={styles.inputContainer}>
-                    <Text style={{fontSize: "15px", color: `${colors.darkgrey}`}}>비밀번호</Text>
+                    <Text style={{fontSize: 15, color: `${colors.darkgrey}`}}>비밀번호</Text>
                     <CustomInput width={"300px"} height={"40px"} name={"pwd"} onChange={onChange} value={value.name}/>
                 </View>
 
                 <View style={{...styles.inputContainer, marginBottom: 60}}>
-                    <Text style={{fontSize: "15px", color: `${colors.darkgrey}`}}>비밀번호 확인</Text>
+                    <Text style={{fontSize: 15, color: `${colors.darkgrey}`}}>비밀번호 확인</Text>
                     <CustomInput width={"300px"} height={"40px"} name={"pwd_check"} onChange={onChange}
                                  value={value.nickname}/>
                 </View>
 
                 <CustomButton handlePressButton={handlePasswordChangeButtonPress} width={"350px"} height={"60px"}
-                              pointColor={colors.pointBlue} borderRadius={"50%"}>
+                              pointColor={colors.pointBlue} borderRadius={50}>
                     {
                         isLoading ? <ActivityIndicator/> : "비밀번호 변경"
                     }

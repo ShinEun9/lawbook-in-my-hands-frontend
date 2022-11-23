@@ -29,7 +29,7 @@ const StyledButton = styled(View)`
 const styles = {
     buttonText: {
         fontFamily: "NanumSquareB",
-        fontSize: "14px",
+        fontSize: 14,
         color: "white",
         textAlign: "center"
     }

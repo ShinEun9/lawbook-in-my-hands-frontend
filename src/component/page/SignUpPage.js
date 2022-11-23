@@ -79,7 +79,7 @@ function SignUpPage({navigation}) {
                     <CustomInput placeholder={"LoginID"} width={"240px"} height={"60px"} name={"loginId"}
                                  value={value.loginId} onChange={onChange}/>
                     <View style={{marginLeft: 10}}>
-                        <CustomButton type={"b"} width={"100px"} height={"50px"} borderRadius={"50%"}
+                        <CustomButton type={"b"} width={"100px"} height={"50px"} borderRadius={50}
                                       pointColor={colors.pointBlue}
                                       handlePressButton={idCheckButtonClick}>
                             중복 확인
@@ -105,7 +105,7 @@ function SignUpPage({navigation}) {
 
 
                 <View style={styles.buttonContainer}>
-                    <CustomButton width={"350px"} height={"60px"} borderRadius={"50%"} pointColor={colors.pointBlue}
+                    <CustomButton width={"350px"} height={"60px"} borderRadius={50} pointColor={colors.pointBlue}
                                   handlePressButton={handleSignUpButtonClick}>
                         회원가입
                     </CustomButton>

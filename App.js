@@ -15,6 +15,7 @@ import {LogBox} from 'react-native';
 import PasswordChangePage from "./src/component/page/MyPage/PasswordChangePage";
 
 LogBox.ignoreLogs(['Sending']);
+LogBox.ignoreLogs(['Expected']);
 
 export default function App() {
     const [isReady, setIsReady] = useState(false); // font가 load 되면 isReady를 true로 변경

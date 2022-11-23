@@ -56,7 +56,7 @@ const styles = {
         borderBottomWidth: "5px",
     },
     nickname:{
-        fontSize: "20px",
+        fontSize: 20,
         fontWeight: "500",
         marginBottom: 10
     }

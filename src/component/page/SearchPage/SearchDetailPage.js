@@ -163,12 +163,12 @@ const styles = {
     },
     caseTitle: {
         fontFamily: "NanumSquareB",
-        fontSize: "18px",
+        fontSize: 18,
         marginBottom: 5
     },
     caseContent: {
         fontFamily: "NanumSquareB",
-        fontSize: "16px",
+        fontSize: 16,
     }
 
 }

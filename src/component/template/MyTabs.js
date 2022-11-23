@@ -20,7 +20,7 @@ function MyTabs() {
                     height: 80,
                 },
                 tabBarLabelStyle: {
-                    fontSize: 14
+                    // fontSize: 14
                 }
             }}
         >

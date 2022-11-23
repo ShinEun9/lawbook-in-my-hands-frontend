@@ -149,6 +149,6 @@ const styles = {
     buttonTitle: {
         width: "90%",
         fontFamily: "NanumSquareR",
-        fontSize: "12px",
+        fontSize: 12,
     }
 }

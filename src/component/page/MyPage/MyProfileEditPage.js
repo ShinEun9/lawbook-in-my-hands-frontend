@@ -59,18 +59,18 @@ function MyProfileEditPage({navigation: stackNavigation, drawerNavigation}) {
 
             <View style={styles.content}>
                 <View style={styles.inputContainer}>
-                    <Text style={{fontSize: "15px", color: `${colors.darkgrey}`}}>이름</Text>
+                    <Text style={{fontSize: 15, color: `${colors.darkgrey}`}}>이름</Text>
                     <CustomInput width={"300px"} height={"40px"} name={"name"} onChange={onChange} value={value.name}/>
                 </View>
 
                 <View style={{...styles.inputContainer, marginBottom: 60}}>
-                    <Text style={{fontSize: "15px", color: `${colors.darkgrey}`}}>닉네임</Text>
+                    <Text style={{fontSize: 15, color: `${colors.darkgrey}`}}>닉네임</Text>
                     <CustomInput width={"300px"} height={"40px"} name={"nickname"} onChange={onChange}
                                  value={value.nickname}/>
                 </View>
 
                 <CustomButton handlePressButton={handleEditInfoButtonPress} width={"350px"} height={"60px"}
-                              pointColor={colors.pointBlue} borderRadius={"50%"}>
+                              pointColor={colors.pointBlue} borderRadius={50}>
                     {
                         isLoading ? <ActivityIndicator/> : "정보수정"
                     }
