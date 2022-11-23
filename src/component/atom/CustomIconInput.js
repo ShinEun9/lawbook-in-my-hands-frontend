@@ -2,12 +2,14 @@ import React, {useState} from 'react';
 import {TextInput, TouchableOpacity, View} from "react-native";
 import styled from 'styled-components/native';
 import {colors} from "../../variable/color";
-import {Ionicons, AntDesign} from "@expo/vector-icons";
+import AntDesign from "react-native-vector-icons/AntDesign";
+import {Ionicons} from "@expo/vector-icons";
 
 function CustomInput({placeholder, width, height, value, onChange, name, iconName}) {
     const [isFocus, setIsFocus] = useState(false);
     const [isPasswordShow, setIsPasswordShow] = useState(true);
     const handleShowPasswordButtonPress = () => {
+        // console.log("hihi")
         setIsPasswordShow((prev) => !prev)
     }
     return (
@@ -15,6 +17,7 @@ function CustomInput({placeholder, width, height, value, onChange, name, iconNam
             <AntDesign name={iconName} size={20} color={isFocus ? `${colors.pointBlue}` : `${colors.lightGrey}`}
                        style={{marginRight: 20}}/>
             <TextInput
+                secureTextEntry={name === "password" ? isPasswordShow : false}
                 value={value}
                 placeholder={placeholder}
                 onChangeText={(text) => {

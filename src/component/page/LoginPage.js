@@ -61,42 +61,39 @@ function LoginPage({navigation}) {
             <Image
                 style={{height: 280, width: 280}}
                 source={require('../../img/logo.png')}/>
-            {/*<View style={{marginBottom: 10}}>*/}
-            {/*    <CustomIconInput name="loginId" placeholder={"LoginID"} width={"240px"} height={"45px"}*/}
-            {/*                     value={value.loginId}*/}
-            {/*                     onChange={onChange} iconName={"user"}/>*/}
-            {/*</View>*/}
-            {/*<View style={{marginBottom: 35}}>*/}
-            {/*    <CustomIconInput name="password" placeholder={"Password"} width={"240px"} height={"45px"}*/}
-            {/*                     value={value.password}*/}
-            {/*                     onChange={onChange} type={"password"} iconName={"lock"}/>*/}
+            {
+                Platform.OS === "android" ?
+                    <>
+                        <View style={{marginBottom: 10}}>
+                            <CustomIconInput name="loginId" placeholder={"LoginID"} width={"240px"} height={"45px"}
+                                             value={value.loginId}
+                                             onChange={onChange} iconName={"user"}/>
+                        </View>
+                        <View style={{marginBottom: 35}}>
+                            <CustomIconInput name="password" placeholder={"Password"} width={"240px"} height={"45px"}
+                                             value={value.password}
+                                             onChange={onChange} type={"password"} iconName={"lock"}/>
 
-            {/*</View>*/}
-            {/*<View style={{marginBottom: 20}}>*/}
-            {/*    <CustomButton handlePressButton={handleLoginButtonClick} width={"240px"} height={"45px"}*/}
-            {/*                  pointColor={colors.gold} borderRadius={"5px"}>*/}
-            {/*        {isLoading ? <ActivityIndicator/> : "로그인"}*/}
-            {/*    </CustomButton>*/}
-            {/*</View>*/}
+                        </View>
+                    </>
+                    :
 
-            {/*<CustomButton handlePressButton={handleSignUpButtonClick} width={"240px"}*/}
-            {/*              height={"45px"} pointColor={colors.pointBlue} borderRadius={"5px"}>*/}
-            {/*    회원가입*/}
-            {/*</CustomButton>*/}
-            <KeyboardAvoidingView
-                behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
-                <View style={{marginBottom: 10}}>
-                    <CustomIconInput name="loginId" placeholder={"LoginID"} width={"240px"} height={"45px"}
-                                     value={value.loginId}
-                                     onChange={onChange} iconName={"user"}/>
-                </View>
-                <View style={{marginBottom: 35}}>
-                    <CustomIconInput name="password" placeholder={"Password"} width={"240px"} height={"45px"}
-                                     value={value.password}
-                                     onChange={onChange} type={"password"} iconName={"lock"}/>
-                </View>
-            </KeyboardAvoidingView>
+                    <KeyboardAvoidingView
+                        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+                        <View style={{marginBottom: 10}}>
+                            <CustomIconInput name="loginId" placeholder={"LoginID"} width={"240px"} height={"45px"}
+                                             value={value.loginId}
+                                             onChange={onChange} iconName={"user"}/>
+                        </View>
+                        <View style={{marginBottom: 35}}>
+                            <CustomIconInput name="password" placeholder={"Password"} width={"240px"} height={"45px"}
+                                             value={value.password}
+                                             onChange={onChange} type={"password"} iconName={"lock"}/>
+                        </View>
+                    </KeyboardAvoidingView>
 
+
+            }
             <View style={{marginBottom: 20}}>
                 <CustomButton handlePressButton={handleLoginButtonClick} width={"240px"} height={"45px"}
                               pointColor={colors.gold} borderRadius={"5px"}>
@@ -108,7 +105,6 @@ function LoginPage({navigation}) {
                           height={"45px"} pointColor={colors.pointBlue} borderRadius={"5px"}>
                 회원가입
             </CustomButton>
-
         </SafeAreaView>
     );
 }
