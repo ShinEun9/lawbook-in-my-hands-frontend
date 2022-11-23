@@ -11,6 +11,7 @@ function CustomMultilineInput({value, onChange, editable = true}) {
                 width={"360px"} height={"360px"}
                 placeholder={"구체적으로 적어주세요."}
                 multiline={true}
+                textAlignVertical={"top"}
                 numberOfLines={5}
                 onChangeText={onChange}
                 value={value}

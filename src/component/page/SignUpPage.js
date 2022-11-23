@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import styled from "styled-components"
-import {Alert, SafeAreaView, View} from "react-native";
+import {Alert, Dimensions, Platform, SafeAreaView, View} from "react-native";
 import CustomInput from "../atom/CustomInput";
 import SignUpPageHeader from "../template/SignUpPageHeader";
 import {colors} from "../../variable/color";
@@ -74,12 +74,14 @@ function SignUpPage({navigation}) {
                 <SignUpPageHeader navigation={navigation}/>
             </View>
 
-            <View style={styles.signUpForm}>
+            <View style={{...styles.signUpForm, paddingTop: Platform.OS === "ios" ? 0 : 30}}>
                 <StyledInputContainer>
-                    <CustomInput placeholder={"LoginID"} width={"240px"} height={"60px"} name={"loginId"}
+                    <CustomInput placeholder={"LoginID"} width={Dimensions.get('window').width * 0.5} height={"60px"}
+                                 name={"loginId"}
                                  value={value.loginId} onChange={onChange}/>
                     <View style={{marginLeft: 10}}>
-                        <CustomButton type={"b"} width={"100px"} height={"50px"} borderRadius={50}
+                        <CustomButton type={"b"} width={Dimensions.get('window').width * 0.3} height={"50px"}
+                                      borderRadius={50}
                                       pointColor={colors.pointBlue}
                                       handlePressButton={idCheckButtonClick}>
                             중복 확인
@@ -89,23 +91,27 @@ function SignUpPage({navigation}) {
                 </StyledInputContainer>
 
                 <StyledInputContainer>
-                    <CustomInput placeholder={"Password"} width={"350px"} height={"60px"} name={"password"}
+                    <CustomInput placeholder={"Password"} width={Dimensions.get('window').width * 0.8} height={"60px"}
+                                 name={"password"}
                                  value={value.password} onChange={onChange}/>
                 </StyledInputContainer>
 
                 <StyledInputContainer>
-                    <CustomInput placeholder={"Name"} width={"350px"} height={"60px"} name={"name"}
+                    <CustomInput placeholder={"Name"} width={Dimensions.get('window').width * 0.8} height={"60px"}
+                                 name={"name"}
                                  value={value.name} onChange={onChange}/>
                 </StyledInputContainer>
 
                 <StyledInputContainer>
-                    <CustomInput placeholder={"NickName"} width={"350px"} height={"60px"} name={"nickname"}
+                    <CustomInput placeholder={"NickName"} width={Dimensions.get('window').width * 0.8} height={"60px"}
+                                 name={"nickname"}
                                  value={value.nickname} onChange={onChange}/>
                 </StyledInputContainer>
 
 
                 <View style={styles.buttonContainer}>
-                    <CustomButton width={"350px"} height={"60px"} borderRadius={50} pointColor={colors.pointBlue}
+                    <CustomButton width={Dimensions.get('window').width * 0.5} height={"60px"} borderRadius={50}
+                                  pointColor={colors.pointBlue}
                                   handlePressButton={handleSignUpButtonClick}>
                         회원가입
                     </CustomButton>

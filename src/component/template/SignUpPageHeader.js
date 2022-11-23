@@ -1,10 +1,10 @@
 import React from 'react';
-import {Text, TouchableOpacity, View} from "react-native";
+import {Platform, Text, TouchableOpacity, View} from "react-native";
 import {Entypo} from "@expo/vector-icons";
 
 function SignUpPageHeader({navigation}) {
     return (
-        <View style={styles.container}>
+        <View style={{...styles.container, marginTop: Platform.OS==="ios"?0:30}}>
             <TouchableOpacity onPress={() => {
                 navigation.navigate("LoginPage")
             }}>
