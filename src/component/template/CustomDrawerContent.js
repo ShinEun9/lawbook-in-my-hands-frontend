@@ -1,7 +1,7 @@
 import React, {useContext, useEffect, useState} from 'react';
 import asyncStorage from "@react-native-async-storage/async-storage/src/AsyncStorage";
 import {LoginContext} from "../../store/loginStore";
-import {View, Text, SafeAreaView, TouchableOpacity, TouchableHighlight, Platform, Image} from "react-native";
+import {View, Text, SafeAreaView, TouchableOpacity, TouchableHighlight, Platform, Image, Alert} from "react-native";
 import {colors} from "../../variable/color";
 import {AntDesign, FontAwesome} from "@expo/vector-icons"
 import userIconImagePath from "../../img/user.png";
@@ -15,9 +15,22 @@ function CustomDrawerContent({navigation}) {
         navigation.navigate("MyPage")
     }
 
-    const handleLogoutButtonPress = async () => {
-        await asyncStorage.removeItem("@access_token");
-        setIsLogin(false);
+    const handleLogoutButtonPress = () => {
+        Alert.alert(
+            "로그아웃 하시겠습니까?",
+            "",
+            [
+                {
+                    text: "확인", onPress: async () => {
+                        await asyncStorage.removeItem("@access_token");
+                        setIsLogin(false);
+                    }
+                },
+                {
+                    text: "취소"
+                }
+            ]
+        );
     }
 
     const handlePasswordChangeButtonPress = () => {

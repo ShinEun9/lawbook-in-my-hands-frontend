@@ -13,6 +13,7 @@ import SignUpPage from "./src/component/page/SignUpPage";
 import MyPage from "./src/component/page/MyPage/MyPage";
 import PasswordChangePage from "./src/component/page/PasswordChangePage";
 import {LogBox} from 'react-native';
+import { StatusBar } from 'expo-status-bar';
 
 // react, hooks, library, component, style 등의 순으로 import 정리
 
@@ -53,6 +54,9 @@ export default function App() {
 
     return (
         <LoginContext.Provider value={{isLogin, setIsLogin}}>
+            <StatusBar style="dark" />
+
+
             <NavigationContainer>
                 {
                     isReady ?
