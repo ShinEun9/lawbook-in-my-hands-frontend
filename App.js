@@ -12,8 +12,10 @@ import MyPage from "./src/component/page/MyPage/MyPage";
 import CustomDrawerContent from "./src/component/template/CustomDrawerContent";
 import asyncStorage from "@react-native-async-storage/async-storage/src/AsyncStorage";
 import {LogBox} from 'react-native';
+import PasswordChangePage from "./src/component/page/MyPage/PasswordChangePage";
 
 LogBox.ignoreLogs(['Sending']);
+LogBox.ignoreLogs(['Expected']);
 
 export default function App() {
     const [isReady, setIsReady] = useState(false); // font가 load 되면 isReady를 true로 변경
@@ -67,6 +69,7 @@ export default function App() {
                                 <Drawer.Screen name="SearchPage" component={SearchPage} options={{headerShown: false}}/>
                                 <Drawer.Screen name="ScrapPage" component={ScrapPage} options={{headerShown: false}}/>
                                 <Drawer.Screen name="MyPage" component={MyPage} options={{headerShown: false}}/>
+                                <Drawer.Screen name="PasswordChangePage" component={PasswordChangePage} options={{headerShown: false}}/>
 
                             </Drawer.Navigator>
                             :

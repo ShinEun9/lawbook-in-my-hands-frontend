@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {ActivityIndicator, SafeAreaView, View} from "react-native";
+import {ActivityIndicator, Keyboard, SafeAreaView, TouchableWithoutFeedback, View} from "react-native";
 import CustomMultilineInput from "../../atom/CustomMultilineInput";
 import {colors} from "../../../variable/color";
 import CustomBackHeader from "../../template/CustomBackHeader";
@@ -14,7 +14,7 @@ function ScrapSearchPage({navigation: stackNavigation, drawerNavigation, route})
     const handleSearchButtonClick = async () => {
         setIsLoading(true);
         const token = await asyncStorage.getItem("@access_token");
-        await axios.get(`http://127.0.0.1:5000/consult/${consult_id_params}`, {
+        await axios.get(`http://3.39.59.151:5000/consult/${consult_id_params}`, {
             headers: {Authorization: `Bearer ${token}`}
         })
             .then((res) => {
@@ -42,18 +42,22 @@ function ScrapSearchPage({navigation: stackNavigation, drawerNavigation, route})
                 />
             </View>
 
-            <View style={styles.content}>
-                <View style={{marginBottom: 30}}>
-                    <CustomMultilineInput
-                        value={consult_content}
-                        // onChange={onChange}
-                        editable={false}/>
+            <TouchableWithoutFeedback onPress={() => {
+                Keyboard.dismiss();
+            }}>
+                <View style={styles.content}>
+                    <View style={{marginBottom: 30}}>
+                        <CustomMultilineInput
+                            value={consult_content}
+                            // onChange={onChange}
+                            editable={false}/>
+                    </View>
+                    <CustomButton handlePressButton={handleSearchButtonClick} width={"260px"} height={"50px"}
+                                  pointColor={colors.pointBlue} borderRadius={"5px"}>
+                        {isLoading ? <ActivityIndicator/> : "AI 법률조회"}
+                    </CustomButton>
                 </View>
-                <CustomButton handlePressButton={handleSearchButtonClick} width={"260px"} height={"50px"}
-                              pointColor={colors.pointBlue} borderRadius={"5px"}>
-                    {isLoading ? <ActivityIndicator/> : "AI 법률조회"}
-                </CustomButton>
-            </View>
+            </TouchableWithoutFeedback>
         </SafeAreaView>
     );
 }

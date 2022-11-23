@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "my-app",
+    "name": "내 손안의 법전",
     "slug": "my-app",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -24,7 +24,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.shineunsu.myapp"
     },
     "web": {
       "favicon": "./assets/favicon.png"

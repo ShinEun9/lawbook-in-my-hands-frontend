@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {View, Text, SafeAreaView, Image, TouchableOpacity, TouchableHighlight} from "react-native";
 import {colors} from "../../variable/color";
 import asyncStorage from "@react-native-async-storage/async-storage/src/AsyncStorage";
@@ -7,7 +7,10 @@ import {AntDesign, FontAwesome} from "@expo/vector-icons"
 import logoImagePath from "../../img/logo2.png";
 
 function CustomDrawerContent({navigation}) {
+    const [userInfo, setUserInfo] = useState(null)
     const {isLogin, setIsLogin} = useContext(LoginContext);
+    // const {userInfo, setUserInfo} = useState(null);
+
     const handle프로필수정ButtonPress = () => {
         navigation.navigate("MyPage")
     }
@@ -17,6 +20,21 @@ function CustomDrawerContent({navigation}) {
         setIsLogin(false);
     }
 
+    const handlePasswordChangeButtonPress = ()=>{
+        navigation.navigate("PasswordChangePage")
+    }
+
+    const fetchUserData = async () => {
+        const nickname = await asyncStorage.getItem("@nickname");
+        const loginId = await asyncStorage.getItem("@loginId");
+        const name = await asyncStorage.getItem("@name");
+        await setUserInfo({nickname, loginId, name});
+
+    }
+
+    useEffect(() => {
+        fetchUserData();
+    }, [asyncStorage.getItem("@nickname"), asyncStorage.getItem("@name")])
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.titleContainer}>
@@ -31,10 +49,13 @@ function CustomDrawerContent({navigation}) {
             >
                 <View style={styles.profileContainer}>
                     <FontAwesome name={"user-circle"} color={"#eeeeee"} size={40} style={{marginRight: 10}}/>
-                    <View>
-                        <Text style={styles.profileName}>신은수</Text>
-                        <Text style={styles.profileNickName}>은구찡(ses2201)</Text>
-                    </View>
+                    {
+                        !userInfo ? null :
+                            <View>
+                                <Text style={styles.profileName}>{userInfo.name}</Text>
+                                <Text style={styles.profileNickName}>{userInfo.nickname}({userInfo.loginId})</Text>
+                            </View>
+                    }
                 </View>
 
             </TouchableHighlight>
@@ -67,7 +88,7 @@ function CustomDrawerContent({navigation}) {
             </View>
 
             <View style={styles.buttonContainer}>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={handlePasswordChangeButtonPress}>
                     <Text style={styles.button}>비밀번호 변경</Text>
                 </TouchableOpacity>
 
@@ -96,23 +117,23 @@ const styles = {
     },
     title: {
         fontFamily: "DrawerTitle",
-        fontSize: "22",
+        fontSize: 22,
 
     },
     profileContainer: {
         flexDirection: "row",
         alignItems: "center",
-        paddingHorizontal:15,
+        paddingHorizontal: 15,
         paddingVertical: 20
     },
     profileName: {
         fontFamily: "NanumSquareB",
-        fontSize: "16",
+        fontSize: 16,
         marginBottom: 10,
     },
     profileNickName: {
         fontFamily: "NanumSquareR",
-        fontSize: "14",
+        fontSize: 14,
         // color: "rgba(0,0,0,0.5)"
     },
     menuContainer: {
@@ -122,7 +143,7 @@ const styles = {
     },
     menuTitle: {
         fontFamily: "NanumSquareEB",
-        fontSize: "18",
+        fontSize: 18,
         paddingTop: 20,
         paddingHorizontal: 15,
         marginBottom: 8
@@ -135,7 +156,7 @@ const styles = {
     },
     menuItemText: {
         fontFamily: "NanumSquareB",
-        fontSize: "16",
+        fontSize: 16,
         color: "rgba(0,0,0,0.7)"
     },
     buttonContainer: {
@@ -144,7 +165,7 @@ const styles = {
     button: {
         fontFamily: "NanumSquareR",
         color: "rgba(0,0,0,0.5)",
-        fontSize: "14",
+        fontSize: 14,
         marginBottom: 20
     }
 }

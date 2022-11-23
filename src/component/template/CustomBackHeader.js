@@ -1,12 +1,15 @@
 import React from 'react';
-import {Image, Text, TouchableOpacity, View} from "react-native";
+import {Image, Platform, Text, TouchableOpacity, View} from "react-native";
 import moreButtonImagePath from "../../img/more.png";
 import styled from "styled-components";
 import {Entypo} from "@expo/vector-icons";
 
+import {Dimensions} from 'react-native';
+const {width} = Dimensions.get('window')
+
 function CustomBackHeader({content, handleBackButtonPress, handleMoreButtonPress}) {
     return (
-        <StyledHeader>
+        <StyledHeader style={{marginTop: Platform.OS ==="ios" ? 0 : 30 }}>
             <View style={styles.titleContainer}>
                 <TouchableOpacity onPress={handleBackButtonPress}>
                     <Entypo name="chevron-left" size={24} color="rgb(71, 67, 72)"/>
@@ -26,6 +29,8 @@ function CustomBackHeader({content, handleBackButtonPress, handleMoreButtonPress
 export default CustomBackHeader;
 
 const StyledHeader = styled(View)`
+  background-color: white;
+
   width: 100%;
   height: 50px;
   flex-direction: row;
@@ -38,10 +43,9 @@ const StyledHeader = styled(View)`
 
 const StyledTitle = styled(Text)`
   font-family: NanumSquareEB;
-  font-size: 20px;
+  font-size: ${width > 375 ? "20px" : "18px"};
   margin-left: 20px;
-  font-weight: 800;
-  color: rgb(71, 67, 72);
+  color: black;
 `
 
 const styles = {

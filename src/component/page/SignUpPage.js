@@ -14,7 +14,7 @@ function SignUpPage({navigation}) {
 
     const handleSignUpButtonClick = () => {
         if (idCheck) {
-            axios.post("http://127.0.0.1:5000/signup", value)
+            axios.post("http://3.39.59.151:5000/signup", value)
                 .then((res) => {
                     Alert.alert(
                         "회원가입이 완료되었습니다.",
@@ -44,7 +44,7 @@ function SignUpPage({navigation}) {
 
     const idCheckButtonClick = () => {
         console.log(value.loginId);
-        axios.get(`http://127.0.0.1:5000/loginid/${value.loginId}`)
+        axios.get(`http://3.39.59.151:5000/loginid/${value.loginId}`)
             .then((res) => {
                 Alert.alert(
                     "아이디 확인이 완료되었습니다.",
@@ -79,7 +79,7 @@ function SignUpPage({navigation}) {
                     <CustomInput placeholder={"LoginID"} width={"240px"} height={"60px"} name={"loginId"}
                                  value={value.loginId} onChange={onChange}/>
                     <View style={{marginLeft: 10}}>
-                        <CustomButton type={"b"} width={"100px"} height={"50px"} borderRadius={"50%"}
+                        <CustomButton type={"b"} width={"100px"} height={"50px"} borderRadius={50}
                                       pointColor={colors.pointBlue}
                                       handlePressButton={idCheckButtonClick}>
                             중복 확인
@@ -105,7 +105,7 @@ function SignUpPage({navigation}) {
 
 
                 <View style={styles.buttonContainer}>
-                    <CustomButton width={"350px"} height={"60px"} borderRadius={"50%"} pointColor={colors.pointBlue}
+                    <CustomButton width={"350px"} height={"60px"} borderRadius={50} pointColor={colors.pointBlue}
                                   handlePressButton={handleSignUpButtonClick}>
                         회원가입
                     </CustomButton>

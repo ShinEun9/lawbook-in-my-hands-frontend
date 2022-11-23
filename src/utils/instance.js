@@ -3,7 +3,7 @@
 // import asyncStorage from "@react-native-async-storage/async-storage/src/AsyncStorage";
 //
 // const authInstance = axios.create({
-//     baseURL: `http://127.0.0.1:5000`
+//     baseURL: `http://3.39.59.151:5000`
 // })
 //
 // authInstance.interceptors.request.use(

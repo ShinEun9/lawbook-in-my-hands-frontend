@@ -8,20 +8,19 @@ import asyncStorage from "@react-native-async-storage/async-storage/src/AsyncSto
 import {useInputs} from "../../../hooks/useInputs";
 import axios from "axios";
 
-function MyProfileEditPage({navigation: stackNavigation, drawerNavigation}) {
-    const [value, onChange, setValue] = useInputs({nickname: "", name: ""});
+function PasswordChangePage({navigation: drawerNavigation}) {
+    const [value, onChange] = useInputs({pwd: "", pwd_check: ""});
     const [isLoading, setIsLoading] = useState(false);
-    const handleEditInfoButtonPress = async () => {
+
+    const handlePasswordChangeButtonPress = async () => {
         setIsLoading(true);
         const token = await asyncStorage.getItem("@access_token");
-        await axios.post(`http://3.39.59.151:5000/user/profile`, value, {
+        await axios.post(`http://3.39.59.151:5000/user/password`, value, {
             headers: {Authorization: `Bearer ${token}`}
         })
-            .then(async () => {
-                await asyncStorage.setItem("@nickname", value.nickname);
-                await asyncStorage.setItem("@name", value.name)
-                await Alert.alert(
-                    "회원 정보 수정이 완료 되었습니다.",
+            .then(() => {
+                Alert.alert(
+                    "비밀번호 변경이 완료되었습니다.",
                     "",
                     [
                         {
@@ -37,20 +36,10 @@ function MyProfileEditPage({navigation: stackNavigation, drawerNavigation}) {
             })
     }
 
-    const fetchUserInfo = async () => {
-        const nickname = await asyncStorage.getItem("@nickname");
-        const name = await asyncStorage.getItem("@name");
-        await setValue({nickname, name})
-    }
-
-    useEffect(() => {
-        fetchUserInfo();
-    }, [])
-
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.header}>
-                <CustomHeader content={"마이페이지 수정"}
+                <CustomHeader content={"비밀번호 변경"}
                               handleMoreButtonPress={() => {
                                   drawerNavigation.toggleDrawer()
                               }}
@@ -59,20 +48,20 @@ function MyProfileEditPage({navigation: stackNavigation, drawerNavigation}) {
 
             <View style={styles.content}>
                 <View style={styles.inputContainer}>
-                    <Text style={{fontSize: 15, color: `${colors.darkgrey}`}}>이름</Text>
-                    <CustomInput width={"300px"} height={"40px"} name={"name"} onChange={onChange} value={value.name}/>
+                    <Text style={{fontSize: 15, color: `${colors.darkgrey}`}}>비밀번호</Text>
+                    <CustomInput width={"300px"} height={"40px"} name={"pwd"} onChange={onChange} value={value.name}/>
                 </View>
 
                 <View style={{...styles.inputContainer, marginBottom: 60}}>
-                    <Text style={{fontSize: 15, color: `${colors.darkgrey}`}}>닉네임</Text>
-                    <CustomInput width={"300px"} height={"40px"} name={"nickname"} onChange={onChange}
+                    <Text style={{fontSize: 15, color: `${colors.darkgrey}`}}>비밀번호 확인</Text>
+                    <CustomInput width={"300px"} height={"40px"} name={"pwd_check"} onChange={onChange}
                                  value={value.nickname}/>
                 </View>
 
-                <CustomButton handlePressButton={handleEditInfoButtonPress} width={"350px"} height={"60px"}
+                <CustomButton handlePressButton={handlePasswordChangeButtonPress} width={"350px"} height={"60px"}
                               pointColor={colors.pointBlue} borderRadius={50}>
                     {
-                        isLoading ? <ActivityIndicator/> : "정보수정"
+                        isLoading ? <ActivityIndicator/> : "비밀번호 변경"
                     }
                 </CustomButton>
 
@@ -80,7 +69,7 @@ function MyProfileEditPage({navigation: stackNavigation, drawerNavigation}) {
         </SafeAreaView>);
 }
 
-export default MyProfileEditPage;
+export default PasswordChangePage;
 
 const styles = {
     container: {

@@ -26,7 +26,7 @@ const styles = {
         paddingHorizontal: 25
     },
     text: {
-        fontSize: "20px",
+        fontSize: 20,
         fontWeight: "800",
         marginLeft: 20,
         // color: "rgb(71, 67, 72)"
