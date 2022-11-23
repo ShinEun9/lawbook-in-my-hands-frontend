@@ -20,6 +20,10 @@ function CustomDrawerContent({navigation}) {
         setIsLogin(false);
     }
 
+    const handlePasswordChangeButtonPress = ()=>{
+        navigation.navigate("PasswordChangePage")
+    }
+
     const fetchUserData = async () => {
         const nickname = await asyncStorage.getItem("@nickname");
         const loginId = await asyncStorage.getItem("@loginId");
@@ -84,7 +88,7 @@ function CustomDrawerContent({navigation}) {
             </View>
 
             <View style={styles.buttonContainer}>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={handlePasswordChangeButtonPress}>
                     <Text style={styles.button}>비밀번호 변경</Text>
                 </TouchableOpacity>
 
