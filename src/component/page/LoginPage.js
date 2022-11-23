@@ -49,28 +49,28 @@ function LoginPage({navigation}) {
     return (
         <SafeAreaView style={styles.container}>
             <Image
-                style={{height: 350, width: 350}}
+                style={{height: 280, width: 280}}
                 source={require('../../img/logo.png')}/>
             <View style={{marginBottom: 10}}>
-                <CustomIconInput name="loginId" placeholder={"LoginID"} width={"260px"} height={"45px"}
+                <CustomIconInput name="loginId" placeholder={"LoginID"} width={"240px"} height={"45px"}
                                  value={value.loginId}
                                  onChange={onChange} iconName={"user"}/>
             </View>
-            <View style={{marginBottom: 45}}>
-                <CustomIconInput name="password" placeholder={"Password"} width={"260px"} height={"45px"}
+            <View style={{marginBottom: 35}}>
+                <CustomIconInput name="password" placeholder={"Password"} width={"240px"} height={"45px"}
                                  value={value.password}
                                  onChange={onChange} type={"password"} iconName={"lock"}/>
 
             </View>
             <View style={{marginBottom: 20}}>
-                <CustomButton handlePressButton={handleLoginButtonClick} width={"260px"} height={"50px"}
+                <CustomButton handlePressButton={handleLoginButtonClick} width={"240px"} height={"45px"}
                               pointColor={colors.gold} borderRadius={"5px"}>
                     {isLoading ? <ActivityIndicator/> : "로그인"}
                 </CustomButton>
             </View>
 
-            <CustomButton handlePressButton={handleSignUpButtonClick} width={"260px"}
-                          height={"50px"} pointColor={colors.pointBlue} borderRadius={"5px"}>
+            <CustomButton handlePressButton={handleSignUpButtonClick} width={"240px"}
+                          height={"45px"} pointColor={colors.pointBlue} borderRadius={"5px"}>
                 회원가입
             </CustomButton>
 
