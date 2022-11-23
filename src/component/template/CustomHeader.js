@@ -24,7 +24,6 @@ function CustomHeader({content, handleMoreButtonPress}) {
 export default CustomHeader;
 
 const StyledHeader = styled(View)`
-  //margin-top: Platform.os = ios ? 0px" : "20px";   
   width: 100%;
   height: 50px;
   flex-direction: row;
@@ -32,13 +31,12 @@ const StyledHeader = styled(View)`
   align-items: center;
   padding-horizontal: 25px;
   border-bottom-color: rgba(0,0,0,0.02);
-  border-bottom-width: 5px;
+  border-bottom-width: 2px;
   background-color: white;
 
 `
 const StyledTitle = styled(Text)`
   font-size: ${width > 375 ? "20px" : "18px"};
   font-weight: 800;
-  // color: ${colors.pointBlue};
   font-family: NanumSquareEB;
 `

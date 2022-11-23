@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {ActivityIndicator, Alert, SafeAreaView, Text, TouchableOpacity, View} from "react-native";
+import {ActivityIndicator, Alert, Dimensions, SafeAreaView, Text, TouchableOpacity, View} from "react-native";
 import CustomHeader from "../../template/CustomHeader";
 import CustomInput from "../../atom/CustomInput";
 import {colors} from "../../../variable/color";
@@ -59,17 +59,20 @@ function MyProfileEditPage({navigation: stackNavigation, drawerNavigation}) {
 
             <View style={styles.content}>
                 <View style={styles.inputContainer}>
-                    <Text style={{fontSize: 15, color: `${colors.darkgrey}`}}>이름</Text>
-                    <CustomInput width={"300px"} height={"40px"} name={"name"} onChange={onChange} value={value.name}/>
+                    <Text style={styles.title}>이름</Text>
+                    <CustomInput width={Dimensions.get('window').width * 0.6} height={"40px"} name={"name"}
+                                 onChange={onChange} value={value.name}/>
                 </View>
 
                 <View style={{...styles.inputContainer, marginBottom: 60}}>
-                    <Text style={{fontSize: 15, color: `${colors.darkgrey}`}}>닉네임</Text>
-                    <CustomInput width={"300px"} height={"40px"} name={"nickname"} onChange={onChange}
+                    <Text style={styles.title}>닉네임</Text>
+                    <CustomInput width={Dimensions.get('window').width * 0.6} height={"40px"} name={"nickname"}
+                                 onChange={onChange}
                                  value={value.nickname}/>
                 </View>
 
-                <CustomButton handlePressButton={handleEditInfoButtonPress} width={"350px"} height={"60px"}
+                <CustomButton handlePressButton={handleEditInfoButtonPress} width={Dimensions.get('window').width * 0.5}
+                              height={"60px"}
                               pointColor={colors.pointBlue} borderRadius={50}>
                     {
                         isLoading ? <ActivityIndicator/> : "정보수정"
@@ -94,16 +97,22 @@ const styles = {
     },
     content: {
         flex: 9,
+        paddingTop: 40,
         alignItems: "center",
         width: "100%",
 
     },
     inputContainer: {
-        width: 350,
+        paddingHorizontal: 20,
         marginBottom: 20,
         flexDirection: "row",
         alignItems: "center",
-        justifyContent: "space-between",
+        // justifyContent: "space-between",
+    },
+    title: {
+        width: Dimensions.get('window').width * 0.2,
+        fontSize: 15,
+        color: `${colors.pointBlue}`
     }
 }
 

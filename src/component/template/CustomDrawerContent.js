@@ -69,7 +69,7 @@ function CustomDrawerContent({navigation}) {
                         navigation.navigate("SearchPage")
                     }}>
                     <View style={styles.menuItem}>
-                        <FontAwesome name={"search"} size={20} color={`${colors.pointBlue2}`}
+                        <FontAwesome name={"search"} size={20} color={`${colors.pointBlue}`}
                                      style={{marginRight: 10}}/>
                         <Text style={styles.menuItemText}>AI 판례 추천 서비스</Text>
                     </View>
@@ -116,6 +116,7 @@ const styles = {
         padding: 15,
     },
     title: {
+        color: colors.pointBlue,
         fontFamily: "DrawerTitle",
         fontSize: 22,
 
