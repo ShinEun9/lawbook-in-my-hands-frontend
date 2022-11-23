@@ -50,7 +50,7 @@ function CustomDrawerContent({navigation}) {
     }, [asyncStorage.getItem("@nickname"), asyncStorage.getItem("@name")])
     return (
         <SafeAreaView style={styles.container}>
-            <View style={{...styles.titleContainer, paddingTop: Platform.OS === "ios" ? 0 : 40}}>
+            <View style={{...styles.titleContainer, paddingTop: Platform.OS === "ios" ? 10 : 40}}>
                 <Text style={styles.title}>내 손안의 법전</Text>
 
             </View>
