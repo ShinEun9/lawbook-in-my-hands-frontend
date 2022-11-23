@@ -1,17 +1,40 @@
 import React, {useEffect, useState} from 'react';
-import {SafeAreaView, Text, TouchableOpacity, View} from "react-native";
+import {ActivityIndicator, Alert, SafeAreaView, Text, TouchableOpacity, View} from "react-native";
 import CustomHeader from "../../template/CustomHeader";
 import CustomInput from "../../atom/CustomInput";
 import {colors} from "../../../variable/color";
 import CustomButton from "../../atom/CustomButton";
 import asyncStorage from "@react-native-async-storage/async-storage/src/AsyncStorage";
 import {useInputs} from "../../../hooks/useInputs";
+import axios from "axios";
 
 function MyProfileEditPage({navigation: stackNavigation, drawerNavigation}) {
     const [value, onChange, setValue] = useInputs({nickname: "", name: ""});
-
-    const handleEditInfoButtonPress = () => {
-        stackNavigation.navigate("MyPageMain")
+    const [isLoading, setIsLoading] = useState(false);
+    const handleEditInfoButtonPress = async () => {
+        setIsLoading(true);
+        const token = await asyncStorage.getItem("@access_token");
+        await axios.post(`http://3.39.59.151:5000/user/profile`, value, {
+            headers: {Authorization: `Bearer ${token}`}
+        })
+            .then(async () => {
+                await asyncStorage.setItem("@nickname", value.nickname);
+                await asyncStorage.setItem("@name", value.name)
+                await Alert.alert(
+                    "회원 정보 수정이 완료 되었습니다.",
+                    "",
+                    [
+                        {
+                            text: "확인"
+                        }
+                    ]
+                );
+                setIsLoading(false);
+            })
+            .catch((err) => {
+                console.log(err);
+                setIsLoading(false);
+            })
     }
 
     const fetchUserInfo = async () => {
@@ -48,7 +71,9 @@ function MyProfileEditPage({navigation: stackNavigation, drawerNavigation}) {
 
                 <CustomButton handlePressButton={handleEditInfoButtonPress} width={"350px"} height={"60px"}
                               pointColor={colors.pointBlue} borderRadius={"50%"}>
-                    정보수정
+                    {
+                        isLoading ? <ActivityIndicator/> : "정보수정"
+                    }
                 </CustomButton>
 
             </View>

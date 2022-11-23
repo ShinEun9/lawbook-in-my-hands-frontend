@@ -9,6 +9,7 @@ import logoImagePath from "../../img/logo2.png";
 function CustomDrawerContent({navigation}) {
     const [userInfo, setUserInfo] = useState(null)
     const {isLogin, setIsLogin} = useContext(LoginContext);
+    // const {userInfo, setUserInfo} = useState(null);
 
     const handle프로필수정ButtonPress = () => {
         navigation.navigate("MyPage")
@@ -29,7 +30,7 @@ function CustomDrawerContent({navigation}) {
 
     useEffect(() => {
         fetchUserData();
-    }, [])
+    }, [asyncStorage.getItem("@nickname"), asyncStorage.getItem("@name")])
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.titleContainer}>
