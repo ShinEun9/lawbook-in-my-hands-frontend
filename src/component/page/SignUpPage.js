@@ -76,10 +76,10 @@ function SignUpPage({navigation}) {
 
             <View style={{...styles.signUpForm, paddingTop: Platform.OS === "ios" ? 0 : 30}}>
                 <StyledInputContainer>
-                    <CustomInput placeholder={"LoginID"} width={Dimensions.get('window').width * 0.45} height={"60px"}
+                    <CustomInput placeholder={"LoginID"} width={Dimensions.get('window').width * 0.46} height={"60px"}
                                  name={"loginId"}
                                  value={value.loginId} onChange={onChange}/>
-                    <View style={{marginLeft: Dimensions.get('window').width * 0.05}}>
+                    <View style={{marginLeft: Dimensions.get('window').width * 0.04}}>
                         <CustomButton type={"b"} width={Dimensions.get('window').width * 0.3} height={"50px"}
                                       borderRadius={50}
                                       pointColor={colors.pointBlue}
