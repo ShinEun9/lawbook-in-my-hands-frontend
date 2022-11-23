@@ -67,7 +67,7 @@ function SearchWritePage({navigation: stackNavigation, drawerNavigation, route})
                 </View>
                 <CustomButton handlePressButton={handleSearchButtonClick} width={"260px"}
                               height={"50px"}
-                              pointColor={colors.pointBlue} borderRadius={"5px"}>
+                              pointColor={colors.pointBlue} borderRadius={50}>
                     {isLoading ? <ActivityIndicator/> : "AI 법률조회"}
                 </CustomButton>
             </View>

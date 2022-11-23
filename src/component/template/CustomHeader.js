@@ -4,15 +4,17 @@ import styled from "styled-components"
 import moreButtonImagePath from "../../img/more.png";
 import {colors} from "../../variable/color";
 import {Dimensions} from 'react-native';
+import {Entypo} from "@expo/vector-icons";
+
 const {width} = Dimensions.get('window')
 
 function CustomHeader({content, handleMoreButtonPress}) {
     return (
-        <StyledHeader style={{marginTop: Platform.OS ==="ios" ? 0 : 30 }}>
+        <StyledHeader style={{marginTop: Platform.OS === "ios" ? 0 : 30}}>
             <StyledTitle>{content}</StyledTitle>
             <TouchableOpacity onPress={handleMoreButtonPress}>
                 <Image
-                    style={{height: 30, width: 30}}
+                    style={{height: 20, width: 20}}
                     source={moreButtonImagePath}
                 />
             </TouchableOpacity>
@@ -30,7 +32,7 @@ const StyledHeader = styled(View)`
   justify-content: space-between;
   align-items: center;
   padding-horizontal: 25px;
-  border-bottom-color: rgba(0,0,0,0.02);
+  border-bottom-color: rgba(0, 0, 0, 0.02);
   border-bottom-width: 2px;
   background-color: white;
 

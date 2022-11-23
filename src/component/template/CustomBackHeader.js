@@ -18,7 +18,7 @@ function CustomBackHeader({content, handleBackButtonPress, handleMoreButtonPress
             </View>
             <TouchableOpacity onPress={handleMoreButtonPress}>
                 <Image
-                    style={{height: 30, width: 30}}
+                    style={{height: 20, width: 20}}
                     source={moreButtonImagePath}
                 />
             </TouchableOpacity>

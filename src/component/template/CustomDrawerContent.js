@@ -88,7 +88,7 @@ function CustomDrawerContent({navigation}) {
             </View>
 
             <View style={styles.buttonContainer}>
-                <TouchableOpacity onPress={handlePasswordChangeButtonPress}>
+                <TouchableOpacity  onPress={handlePasswordChangeButtonPress}>
                     <Text style={styles.button}>비밀번호 변경</Text>
                 </TouchableOpacity>
 
@@ -96,7 +96,7 @@ function CustomDrawerContent({navigation}) {
                     <Text style={styles.button}>로그아웃</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity>
+                <TouchableOpacity  onPress={()=>{console.log("hi")}}>
                     <Text style={styles.button}>계정탈퇴</Text>
                 </TouchableOpacity>
             </View>
@@ -165,7 +165,7 @@ const styles = {
     },
     button: {
         fontFamily: "NanumSquareR",
-        color: "rgba(0,0,0,0.5)",
+        color: colors.pointBlue,
         fontSize: 14,
         marginBottom: 20
     }

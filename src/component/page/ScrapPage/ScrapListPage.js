@@ -49,7 +49,6 @@ function ScrapListPage({navigation: stackNavigation, drawerNavigation}) {
 
     const handle스크랩판례ButtonPress = (상담내역, oneCase, title) => {
         const titleTmp = `${title.slice(0,15)}...`
-        console.log(titleTmp);
         const {consult_id} = 상담내역;
         const {url, case_serial_id} = oneCase
         stackNavigation.navigate("ScrapDetailPage", {
@@ -157,7 +156,7 @@ const StyledScrapContainer = styled(View)`
   margin-bottom: 24px;
   border-color: rgba(0, 0, 0, 0.2);
   border-width: 0.5px;
-  border-radius: 20px;
+  border-radius: 10px;
 `;
 
 const styles = {
@@ -190,9 +189,9 @@ const styles = {
     containerTitle: {
         backgroundColor: "rgba(233,235,239, 0.8)",
         paddingHorizontal: 20,
-        paddingVertical: 20,
-        borderTopLeftRadius: 20,
-        borderTopRightRadius: 20,
+        paddingVertical: 15,
+        borderTopLeftRadius: 5,
+        borderTopRightRadius: 10,
     },
     titleButtonText: {
         fontFamily: "NanumSquareEB",
