@@ -1,33 +1,36 @@
 import React, {useState} from 'react';
-import {TextInput} from "react-native";
+import {Keyboard, TextInput, TouchableWithoutFeedback} from "react-native";
 import styled from "styled-components/native";
 import {colors} from "../../variable/color";
 
 function CustomMultilineInput({value, onChange, editable = true}) {
     const [isFocus, setIsFocus] = useState(false);
     return (
-        <StyledTextInput // margin={margin}
-            width={"360px"} height={"360px"}
-            placeholder={"구체적으로 적어주세요."}
-            multiline={true}
-            numberOfLines={5}
-            onChangeText={onChange}
-            value={value}
-            editable={editable}
-            focus={isFocus}
-            onFocus={() => {
-                setIsFocus(true)
-            }}
-            onBlur={() => {
-                setIsFocus(false)
-            }}
-        />
+
+            <StyledTextInput // margin={margin}
+                width={"360px"} height={"360px"}
+                placeholder={"구체적으로 적어주세요."}
+                multiline={true}
+                numberOfLines={5}
+                onChangeText={onChange}
+                value={value}
+                editable={editable}
+                focus={isFocus}
+                blurOnSubmit={true}
+                onFocus={() => {
+                    setIsFocus(true)
+                }}
+                onBlur={() => {
+                    setIsFocus(false)
+                }}
+            />
     );
 }
 
 export default CustomMultilineInput;
 
 import {Dimensions} from 'react-native';
+
 const {width} = Dimensions.get('window')
 
 const StyledTextInput = styled(TextInput)`

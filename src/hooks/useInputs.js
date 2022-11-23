@@ -11,5 +11,5 @@ export const useInputs = (initialData) => {
         setInputs({...inputs, [name]: text})
     }
 
-    return [inputs, onChange];
+    return [inputs, onChange, setInputs];
 }
