@@ -9,11 +9,11 @@ import {
     ActivityIndicator,
     ScrollView,
     RefreshControl,
-    Platform
+    Platform, Alert
 } from "react-native";
 import CustomHeader from "../../template/CustomHeader";
 import styled from "styled-components"
-import {Entypo} from "@expo/vector-icons";
+import {AntDesign, Entypo} from "@expo/vector-icons";
 import {colors} from "../../../variable/color";
 
 function ScrapListPage({navigation: stackNavigation, drawerNavigation}) {
@@ -48,7 +48,7 @@ function ScrapListPage({navigation: stackNavigation, drawerNavigation}) {
     }
 
     const handle스크랩판례ButtonPress = (상담내역, oneCase, title) => {
-        const titleTmp = `${title.slice(0,15)}...`
+        const titleTmp = `${title.slice(0, 15)}...`
         const {consult_id} = 상담내역;
         const {url, case_serial_id} = oneCase
         stackNavigation.navigate("ScrapDetailPage", {
@@ -57,6 +57,31 @@ function ScrapListPage({navigation: stackNavigation, drawerNavigation}) {
             consult_id,
             title: titleTmp
         })
+    }
+
+    const handle내역DeleteButton = async (consult_id) => {
+        Alert.alert(
+            "상담내역을 삭제하시겠습니까?",
+            "삭제 시 스크랩한 판례도 모두 삭제됩니다.",
+            [
+                {
+                    text: "확인", onPress: async () => {
+                        const token = await asyncStorage.getItem("@access_token");
+                        await axios.delete(`http://3.39.59.151:5000/consult/${consult_id}`, {
+                            headers: {Authorization: `Bearer ${token}`}
+                        }).then((res) => {
+                            console.log(res.data);
+                            fetch스크랩리스트Data();
+                        }).catch((err) => {
+                            console.log(err)
+                        })
+                    }
+                },
+                {
+                    text: "취소"
+                }
+            ]
+        );
     }
 
     useEffect(() => {
@@ -97,7 +122,14 @@ function ScrapListPage({navigation: stackNavigation, drawerNavigation}) {
                                     } = 상담내역;
 
                                     return <View style={{width: "100%", alignItems: "center",}} key={index}>
-                                        <Text style={styles.timeText}>{created_at.slice(2, 16)}</Text>
+                                        <View style={styles.timeTextContainer}>
+                                            <Text style={styles.timeText}>{created_at.slice(2, 16)}</Text>
+                                            <TouchableOpacity onPress={() => {
+                                                handle내역DeleteButton(consult_id)
+                                            }}>
+                                                <AntDesign name={"delete"} color={colors.gold} size={20}/>
+                                            </TouchableOpacity>
+                                        </View>
                                         <StyledScrapContainer>
                                             <View style={styles.containerTitle}>
                                                 <TouchableOpacity onPress={() => {
@@ -178,13 +210,19 @@ const styles = {
         flex: 9,
         width: "100%"
     },
+    timeTextContainer: {
+        width: "100%",
+        paddingHorizontal: 20,
+        flexDirection: "row",
+        alignItems: "center",
+        justifySelf: "flex-start",
+        marginBottom: 8
+    },
     timeText: {
+        marginRight: 15,
         fontSize: 16,
         color: `${colors.gold}`,
         fontFamily: "NanumSquareEB",
-        alignSelf: "flex-start",
-        paddingHorizontal: "7%",
-        marginBottom: 8
     },
     containerTitle: {
         backgroundColor: "rgba(233,235,239, 0.8)",
