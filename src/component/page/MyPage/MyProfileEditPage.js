@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from 'react';
-import {ActivityIndicator, Alert, Dimensions, SafeAreaView, Text, TouchableOpacity, View} from "react-native";
-import CustomHeader from "../../template/CustomHeader";
-import CustomInput from "../../atom/CustomInput";
-import {colors} from "../../../variable/color";
-import CustomButton from "../../atom/CustomButton";
-import asyncStorage from "@react-native-async-storage/async-storage/src/AsyncStorage";
 import {useInputs} from "../../../hooks/useInputs";
 import axios from "axios";
+import {ActivityIndicator, Alert, Dimensions, SafeAreaView, Text, View} from "react-native";
+import CustomHeader from "../../template/CustomHeader";
+import CustomInput from "../../atom/CustomInput";
+import CustomButton from "../../atom/CustomButton";
+import asyncStorage from "@react-native-async-storage/async-storage/src/AsyncStorage";
+import {colors} from "../../../variable/color";
 
 function MyProfileEditPage({navigation: stackNavigation, drawerNavigation}) {
     const [value, onChange, setValue] = useInputs({nickname: "", name: ""});

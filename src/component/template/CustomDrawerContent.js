@@ -1,10 +1,10 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {View, Text, SafeAreaView, Image, TouchableOpacity, TouchableHighlight, Platform} from "react-native";
-import {colors} from "../../variable/color";
 import asyncStorage from "@react-native-async-storage/async-storage/src/AsyncStorage";
 import {LoginContext} from "../../store/loginStore";
+import {View, Text, SafeAreaView, TouchableOpacity, TouchableHighlight, Platform, Image, Alert} from "react-native";
+import {colors} from "../../variable/color";
 import {AntDesign, FontAwesome} from "@expo/vector-icons"
-import logoImagePath from "../../img/logo2.png";
+import userIconImagePath from "../../img/user.png";
 
 function CustomDrawerContent({navigation}) {
     const [userInfo, setUserInfo] = useState(null)
@@ -15,12 +15,25 @@ function CustomDrawerContent({navigation}) {
         navigation.navigate("MyPage")
     }
 
-    const handleLogoutButtonPress = async () => {
-        await asyncStorage.removeItem("@access_token");
-        setIsLogin(false);
+    const handleLogoutButtonPress = () => {
+        Alert.alert(
+            "로그아웃 하시겠습니까?",
+            "",
+            [
+                {
+                    text: "확인", onPress: async () => {
+                        await asyncStorage.removeItem("@access_token");
+                        setIsLogin(false);
+                    }
+                },
+                {
+                    text: "취소"
+                }
+            ]
+        );
     }
 
-    const handlePasswordChangeButtonPress = ()=>{
+    const handlePasswordChangeButtonPress = () => {
         navigation.navigate("PasswordChangePage")
     }
 
@@ -37,7 +50,7 @@ function CustomDrawerContent({navigation}) {
     }, [asyncStorage.getItem("@nickname"), asyncStorage.getItem("@name")])
     return (
         <SafeAreaView style={styles.container}>
-            <View style={{...styles.titleContainer, paddingTop: Platform.OS==="ios" ? 0 : 40}}>
+            <View style={{...styles.titleContainer, paddingTop: Platform.OS === "ios" ? 10 : 40}}>
                 <Text style={styles.title}>내 손안의 법전</Text>
 
             </View>
@@ -48,7 +61,9 @@ function CustomDrawerContent({navigation}) {
                 onPress={handle프로필수정ButtonPress}
             >
                 <View style={styles.profileContainer}>
-                    <FontAwesome name={"user-circle"} color={"#eeeeee"} size={40} style={{marginRight: 10}}/>
+                    <Image
+                        style={{width: 45, height: 45, marginRight: 20}}
+                        source={userIconImagePath}/>
                     {
                         !userInfo ? null :
                             <View>
@@ -69,7 +84,7 @@ function CustomDrawerContent({navigation}) {
                         navigation.navigate("SearchPage")
                     }}>
                     <View style={styles.menuItem}>
-                        <FontAwesome name={"search"} size={20} color={`${colors.pointBlue}`}
+                        <FontAwesome name={"search"} size={20} color={"black"}
                                      style={{marginRight: 10}}/>
                         <Text style={styles.menuItemText}>AI 판례 추천 서비스</Text>
                     </View>
@@ -88,7 +103,7 @@ function CustomDrawerContent({navigation}) {
             </View>
 
             <View style={styles.buttonContainer}>
-                <TouchableOpacity  onPress={handlePasswordChangeButtonPress}>
+                <TouchableOpacity onPress={handlePasswordChangeButtonPress}>
                     <Text style={styles.button}>비밀번호 변경</Text>
                 </TouchableOpacity>
 
@@ -96,7 +111,9 @@ function CustomDrawerContent({navigation}) {
                     <Text style={styles.button}>로그아웃</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity  onPress={()=>{console.log("hi")}}>
+                <TouchableOpacity onPress={() => {
+                    console.log("hi")
+                }}>
                     <Text style={styles.button}>계정탈퇴</Text>
                 </TouchableOpacity>
             </View>
@@ -109,7 +126,6 @@ export default CustomDrawerContent;
 const styles = {
     container: {
         flex: 1,
-        paddingHorizontal: 10,
     },
     titleContainer: {
         width: "100%",
@@ -125,7 +141,9 @@ const styles = {
         flexDirection: "row",
         alignItems: "center",
         paddingHorizontal: 15,
-        paddingVertical: 20
+        paddingVertical: 20,
+        borderBottomWidth: 1,
+        borderBottomColor: "#F8F8F8",
     },
     profileName: {
         fontFamily: "NanumSquareB",
@@ -144,29 +162,30 @@ const styles = {
     },
     menuTitle: {
         fontFamily: "NanumSquareEB",
-        fontSize: 18,
-        paddingTop: 20,
-        paddingHorizontal: 15,
-        marginBottom: 8
+        fontSize: 16,
+        marginTop: 10,
+        marginBottom: 5,
+        paddingHorizontal: 15
     },
     menuItem: {
         flexDirection: "row",
         alignItems: "center",
         paddingHorizontal: 15,
-        paddingVertical: 20,
+        paddingVertical: 15,
     },
     menuItemText: {
         fontFamily: "NanumSquareB",
-        fontSize: 16,
-        color: "rgba(0,0,0,0.7)"
+        fontSize: 14,
+        // color: "rgba(0,0,0,0.7)"
+        color: colors.pointBlue,
     },
     buttonContainer: {
         padding: 15,
     },
     button: {
         fontFamily: "NanumSquareR",
-        color: colors.pointBlue,
-        fontSize: 14,
+        color: "#5c5c5c",
+        fontSize: 12,
         marginBottom: 20
     }
 }

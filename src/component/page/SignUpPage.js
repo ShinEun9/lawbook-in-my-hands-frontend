@@ -43,7 +43,6 @@ function SignUpPage({navigation}) {
     }
 
     const idCheckButtonClick = () => {
-        console.log(value.loginId);
         axios.get(`http://3.39.59.151:5000/loginid/${value.loginId}`)
             .then((res) => {
                 Alert.alert(

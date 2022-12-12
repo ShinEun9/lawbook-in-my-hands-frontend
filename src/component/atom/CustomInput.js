@@ -18,7 +18,6 @@ function CustomInput({placeholder, width, height, value, onChange, name, type = 
                 }}
                 onEndEditing={({ nativeEvent: { text }}) => {
                     setIsFocus(false)
-                    console.log(text)
                     if (text === "") setShowRequiredMessage(false); else setShowRequiredMessage(true);
                 }}
                 value={value}

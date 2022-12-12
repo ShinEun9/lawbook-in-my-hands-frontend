@@ -14,7 +14,7 @@ function CustomInput({placeholder, width, height, value, onChange, name, iconNam
     }
     return (
         <StyledTextInput width={width} height={height} focus={isFocus}>
-            <AntDesign name={iconName} size={20} color={isFocus ? `${colors.pointBlue}` : "rgba(0, 0, 0, 0.2)"}
+            <AntDesign name={iconName} size={20} color={isFocus ? `${colors.pointBlue}` : `${colors.lightGrey}`}
                        style={{marginRight: 20}}/>
             <TextInput
                 secureTextEntry={name === "password" ? isPasswordShow : false}

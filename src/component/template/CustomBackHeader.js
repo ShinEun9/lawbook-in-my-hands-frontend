@@ -1,8 +1,8 @@
 import React from 'react';
 import {Image, Platform, Text, TouchableOpacity, View} from "react-native";
-import moreButtonImagePath from "../../img/more.png";
 import styled from "styled-components";
 import {Entypo} from "@expo/vector-icons";
+import moreButtonImagePath from "../../img/more.png";
 
 import {Dimensions} from 'react-native';
 const {width} = Dimensions.get('window')

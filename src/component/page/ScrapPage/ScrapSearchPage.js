@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
-import {ActivityIndicator, Keyboard, SafeAreaView, TouchableWithoutFeedback, View} from "react-native";
-import CustomMultilineInput from "../../atom/CustomMultilineInput";
-import {colors} from "../../../variable/color";
-import CustomBackHeader from "../../template/CustomBackHeader";
 import axios from "axios";
 import asyncStorage from "@react-native-async-storage/async-storage/src/AsyncStorage";
+import {ActivityIndicator, Keyboard, SafeAreaView, TouchableWithoutFeedback, View} from "react-native";
+import CustomBackHeader from "../../template/CustomBackHeader";
+import CustomMultilineInput from "../../atom/CustomMultilineInput";
 import CustomButton from "../../atom/CustomButton";
+import {colors} from "../../../variable/color";
 
 function ScrapSearchPage({navigation: stackNavigation, drawerNavigation, route}) {
     const {consult_content, consult_id: consult_id_params} = route.params;

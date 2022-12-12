@@ -1,6 +1,16 @@
 import React, {useContext, useEffect, useState} from 'react';
 import axios from "axios";
-import {ActivityIndicator, Alert, Image, SafeAreaView, View} from "react-native";
+import {
+    StyleSheet,
+    ActivityIndicator,
+    Alert, Button,
+    Image, Keyboard,
+    KeyboardAvoidingView,
+    Platform,
+    SafeAreaView, Text, TextInput,
+    TouchableWithoutFeedback,
+    View
+} from "react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {colors} from "../../variable/color";
 import {LoginContext} from "../../store/loginStore";
@@ -49,31 +59,52 @@ function LoginPage({navigation}) {
     return (
         <SafeAreaView style={styles.container}>
             <Image
-                style={{height: 350, width: 350}}
+                style={{height: 280, width: 280}}
                 source={require('../../img/logo.png')}/>
-            <View style={{marginBottom: 10}}>
-                <CustomIconInput name="loginId" placeholder={"LoginID"} width={"260px"} height={"45px"}
-                                 value={value.loginId}
-                                 onChange={onChange} iconName={"user"}/>
-            </View>
-            <View style={{marginBottom: 45}}>
-                <CustomIconInput name="password" placeholder={"Password"} width={"260px"} height={"45px"}
-                                 value={value.password}
-                                 onChange={onChange} type={"password"} iconName={"lock"}/>
+            {
+                Platform.OS === "android" ?
+                    <>
+                        <View style={{marginBottom: 10}}>
+                            <CustomIconInput name="loginId" placeholder={"LoginID"} width={"240px"} height={"45px"}
+                                             value={value.loginId}
+                                             onChange={onChange} iconName={"user"}/>
+                        </View>
+                        <View style={{marginBottom: 35}}>
+                            <CustomIconInput name="password" placeholder={"Password"} width={"240px"} height={"45px"}
+                                             value={value.password}
+                                             onChange={onChange} type={"password"} iconName={"lock"}/>
 
-            </View>
+                        </View>
+                    </>
+                    :
+
+                    <KeyboardAvoidingView
+                        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+                        <View style={{marginBottom: 10}}>
+                            <CustomIconInput name="loginId" placeholder={"LoginID"} width={"240px"} height={"45px"}
+                                             value={value.loginId}
+                                             onChange={onChange} iconName={"user"}/>
+                        </View>
+                        <View style={{marginBottom: 35}}>
+                            <CustomIconInput name="password" placeholder={"Password"} width={"240px"} height={"45px"}
+                                             value={value.password}
+                                             onChange={onChange} type={"password"} iconName={"lock"}/>
+                        </View>
+                    </KeyboardAvoidingView>
+
+
+            }
             <View style={{marginBottom: 20}}>
-                <CustomButton handlePressButton={handleLoginButtonClick} width={"260px"} height={"50px"}
+                <CustomButton handlePressButton={handleLoginButtonClick} width={"240px"} height={"45px"}
                               pointColor={colors.gold} borderRadius={"5px"}>
                     {isLoading ? <ActivityIndicator/> : "로그인"}
                 </CustomButton>
             </View>
 
-            <CustomButton handlePressButton={handleSignUpButtonClick} width={"260px"}
-                          height={"50px"} pointColor={colors.pointBlue} borderRadius={"5px"}>
+            <CustomButton handlePressButton={handleSignUpButtonClick} width={"240px"}
+                          height={"45px"} pointColor={colors.pointBlue} borderRadius={"5px"}>
                 회원가입
             </CustomButton>
-
         </SafeAreaView>
     );
 }
@@ -86,5 +117,6 @@ const styles = {
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-    }
+    },
 }
+
